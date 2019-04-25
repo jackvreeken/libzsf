@@ -7,7 +7,7 @@
 #include "util.h"
 #include "zsf.h"
 
-void __stdcall zsf_param_default(zsf_param_t *p) {
+void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   /* */
   memset(p, 0, sizeof(zsf_param_t));
 
@@ -43,7 +43,7 @@ void __stdcall zsf_param_default(zsf_param_t *p) {
   p->atol = 1E-8;
 }
 
-void __stdcall zsf_calculate(zsf_param_t *p, zsf_results_t *results,
+void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
                              zsf_aux_results_t *aux_results) {
   // Gravitational constant
   double g = 9.81;
