@@ -18,6 +18,11 @@ else()
     endif()
 endif()
 
+option(USE_FAST_TANH "Enable fast tanh approximation" OFF)
+if(USE_FAST_TANH)
+    add_definitions(-DZSF_USE_FAST_TANH)
+endif()
+
 add_library(zsf SHARED src/zsf.c)
 
 set_target_properties (zsf PROPERTIES

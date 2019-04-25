@@ -7,6 +7,23 @@
 #include "util.h"
 #include "zsf.h"
 
+#ifdef ZSF_USE_FAST_TANH
+inline double TANH(const double x) {
+  const double ax = fabs(x);
+  const double x2 = x * x;
+
+  const double z1 =
+      (x *
+       (2.45550750702956 + 2.45550750702956 * ax +
+        (0.893229853513558 + 0.821226666969744 * ax) * x2) /
+       (2.44506634652299 + (2.44506634652299 + x2) * fabs(x + 0.814642734961073 * x * ax)));
+
+  return fmin(z1, 1.0);
+}
+#else
+#  define TANH tanh
+#endif
+
 void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   /* */
   memset(p, 0, sizeof(zsf_param_t));
@@ -152,7 +169,7 @@ void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
         fmax((velocity_exchange_eta - velocity_flushing) / velocity_exchange_eta, 0.0);
     double t_lock_exchange = 2 * p->lock_length / velocity_exchange_eta;
     double volume_exchange_2 =
-        frac_lock_exchange * volume_lock_at_lake * tanh(t_open_lake / t_lock_exchange);
+        frac_lock_exchange * volume_lock_at_lake * TANH(t_open_lake / t_lock_exchange);
 
     double mt_lake_2_lock_exchange = (p->sal_lake - sal_lock_2a) * volume_exchange_2;
 
@@ -259,7 +276,7 @@ void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
         fmax((velocity_exchange_eta - velocity_flushing) / velocity_exchange_eta, 0.0);
     t_lock_exchange = 2 * p->lock_length / velocity_exchange_eta;
     double volume_exchange_4 =
-        frac_lock_exchange * volume_lock_at_sea * tanh(t_open_sea / t_lock_exchange);
+        frac_lock_exchange * volume_lock_at_sea * TANH(t_open_sea / t_lock_exchange);
 
     double mt_sea_4_lock_exchange = (sal_lock_4a - p->sal_sea) * volume_exchange_4;
 
