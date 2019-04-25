@@ -4,6 +4,20 @@ project(libzsf)
 enable_language(C)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+option(USE_FAST_MATH "Enable fast math optimizations" OFF)
+if(USE_FAST_MATH)
+    if((CMAKE_C_COMPILER_ID MATCHES "Clang") OR (CMAKE_C_COMPILER_ID MATCHES "GNU"))
+        add_compile_options(-ffast-math)
+    elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
+        add_compile_options(/fp:fast)
+    endif()
+else()
+    if(CMAKE_C_COMPILER_ID MATCHES "MSVC")
+        add_compile_options(/fp:precise)
+    endif()
+endif()
+
 add_library(zsf SHARED src/zsf.c)
 
 set_target_properties (zsf PROPERTIES
