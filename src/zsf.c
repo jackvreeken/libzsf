@@ -272,11 +272,26 @@ void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
     velocity_exchange_raw =
         0.5 * sqrt(g * 0.8 * sal_diff / density_average * (p->head_sea - p->lock_bottom));
     velocity_exchange_eta = p->density_current_factor_sea * velocity_exchange_raw;
+
+    // The equilibrium depth of the boundary layer between the salt (sal_sea)
+    // and fresh (sal_lake) water when flushing for a very long time.
+    double head_equilibrium = pow(2.0 * velocity_flushing, 2.0) * density_average /
+                              (g * 0.8 * (p->sal_sea - p->sal_lake));
+    head_equilibrium = fmin(head_equilibrium, p->head_sea - p->lock_bottom);
     frac_lock_exchange =
-        fmax((velocity_exchange_eta - velocity_flushing) / velocity_exchange_eta, 0.0);
-    t_lock_exchange = 2 * p->lock_length / velocity_exchange_eta;
-    double volume_exchange_4 =
-        frac_lock_exchange * volume_lock_at_sea * TANH(t_open_sea / t_lock_exchange);
+        (p->head_sea - p->lock_bottom - head_equilibrium) / (p->head_sea - p->lock_bottom);
+
+    // If we flush so much that the density current never enters the lock, we
+    // might get division by zero. Avoid by branching such that we can still
+    // use fast math (which typically does not work with non-finite values).
+    double volume_exchange_4 = 0.0;
+
+    if (velocity_exchange_eta > velocity_flushing) {
+      t_lock_exchange =
+          2 * p->lock_length * frac_lock_exchange / (velocity_exchange_eta - velocity_flushing);
+      volume_exchange_4 =
+          frac_lock_exchange * volume_lock_at_sea * TANH(t_open_sea / t_lock_exchange);
+    }
 
     double mt_sea_4_lock_exchange = (sal_lock_4a - p->sal_sea) * volume_exchange_4;
 
