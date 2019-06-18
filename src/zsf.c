@@ -34,7 +34,7 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   p->lock_bottom = -5.0;
 
   // Operation properties
-  p->num_cycles = 24.0;
+  p->num_cycles = 12.0;
   p->door_time_to_open = 5.0;
   p->leveling_time = 5.0;
   p->symmetry_coefficient = 1.0;
