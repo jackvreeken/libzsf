@@ -275,9 +275,11 @@ void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
 
     // The equilibrium depth of the boundary layer between the salt (sal_sea)
     // and fresh (sal_lake) water when flushing for a very long time.
-    double head_equilibrium = pow(2.0 * velocity_flushing, 2.0) * density_average /
-                              (g * 0.8 * (p->sal_sea - p->sal_lake));
+    double head_equilibrium = cbrt(2.0 * pow(flushing_discharge, 2.0) * density_average /
+                                   (g * 0.8 * (p->sal_sea - p->sal_lake)));
+
     head_equilibrium = fmin(head_equilibrium, p->head_sea - p->lock_bottom);
+
     frac_lock_exchange =
         (p->head_sea - p->lock_bottom - head_equilibrium) / (p->head_sea - p->lock_bottom);
 
