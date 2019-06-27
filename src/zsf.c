@@ -48,6 +48,9 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   p->density_current_factor_sea = 1.0;
   p->density_current_factor_lake = 1.0;
 
+  // Initial condition
+  p->sal_lock = ZSF_NAN;
+
   // Boundary conditions
   p->head_sea = 0.0;
   p->sal_sea = 30.0;
@@ -92,8 +95,11 @@ void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
   double flushing_discharge =
       is_low_tide ? p->flushing_discharge_low_tide : p->flushing_discharge_high_tide;
 
-  // Start salinity and salt mass guess
-  double sal_lock_4 = 0.5 * (p->sal_sea + p->sal_lake);
+  // Start salinity and salt mass
+  double sal_lock_4 = p->sal_lock;
+  if (sal_lock_4 == ZSF_NAN)
+    sal_lock_4 = 0.5 * (p->sal_sea + p->sal_lake);
+
   double saltmass_lock_4 = sal_lock_4 * (volume_lock_at_sea - p->ship_volume_sea_to_lake);
 
   // Average density (for lock exchange)

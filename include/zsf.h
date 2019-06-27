@@ -34,6 +34,9 @@
 #   define ZSF_CALLCONV
 #endif
 
+// A custom value to signify "not specified"
+#define ZSF_NAN -999.0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -49,6 +52,7 @@ typedef struct zsf_param_t {
   double symmetry_coefficient;
   double ship_volume_sea_to_lake;
   double ship_volume_lake_to_sea;
+  double sal_lock;
   double head_sea;
   double sal_sea;
   double head_lake;
