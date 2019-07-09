@@ -491,8 +491,8 @@ void ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open_sea,
   step_phase_4(p, &o, t_open_sea, state, results);
 }
 
-void ZSF_CALLCONV zsf_calculate(const zsf_param_t *p, zsf_results_t *results,
-                                zsf_aux_results_t *aux_results) {
+void ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
+                                  zsf_aux_results_t *aux_results) {
 
   derived_parameters_t o;
   calculate_derived_parameters(p, &o);

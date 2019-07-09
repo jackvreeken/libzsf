@@ -157,10 +157,10 @@ ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_ope
  *      fill zsf_param_t with default values */
 ZSF_EXPORT void ZSF_CALLCONV zsf_param_default(zsf_param_t *p);
 
-/* zsf_calculate:
- *      calculate the salt intrusion for a set of parameters */
-ZSF_EXPORT void ZSF_CALLCONV zsf_calculate(const zsf_param_t *p, zsf_results_t *results,
-                                           zsf_aux_results_t *aux_results);
+/* zsf_calc_steady:
+ *      calculate the salt intrusion for a set of parameters, assuming steady operation*/
+ZSF_EXPORT void ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
+                                             zsf_aux_results_t *aux_results);
 
 #ifdef __cplusplus
 }
