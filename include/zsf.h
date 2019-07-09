@@ -105,6 +105,54 @@ typedef struct zsf_aux_results_t {
   double t_open_sea;
 } zsf_aux_results_t;
 
+/* Structs when stepping through phases explicitly, i.e. not looping until steady */
+typedef struct zsf_phase_state_t {
+  double sal_lock;
+  double saltmass_lock;
+  double head_lock;
+  double volume_ship_in_lock;
+} zsf_phase_state_t;
+
+/* Per phase we calculate the mass transports and volume transports over the
+   lock gates/openings. A positive values means "from lake to lock" or "from lock
+   to sea". */
+typedef struct zsf_phase_transports_t {
+  double mass_transport_lake;
+  double volume_lake_out;
+  double volume_lake_in;
+
+  double mass_transport_sea;
+  double volume_sea_out;
+  double volume_sea_in;
+} zsf_phase_transports_t;
+
+/* zsf_initialize_state:
+ *      fill zsf_state_t with an initial condition for an empty (no ships) lock */
+ZSF_EXPORT void ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
+                                                  double sal_lock, double head_lock);
+
+/* zsf_step_phase_1:
+ *      Perform step 1: levelling to lake side */
+ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, zsf_phase_state_t *state,
+                                              zsf_phase_transports_t *results);
+
+/* zsf_step_phase_2:
+ *      Perform step 1: door open to lake side (ships out, lock exchange + flushing, ships in) */
+ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_open_lake,
+                                              zsf_phase_state_t *state,
+                                              zsf_phase_transports_t *results);
+
+/* zsf_step_phase_3:
+ *      Perform step 1: levelling to sea side */
+ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, zsf_phase_state_t *state,
+                                              zsf_phase_transports_t *results);
+
+/* zsf_step_phase_4:
+ *      Perform step 1: door open to sea side (ships out, lock exchange + flushing, ships in) */
+ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open_sea,
+                                              zsf_phase_state_t *state,
+                                              zsf_phase_transports_t *results);
+
 /* zsf_param_default:
  *      fill zsf_param_t with default values */
 ZSF_EXPORT void ZSF_CALLCONV zsf_param_default(zsf_param_t *p);
