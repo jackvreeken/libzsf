@@ -111,7 +111,7 @@ ZSF_EXPORT void ZSF_CALLCONV zsf_param_default(zsf_param_t *p);
 
 /* zsf_calculate:
  *      calculate the salt intrusion for a set of parameters */
-ZSF_EXPORT void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
+ZSF_EXPORT void ZSF_CALLCONV zsf_calculate(const zsf_param_t *p, zsf_results_t *results,
                                            zsf_aux_results_t *aux_results);
 
 #ifdef __cplusplus
