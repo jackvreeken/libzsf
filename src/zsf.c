@@ -371,11 +371,11 @@ void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
       double mt_sea = mt_sea_2 + mt_sea_3 + mt_sea_4;
 
       double vol_sea_out =
-          (volume_leveling_high_tide + volume_exchange_2 + p->ship_volume_lake_to_sea);
+          (volume_leveling_high_tide + volume_exchange_4 + p->ship_volume_lake_to_sea);
       double disch_sea_out = vol_sea_out / t_cycle;
 
       double vol_sea_in = (volume_leveling_low_tide + p->ship_volume_sea_to_lake +
-                           volume_exchange_2 + flushing_discharge * 2 * t_open);
+                           volume_exchange_4 + flushing_discharge * 2 * t_open);
       double disch_sea_in = vol_sea_in / t_cycle;
 
       double salt_load_sea = mt_sea / t_cycle;
