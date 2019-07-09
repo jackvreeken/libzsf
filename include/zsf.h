@@ -10,7 +10,7 @@
 #ifndef ZSF_ZSF_H
 #define ZSF_ZSF_H
 
-#if defined (_WIN32)
+#if defined(_WIN32)
 #  if defined ZSF_STATIC
 #    define ZSF_EXPORT
 #  elif defined ZSF_EXPORTS
@@ -18,11 +18,11 @@
 #  else
 #    define ZSF_EXPORT __declspec(dllimport)
 #  endif
-#elif defined (__CYGWIN__)
+#elif defined(__CYGWIN__)
 #  define ZSF_EXPORT
 #else
 #  if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER
-#    define ZSF_EXPORT __attribute__ ((visibility ("default")))
+#    define ZSF_EXPORT __attribute__((visibility("default")))
 #  else
 #    define ZSF_EXPORT
 #  endif
@@ -31,7 +31,7 @@
 #if (defined ZSF_USE_STDCALL) && (defined _WIN32)
 #  define ZSF_CALLCONV __stdcall
 #else
-#   define ZSF_CALLCONV
+#  define ZSF_CALLCONV
 #endif
 
 // A custom value to signify "not specified"
@@ -112,7 +112,7 @@ ZSF_EXPORT void ZSF_CALLCONV zsf_param_default(zsf_param_t *p);
 /* zsf_calculate:
  *      calculate the salt intrusion for a set of parameters */
 ZSF_EXPORT void ZSF_CALLCONV zsf_calculate(zsf_param_t *p, zsf_results_t *results,
-                                       zsf_aux_results_t *aux_results);
+                                           zsf_aux_results_t *aux_results);
 
 #ifdef __cplusplus
 }
