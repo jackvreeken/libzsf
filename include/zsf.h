@@ -120,10 +120,16 @@ typedef struct zsf_phase_transports_t {
   double mass_transport_lake;
   double volume_lake_out;
   double volume_lake_in;
+  double discharge_lake_out;
+  double discharge_lake_in;
+  double salinity_lake_in;
 
   double mass_transport_sea;
   double volume_sea_out;
   double volume_sea_in;
+  double discharge_sea_out;
+  double discharge_sea_in;
+  double salinity_sea_in;
 } zsf_phase_transports_t;
 
 /* zsf_initialize_state:
@@ -133,7 +139,8 @@ ZSF_EXPORT void ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phas
 
 /* zsf_step_phase_1:
  *      Perform step 1: levelling to lake side */
-ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, zsf_phase_state_t *state,
+ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, double t_level,
+                                              zsf_phase_state_t *state,
                                               zsf_phase_transports_t *results);
 
 /* zsf_step_phase_2:
@@ -144,7 +151,8 @@ ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_ope
 
 /* zsf_step_phase_3:
  *      Perform step 1: levelling to sea side */
-ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, zsf_phase_state_t *state,
+ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, double t_level,
+                                              zsf_phase_state_t *state,
                                               zsf_phase_transports_t *results);
 
 /* zsf_step_phase_4:
