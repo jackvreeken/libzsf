@@ -75,7 +75,7 @@ static forceinline void calculate_derived_parameters(const zsf_param_t *p,
 
   // Door open times
   o->t_cycle = 24.0 * 3600.0 / p->num_cycles;
-  o->t_open_avg = 0.5 * o->t_cycle - (p->leveling_time + 2.0 * 0.5 * p->door_time_to_open) * 60.0;
+  o->t_open_avg = 0.5 * o->t_cycle - (p->leveling_time + 2.0 * 0.5 * p->door_time_to_open);
   o->t_open = p->calibration_coefficient * o->t_open_avg;
   o->t_open_lake = p->symmetry_coefficient * o->t_open;
   o->t_open_sea = (2.0 - p->symmetry_coefficient) * o->t_open;
@@ -100,8 +100,8 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
 
   // Operation properties
   p->num_cycles = 12.0;
-  p->door_time_to_open = 5.0;
-  p->leveling_time = 5.0;
+  p->door_time_to_open = 300.0;
+  p->leveling_time = 300.0;
   p->symmetry_coefficient = 1.0;
   p->ship_volume_sea_to_lake = 0.0;
   p->ship_volume_lake_to_sea = 0.0;
