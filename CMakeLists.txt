@@ -35,7 +35,7 @@ add_library(zsf-static STATIC src/zsf.c)
 
 set_target_properties(zsf-static PROPERTIES
     COMPILE_DEFINITIONS "ZSF_STATIC"
-    OUTPUT_NAME "zsf"
+    OUTPUT_NAME "zsf-static"
     PREFIX "lib"
 )
 
