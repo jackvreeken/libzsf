@@ -29,6 +29,7 @@ set_target_properties (zsf PROPERTIES
     DEFINE_SYMBOL "ZSF_EXPORTS"
     OUTPUT_NAME "zsf"
     PREFIX "lib"
+    PUBLIC_HEADER "include/zsf.h"
 )
 
 add_library(zsf-static STATIC src/zsf.c)
@@ -37,7 +38,10 @@ set_target_properties(zsf-static PROPERTIES
     COMPILE_DEFINITIONS "ZSF_STATIC"
     OUTPUT_NAME "zsf-static"
     PREFIX "lib"
+    PUBLIC_HEADER "include/zsf.h"
 )
+
+set(INSTALL_TARGETS zsf zsf-static)
 
 # We also generate a 32-bits stdcall version for VBA
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -50,5 +54,12 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
         COMPILE_DEFINITIONS "ZSF_USE_STDCALL"
         OUTPUT_NAME "zsf-stdcall"
         PREFIX "lib"
+        PUBLIC_HEADER "include/zsf.h"
     )
+
+    set(INSTALL_TARGETS ${INSTALL_TARGETS} zsf-stdcall)
 endif()
+
+install(
+    TARGETS
+    ${INSTALL_TARGETS})
