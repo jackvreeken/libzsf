@@ -285,9 +285,12 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   double mt_lake_2_ship_enter = -1 * p->ship_volume_lake_to_sea * sal_lock_2b;
 
+#ifndef NDEBUG
+  // These variables are only needed for the assertion later on
   // Update state variables of the lock
   double saltmass_lock_2c = saltmass_lock_2b + mt_lake_2_ship_enter;
   double sal_lock_2c = saltmass_lock_2c / (o->volume_lock_at_lake - p->ship_volume_lake_to_sea);
+#endif
 
   // Totals for Phase 2
   // ~~~~~~~~~~~~~~~~~~
@@ -469,9 +472,12 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   double mt_sea_4_ship_enter = p->ship_volume_sea_to_lake * sal_lock_4b;
 
+#ifndef NDEBUG
+  // These variables are only needed for the assertion later on
   // Update state variables of the lock
   double saltmass_lock_4c = saltmass_lock_4b - mt_sea_4_ship_enter;
   double sal_lock_4c = saltmass_lock_4c / (o->volume_lock_at_sea - p->ship_volume_sea_to_lake);
+#endif
 
   // Totals for Phase 4
   // ~~~~~~~~~~~~~~~~~~
