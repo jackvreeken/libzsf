@@ -4,6 +4,10 @@
 #include "zsf.h"
 #include <math.h>
 
+int is_close(double a, double b, double rtol, double atol);
+double sal_psu_2_density(double sal_psu, double temperature);
+double sal_2_density(double sal_kgm3, double temperature, double rtol, double atol);
+
 int is_close(double a, double b, double rtol, double atol) {
   double max_abs = fmax(fabs(a), fabs(b));
   if (fabs(a - b) <= fmax(rtol * max_abs, atol))
