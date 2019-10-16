@@ -134,32 +134,32 @@ typedef struct zsf_phase_transports_t {
 
 /* zsf_initialize_state:
  *      fill zsf_state_t with an initial condition for an empty (no ships) lock */
-ZSF_EXPORT void ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
-                                                  double sal_lock, double head_lock);
+ZSF_EXPORT int ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
+                                                 double sal_lock, double head_lock);
 
 /* zsf_step_phase_1:
  *      Perform step 1: levelling to lake side */
-ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, double t_level,
-                                              zsf_phase_state_t *state,
-                                              zsf_phase_transports_t *results);
+ZSF_EXPORT int ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, double t_level,
+                                             zsf_phase_state_t *state,
+                                             zsf_phase_transports_t *results);
 
 /* zsf_step_phase_2:
  *      Perform step 1: door open to lake side (ships out, lock exchange + flushing, ships in) */
-ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_open_lake,
-                                              zsf_phase_state_t *state,
-                                              zsf_phase_transports_t *results);
+ZSF_EXPORT int ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_open_lake,
+                                             zsf_phase_state_t *state,
+                                             zsf_phase_transports_t *results);
 
 /* zsf_step_phase_3:
  *      Perform step 1: levelling to sea side */
-ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, double t_level,
-                                              zsf_phase_state_t *state,
-                                              zsf_phase_transports_t *results);
+ZSF_EXPORT int ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, double t_level,
+                                             zsf_phase_state_t *state,
+                                             zsf_phase_transports_t *results);
 
 /* zsf_step_phase_4:
  *      Perform step 1: door open to sea side (ships out, lock exchange + flushing, ships in) */
-ZSF_EXPORT void ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open_sea,
-                                              zsf_phase_state_t *state,
-                                              zsf_phase_transports_t *results);
+ZSF_EXPORT int ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open_sea,
+                                             zsf_phase_state_t *state,
+                                             zsf_phase_transports_t *results);
 
 /* zsf_param_default:
  *      fill zsf_param_t with default values */
@@ -167,8 +167,11 @@ ZSF_EXPORT void ZSF_CALLCONV zsf_param_default(zsf_param_t *p);
 
 /* zsf_calc_steady:
  *      calculate the salt intrusion for a set of parameters, assuming steady operation*/
-ZSF_EXPORT void ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
-                                             zsf_aux_results_t *aux_results);
+ZSF_EXPORT int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
+                                            zsf_aux_results_t *aux_results);
+/* zsf_error_msg:
+ *      Get error messeage corresponding to error code */
+ZSF_EXPORT const char *ZSF_CALLCONV zsf_error_msg(int code);
 
 #ifdef __cplusplus
 }

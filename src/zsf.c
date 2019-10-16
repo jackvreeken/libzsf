@@ -42,6 +42,26 @@ inline double TANH(const double x) {
 #  define TANH tanh
 #endif
 
+#define ERROR_CODES(X)                                                                             \
+  X(ZSF_SUCCESS, "Success")                                                                        \
+  X(ZSF_SHIP_TOO_BIG, "The ship is too large for the lock")                                        \
+  X(ZSF_ERR_REMAINING_HEAD_DIFF, "Remaining head difference when opening doors")                   \
+  X(ZSF_ERR_SAL_LOCK_OUT_OF_BOUNDS, "The salinity of the lock exceeds that of the boundaries")
+
+#define ERROR_ENUM(ID, TEXT) ID,
+enum error_ids { ERROR_CODES(ERROR_ENUM) ZSF_NUM_ERRORS };
+#undef ERROR_ENUM
+
+#define ERROR_TEXT(ID, TEXT)                                                                       \
+  case ID:                                                                                         \
+    return TEXT;
+const char *ZSF_CALLCONV zsf_error_msg(int code) {
+  switch (code) { ERROR_CODES(ERROR_TEXT) }
+  return "Unknown error";
+}
+#undef ERROR_TEXT
+#undef ERROR_CODES
+
 typedef struct derived_parameters_t {
   double g;
   int is_high_tide;
@@ -87,6 +107,21 @@ static forceinline void calculate_derived_parameters(const zsf_param_t *p,
   // Average density (for lock exchange)
   o->density_average = 0.5 * (sal_2_density(p->sal_lake, p->temperature, p->rtol, p->atol) +
                               sal_2_density(p->sal_sea, p->temperature, p->rtol, p->atol));
+}
+
+static int check_parameters_state(const zsf_param_t *p, const derived_parameters_t *o,
+                                  const zsf_phase_state_t *state) {
+
+  if (fmax(p->ship_volume_lake_to_sea, p->ship_volume_sea_to_lake) >
+      fmin(o->volume_lock_at_lake, o->volume_lock_at_sea)) {
+    return ZSF_SHIP_TOO_BIG;
+  }
+  if ((state->sal_lock > fmax(p->sal_lake, p->sal_sea)) ||
+      (state->sal_lock < fmin(p->sal_lake, p->sal_sea))) {
+    return ZSF_ERR_SAL_LOCK_OUT_OF_BOUNDS;
+  }
+
+  return ZSF_SUCCESS;
 }
 
 void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
@@ -478,52 +513,87 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   state->volume_ship_in_lock = p->ship_volume_sea_to_lake;
 }
 
-void ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
-                                       double sal_lock, double head_lock) {
+int ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
+                                      double sal_lock, double head_lock) {
   state->sal_lock = sal_lock;
   state->saltmass_lock = sal_lock * (p->lock_length * p->lock_width * (head_lock - p->lock_bottom));
   state->head_lock = head_lock;
   state->volume_ship_in_lock = 0.0;
+
+  return ZSF_SUCCESS;
 }
 
-void ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, double t_level, zsf_phase_state_t *state,
-                                   zsf_phase_transports_t *results) {
+int ZSF_CALLCONV zsf_step_phase_1(const zsf_param_t *p, double t_level, zsf_phase_state_t *state,
+                                  zsf_phase_transports_t *results) {
   // Get the derived parameters
   derived_parameters_t o;
   calculate_derived_parameters(p, &o);
+
+  int err = check_parameters_state(p, &o, state);
+  if (err) {
+    return err;
+  }
 
   step_phase_1(p, &o, t_level, state, results);
+
+  return ZSF_SUCCESS;
 }
 
-void ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_open_lake,
-                                   zsf_phase_state_t *state, zsf_phase_transports_t *results) {
+int ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_open_lake,
+                                  zsf_phase_state_t *state, zsf_phase_transports_t *results) {
   // Get the derived parameters
   derived_parameters_t o;
   calculate_derived_parameters(p, &o);
+
+  int err = check_parameters_state(p, &o, state);
+  if (err) {
+    return err;
+  }
+  if (fabs(state->head_lock - p->head_lake) > 1E-8) {
+    return ZSF_ERR_REMAINING_HEAD_DIFF;
+  }
 
   step_phase_2(p, &o, t_open_lake, state, results);
+
+  return ZSF_SUCCESS;
 }
 
-void ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, double t_level, zsf_phase_state_t *state,
-                                   zsf_phase_transports_t *results) {
+int ZSF_CALLCONV zsf_step_phase_3(const zsf_param_t *p, double t_level, zsf_phase_state_t *state,
+                                  zsf_phase_transports_t *results) {
   // Get the derived parameters
   derived_parameters_t o;
   calculate_derived_parameters(p, &o);
+
+  int err = check_parameters_state(p, &o, state);
+  if (err) {
+    return err;
+  }
 
   step_phase_3(p, &o, t_level, state, results);
+
+  return ZSF_SUCCESS;
 }
 
-void ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open_sea,
-                                   zsf_phase_state_t *state, zsf_phase_transports_t *results) {
+int ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open_sea, zsf_phase_state_t *state,
+                                  zsf_phase_transports_t *results) {
   // Get the derived parameters
   derived_parameters_t o;
   calculate_derived_parameters(p, &o);
 
-  step_phase_4(p, &o, t_open_sea, state, results);
-}
+  int err = check_parameters_state(p, &o, state);
+  if (err) {
+    return err;
+  }
+  if (fabs(state->head_lock - p->head_sea) > 1E-8) {
+    return ZSF_ERR_REMAINING_HEAD_DIFF;
+  }
 
-void ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
-                                  zsf_aux_results_t *aux_results) {
+  step_phase_4(p, &o, t_open_sea, state, results);
+
+  return ZSF_SUCCESS;
+}
+int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
+                                 zsf_aux_results_t *aux_results) {
 
   derived_parameters_t o;
   calculate_derived_parameters(p, &o);
@@ -538,6 +608,12 @@ void ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
   state.volume_ship_in_lock = p->ship_volume_sea_to_lake;
   state.saltmass_lock = sal_lock_4 * (o.volume_lock_at_sea - state.volume_ship_in_lock);
   state.head_lock = p->head_sea;
+  state.sal_lock = sal_lock_4;
+
+  int err = check_parameters_state(p, &o, &state);
+  if (err) {
+    return err;
+  }
 
   while (1) {
     // Backup old salinity value for convergence check
@@ -659,4 +735,6 @@ void ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
       break;
     }
   }
+
+  return ZSF_SUCCESS;
 }
