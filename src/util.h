@@ -1,6 +1,7 @@
 #ifndef ZSF_UTIL_H
 #define ZSF_UTIL_H
 
+#include "zsf.h"
 #include <math.h>
 
 int is_close(double a, double b, double rtol, double atol) {
@@ -51,6 +52,6 @@ double sal_2_density(double sal_kgm3, double temperature, double rtol, double at
 
     rho = rho_new;
   }
-  return NAN;
+  return ZSF_NAN;
 }
 #endif
