@@ -1,1 +1,8 @@
-build/*
+# Build and distributions
+build
+dist
+
+# Editors
+.idea
+.ipynb_checkpoints
+.vscode
