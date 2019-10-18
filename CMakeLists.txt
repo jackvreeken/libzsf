@@ -30,6 +30,11 @@ configure_file(config.h.in config.h ESCAPE_QUOTES)
 ##############################################################################
 ################################## Options ###################################
 ##############################################################################
+# Default build type is Release
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type (default Release)" FORCE)
+endif()
+
 option(USE_FAST_MATH "Enable fast math optimizations" OFF)
 if(USE_FAST_MATH)
     if (MSVC)
