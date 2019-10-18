@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "config.h"
 #include "util.h"
 #include "zsf.h"
 
@@ -76,6 +77,8 @@ typedef struct derived_parameters_t {
   double flushing_discharge;
   double density_average;
 } derived_parameters_t;
+
+const char *ZSF_CALLCONV zsf_version() { return ZSF_GIT_DESCRIBE; }
 
 static forceinline void calculate_derived_parameters(const zsf_param_t *p,
                                                      derived_parameters_t *o) {

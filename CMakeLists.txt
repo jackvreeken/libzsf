@@ -3,8 +3,33 @@ cmake_minimum_required(VERSION 2.8)
 project(libzsf)
 enable_language(C)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR})
 
+##############################################################################
+################################## Version ###################################
+##############################################################################
+# For systems with git installed, find out revision and description.
+execute_process(COMMAND git rev-parse HEAD
+  OUTPUT_VARIABLE git_revision
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  ERROR_QUIET
+)
+execute_process(COMMAND git describe --tags --first-parent HEAD
+  OUTPUT_VARIABLE git_describe
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  ERROR_QUIET
+)
+
+string(REPLACE "-g" ".g" git_describe "${git_describe}")
+string(REPLACE "-dirty" ".dirty" git_describe "${git_describe}")
+string(REPLACE "-" "+" git_describe "${git_describe}")
+set(PACKAGE_VERSION_FULL "${git_describe}")
+
+configure_file(config.h.in config.h ESCAPE_QUOTES)
+
+##############################################################################
+################################## Options ###################################
+##############################################################################
 option(USE_FAST_MATH "Enable fast math optimizations" OFF)
 if(USE_FAST_MATH)
     if (MSVC)
@@ -23,6 +48,9 @@ if(USE_FAST_TANH)
     add_definitions(-DZSF_USE_FAST_TANH)
 endif()
 
+##############################################################################
+################################## Targets ###################################
+##############################################################################
 add_library(zsf SHARED src/zsf.c)
 
 set_target_properties (zsf PROPERTIES

@@ -173,6 +173,10 @@ ZSF_EXPORT int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t 
  *      Get error messeage corresponding to error code */
 ZSF_EXPORT const char *ZSF_CALLCONV zsf_error_msg(int code);
 
+/* zsf_version:
+ *      Get version string */
+ZSF_EXPORT const char *ZSF_CALLCONV zsf_version();
+
 #ifdef __cplusplus
 }
 #endif
