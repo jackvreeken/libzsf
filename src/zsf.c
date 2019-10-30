@@ -428,8 +428,8 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
 
   // The equilibrium depth of the boundary layer between the salt (sal_sea)
   // and fresh (sal_lake) water when flushing for a very long time.
-  double head_equilibrium = cbrt(2.0 * pow(o->flushing_discharge, 2.0) * o->density_average /
-                                 (o->g * 0.8 * (p->sal_sea - p->sal_lake)));
+  double head_equilibrium = cbrt(2.0 * pow(o->flushing_discharge / p->lock_width, 2.0) *
+                                 o->density_average / (o->g * 0.8 * (p->sal_sea - p->sal_lake)));
 
   head_equilibrium = fmin(head_equilibrium, p->head_sea - p->lock_bottom);
 
