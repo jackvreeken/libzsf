@@ -55,9 +55,10 @@ typedef struct zsf_param_t {
   double sal_lock;
   double head_sea;
   double sal_sea;
+  double temperature_sea;
   double head_lake;
   double sal_lake;
-  double temperature;
+  double temperature_lake;
   double flushing_discharge_high_tide;
   double flushing_discharge_low_tide;
   double density_current_factor_sea;

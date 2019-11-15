@@ -108,8 +108,8 @@ static forceinline void calculate_derived_parameters(const zsf_param_t *p,
       o->is_low_tide ? p->flushing_discharge_low_tide : p->flushing_discharge_high_tide;
 
   // Average density (for lock exchange)
-  o->density_average = 0.5 * (sal_2_density(p->sal_lake, p->temperature, p->rtol, p->atol) +
-                              sal_2_density(p->sal_sea, p->temperature, p->rtol, p->atol));
+  o->density_average = 0.5 * (sal_2_density(p->sal_lake, p->temperature_lake, p->rtol, p->atol) +
+                              sal_2_density(p->sal_sea, p->temperature_sea, p->rtol, p->atol));
 }
 
 static int check_parameters_state(const zsf_param_t *p, const derived_parameters_t *o,
@@ -157,9 +157,10 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   // Boundary conditions
   p->head_sea = 0.0;
   p->sal_sea = 30.0;
+  p->temperature_sea = 15.0;
   p->head_lake = 0.0;
   p->sal_lake = 1.0;
-  p->temperature = 15.0;
+  p->temperature_lake = 15.0;
 
   // Convergence criterion
   p->rtol = 1E-5;
