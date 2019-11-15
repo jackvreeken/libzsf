@@ -52,12 +52,12 @@ typedef struct zsf_param_t {
   double symmetry_coefficient;
   double ship_volume_sea_to_lake;
   double ship_volume_lake_to_sea;
-  double sal_lock;
+  double salinity_lock;
   double head_sea;
-  double sal_sea;
+  double salinity_sea;
   double temperature_sea;
   double head_lake;
-  double sal_lake;
+  double salinity_lake;
   double temperature_lake;
   double flushing_discharge_high_tide;
   double flushing_discharge_low_tide;
@@ -108,7 +108,7 @@ typedef struct zsf_aux_results_t {
 
 /* Structs when stepping through phases explicitly, i.e. not looping until steady */
 typedef struct zsf_phase_state_t {
-  double sal_lock;
+  double salinity_lock;
   double saltmass_lock;
   double head_lock;
   double volume_ship_in_lock;
@@ -136,7 +136,7 @@ typedef struct zsf_phase_transports_t {
 /* zsf_initialize_state:
  *      fill zsf_state_t with an initial condition for an empty (no ships) lock */
 ZSF_EXPORT int ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
-                                                 double sal_lock, double head_lock);
+                                                 double salinity_lock, double head_lock);
 
 /* zsf_step_phase_1:
  *      Perform step 1: levelling to lake side */

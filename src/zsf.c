@@ -108,8 +108,9 @@ static forceinline void calculate_derived_parameters(const zsf_param_t *p,
       o->is_low_tide ? p->flushing_discharge_low_tide : p->flushing_discharge_high_tide;
 
   // Average density (for lock exchange)
-  o->density_average = 0.5 * (sal_2_density(p->sal_lake, p->temperature_lake, p->rtol, p->atol) +
-                              sal_2_density(p->sal_sea, p->temperature_sea, p->rtol, p->atol));
+  o->density_average =
+      0.5 * (sal_2_density(p->salinity_lake, p->temperature_lake, p->rtol, p->atol) +
+             sal_2_density(p->salinity_sea, p->temperature_sea, p->rtol, p->atol));
 }
 
 static int check_parameters_state(const zsf_param_t *p, const derived_parameters_t *o,
@@ -119,8 +120,8 @@ static int check_parameters_state(const zsf_param_t *p, const derived_parameters
       fmin(o->volume_lock_at_lake, o->volume_lock_at_sea)) {
     return ZSF_SHIP_TOO_BIG;
   }
-  if ((state->sal_lock > fmax(p->sal_lake, p->sal_sea)) ||
-      (state->sal_lock < fmin(p->sal_lake, p->sal_sea))) {
+  if ((state->salinity_lock > fmax(p->salinity_lake, p->salinity_sea)) ||
+      (state->salinity_lock < fmin(p->salinity_lake, p->salinity_sea))) {
     return ZSF_ERR_SAL_LOCK_OUT_OF_BOUNDS;
   }
 
@@ -152,14 +153,14 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   p->density_current_factor_lake = 1.0;
 
   // Initial condition
-  p->sal_lock = ZSF_NAN;
+  p->salinity_lock = ZSF_NAN;
 
   // Boundary conditions
   p->head_sea = 0.0;
-  p->sal_sea = 30.0;
+  p->salinity_sea = 30.0;
   p->temperature_sea = 15.0;
   p->head_lake = 0.0;
-  p->sal_lake = 1.0;
+  p->salinity_lake = 1.0;
   p->temperature_lake = 15.0;
 
   // Convergence criterion
@@ -184,13 +185,13 @@ static forceinline void step_phase_1(const zsf_param_t *p, const derived_paramet
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   double saltmass_lock_4 = state->saltmass_lock;
-  double sal_lock_4 = state->sal_lock;
+  double sal_lock_4 = state->salinity_lock;
   double volume_ship_in_lock_4 = state->volume_ship_in_lock;
 
   // Leveling
   double vol_lake_in = fmax(state->head_lock - p->head_lake, 0.0) * p->lock_width * p->lock_length;
   double vol_lake_out = fmax(p->head_lake - state->head_lock, 0.0) * p->lock_width * p->lock_length;
-  double mt_lake_1 = vol_lake_out * p->sal_lake - vol_lake_in * sal_lock_4;
+  double mt_lake_1 = vol_lake_out * p->salinity_lake - vol_lake_in * sal_lock_4;
 
   // Update the results
   results->mass_transport_lake = mt_lake_1;
@@ -210,7 +211,7 @@ static forceinline void step_phase_1(const zsf_param_t *p, const derived_paramet
   // Update state variables of the lock
   double saltmass_lock_1 = saltmass_lock_4 + mt_lake_1;
   state->saltmass_lock = saltmass_lock_1;
-  state->sal_lock = saltmass_lock_1 / (o->volume_lock_at_lake - volume_ship_in_lock_4);
+  state->salinity_lock = saltmass_lock_1 / (o->volume_lock_at_lake - volume_ship_in_lock_4);
   state->head_lock = p->head_lake;
   // state->volume_ship_in_lock = state->volume_ship_in_lock;  /* Unchanged */
 }
@@ -236,12 +237,12 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   double saltmass_lock_1 = state->saltmass_lock;
-  double sal_lock_1 = state->sal_lock;
+  double sal_lock_1 = state->salinity_lock;
   double volume_ship_in_lock_1 = state->volume_ship_in_lock;
 
   // Subphase a. Ships exiting the lock chamber towards the lake
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  double mt_lake_2_ship_exit = volume_ship_in_lock_1 * p->sal_lake;
+  double mt_lake_2_ship_exit = volume_ship_in_lock_1 * p->salinity_lake;
 
   // Update state variables of the lock
   double saltmass_lock_2a = saltmass_lock_1 + mt_lake_2_ship_exit;
@@ -252,7 +253,7 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   double velocity_flushing =
       o->flushing_discharge / (p->lock_width * (p->head_lake - p->lock_bottom));
 
-  double sal_diff = sal_lock_2a - p->sal_lake;
+  double sal_diff = sal_lock_2a - p->salinity_lake;
   double velocity_exchange_raw =
       0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * (p->head_lake - p->lock_bottom));
   double velocity_exchange_eta = p->density_current_factor_lake * velocity_exchange_raw;
@@ -262,7 +263,7 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   double volume_exchange_2 =
       frac_lock_exchange * o->volume_lock_at_lake * TANH(t_open_lake / t_lock_exchange);
 
-  double mt_lake_2_lock_exchange = (p->sal_lake - sal_lock_2a) * volume_exchange_2;
+  double mt_lake_2_lock_exchange = (p->salinity_lake - sal_lock_2a) * volume_exchange_2;
 
   // Flushing itself (taking lock exchange into account)
   double volume_flush = o->flushing_discharge * t_open_lake;
@@ -276,9 +277,9 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   double volume_flush_passthrough = fmax(volume_flush - max_volume_flush_refresh, 0.0);
 
   double mt_lake_2_flushing =
-      volume_flush_refresh * p->sal_lake + volume_flush_passthrough * p->sal_lake;
+      volume_flush_refresh * p->salinity_lake + volume_flush_passthrough * p->salinity_lake;
   double mt_sea_2_flushing =
-      volume_flush_refresh * sal_lock_2a + volume_flush_passthrough * p->sal_lake;
+      volume_flush_refresh * sal_lock_2a + volume_flush_passthrough * p->salinity_lake;
 
   // Update state variables of the lock
   double saltmass_lock_2b =
@@ -310,7 +311,7 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   assert(fabs(saltmass_lock_2 - saltmass_lock_2c) < 1E-8);
   assert(fabs(sal_lock_2 - sal_lock_2c) < 1E-8);
 
-  assert((sal_lock_2 >= p->sal_lake) & (sal_lock_2 <= p->sal_sea));
+  assert((sal_lock_2 >= p->salinity_lake) & (sal_lock_2 <= p->salinity_sea));
 
   // Update the results
   results->mass_transport_lake = mt_lake_2;
@@ -320,7 +321,7 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   results->discharge_lake_out = results->volume_lake_out / t_open_lake;
   results->discharge_lake_in = results->volume_lake_in / t_open_lake;
   results->salinity_lake_in =
-      -1 * (mt_lake_2 - results->volume_lake_out * p->sal_lake) / results->volume_lake_in;
+      -1 * (mt_lake_2 - results->volume_lake_out * p->salinity_lake) / results->volume_lake_in;
 
   results->mass_transport_sea = mt_sea_2;
   results->volume_sea_out = 0.0;
@@ -332,7 +333,7 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
 
   // Update state variables of the lock
   state->saltmass_lock = saltmass_lock_2;
-  state->sal_lock = sal_lock_2;
+  state->salinity_lock = sal_lock_2;
   // state->head_lock = state->head_lock;  /* Unchanged */
   state->volume_ship_in_lock = p->ship_volume_lake_to_sea;
 }
@@ -354,13 +355,13 @@ static forceinline void step_phase_3(const zsf_param_t *p, const derived_paramet
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   double saltmass_lock_2 = state->saltmass_lock;
-  double sal_lock_2 = state->sal_lock;
+  double sal_lock_2 = state->salinity_lock;
   double volume_ship_in_lock_2 = state->volume_ship_in_lock;
 
   // Leveling
   double vol_sea_in = fmax(state->head_lock - p->head_sea, 0.0) * p->lock_width * p->lock_length;
   double vol_sea_out = fmax(p->head_sea - state->head_lock, 0.0) * p->lock_width * p->lock_length;
-  double mt_sea_3 = vol_sea_in * sal_lock_2 - vol_sea_out * p->sal_sea;
+  double mt_sea_3 = vol_sea_in * sal_lock_2 - vol_sea_out * p->salinity_sea;
 
   // Update the results
   results->mass_transport_lake = 0.0;
@@ -380,7 +381,7 @@ static forceinline void step_phase_3(const zsf_param_t *p, const derived_paramet
   // Update state variables of the lock
   double saltmass_lock_3 = saltmass_lock_2 - mt_sea_3;
   state->saltmass_lock = saltmass_lock_3;
-  state->sal_lock = saltmass_lock_3 / (o->volume_lock_at_sea - volume_ship_in_lock_2);
+  state->salinity_lock = saltmass_lock_3 / (o->volume_lock_at_sea - volume_ship_in_lock_2);
   state->head_lock = p->head_sea;
   // state->volume_ship_in_lock = state->volume_ship_in_lock;  /* Unchanged */
 }
@@ -406,12 +407,12 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   double saltmass_lock_3 = state->saltmass_lock;
-  double sal_lock_3 = state->sal_lock;
+  double sal_lock_3 = state->salinity_lock;
   double volume_ship_in_lock_3 = state->volume_ship_in_lock;
 
   // Subphase a. Ships exiting the lock chamber towards the sea
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  double mt_sea_4_ship_exit = -1 * volume_ship_in_lock_3 * p->sal_sea;
+  double mt_sea_4_ship_exit = -1 * volume_ship_in_lock_3 * p->salinity_sea;
 
   // Update state variables of the lock
   double saltmass_lock_4a = saltmass_lock_3 - mt_sea_4_ship_exit;
@@ -422,15 +423,16 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   double velocity_flushing =
       o->flushing_discharge / (p->lock_width * (p->head_sea - p->lock_bottom));
 
-  double sal_diff = p->sal_sea - sal_lock_4a;
+  double sal_diff = p->salinity_sea - sal_lock_4a;
   double velocity_exchange_raw =
       0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * (p->head_sea - p->lock_bottom));
   double velocity_exchange_eta = p->density_current_factor_sea * velocity_exchange_raw;
 
   // The equilibrium depth of the boundary layer between the salt (sal_sea)
   // and fresh (sal_lake) water when flushing for a very long time.
-  double head_equilibrium = cbrt(2.0 * pow(o->flushing_discharge / p->lock_width, 2.0) *
-                                 o->density_average / (o->g * 0.8 * (p->sal_sea - p->sal_lake)));
+  double head_equilibrium =
+      cbrt(2.0 * pow(o->flushing_discharge / p->lock_width, 2.0) * o->density_average /
+           (o->g * 0.8 * (p->salinity_sea - p->salinity_lake)));
 
   head_equilibrium = fmin(head_equilibrium, p->head_sea - p->lock_bottom);
 
@@ -449,7 +451,7 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
         frac_lock_exchange * o->volume_lock_at_sea * TANH(t_open_sea / t_lock_exchange);
   }
 
-  double mt_sea_4_lock_exchange = (sal_lock_4a - p->sal_sea) * volume_exchange_4;
+  double mt_sea_4_lock_exchange = (sal_lock_4a - p->salinity_sea) * volume_exchange_4;
 
   // Flushing itself (taking lock exchange into account)
   double volume_flush = o->flushing_discharge * t_open_sea;
@@ -463,9 +465,9 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   double volume_flush_passthrough = fmax(volume_flush - max_volume_flush_refresh, 0.0);
 
   double mt_lake_4_flushing =
-      volume_flush_refresh * p->sal_lake + volume_flush_passthrough * p->sal_lake;
+      volume_flush_refresh * p->salinity_lake + volume_flush_passthrough * p->salinity_lake;
   double mt_sea_4_flushing =
-      volume_flush_refresh * sal_lock_4a + volume_flush_passthrough * p->sal_lake;
+      volume_flush_refresh * sal_lock_4a + volume_flush_passthrough * p->salinity_lake;
 
   // Update state variables of the lock
   double saltmass_lock_4b =
@@ -497,7 +499,7 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   assert(fabs(saltmass_lock_4 - saltmass_lock_4c) < 1E-8);
   assert(fabs(sal_lock_4 - sal_lock_4c) < 1E-8);
 
-  assert((sal_lock_4 >= p->sal_lake) & (sal_lock_4 <= p->sal_sea));
+  assert((sal_lock_4 >= p->salinity_lake) & (sal_lock_4 <= p->salinity_sea));
 
   // Update the results
   results->mass_transport_lake = mt_lake_4;
@@ -514,18 +516,18 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   results->discharge_sea_out = results->volume_sea_out / t_open_sea;
   results->discharge_sea_in = results->volume_sea_in / t_open_sea;
   results->salinity_sea_in =
-      (mt_sea_4 - results->volume_sea_out * p->sal_sea) / results->volume_sea_in;
+      (mt_sea_4 - results->volume_sea_out * p->salinity_sea) / results->volume_sea_in;
 
   // Update state variables of the lock
   state->saltmass_lock = saltmass_lock_4;
-  state->sal_lock = sal_lock_4;
+  state->salinity_lock = sal_lock_4;
   // state->head_lock = state->head_lock;  /* Unchanged */
   state->volume_ship_in_lock = p->ship_volume_sea_to_lake;
 }
 
 int ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
                                       double sal_lock, double head_lock) {
-  state->sal_lock = sal_lock;
+  state->salinity_lock = sal_lock;
   state->saltmass_lock = sal_lock * (p->lock_length * p->lock_width * (head_lock - p->lock_bottom));
   state->head_lock = head_lock;
   state->volume_ship_in_lock = 0.0;
@@ -611,14 +613,14 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
   // Start salinity and salt mass
   zsf_phase_state_t state;
 
-  double sal_lock_4 = p->sal_lock;
+  double sal_lock_4 = p->salinity_lock;
   if (sal_lock_4 == ZSF_NAN)
-    sal_lock_4 = 0.5 * (p->sal_sea + p->sal_lake);
+    sal_lock_4 = 0.5 * (p->salinity_sea + p->salinity_lake);
 
   state.volume_ship_in_lock = p->ship_volume_sea_to_lake;
   state.saltmass_lock = sal_lock_4 * (o.volume_lock_at_sea - state.volume_ship_in_lock);
   state.head_lock = p->head_sea;
-  state.sal_lock = sal_lock_4;
+  state.salinity_lock = sal_lock_4;
 
   int err = check_parameters_state(p, &o, &state);
   if (err) {
@@ -631,20 +633,20 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
 
     zsf_phase_transports_t tp1;
     step_phase_1(p, &o, p->leveling_time, &state, &tp1);
-    double sal_lock_1 = state.sal_lock;
+    double sal_lock_1 = state.salinity_lock;
 
     zsf_phase_transports_t tp2;
     step_phase_2(p, &o, o.t_open_lake, &state, &tp2);
-    double sal_lock_2 = state.sal_lock;
+    double sal_lock_2 = state.salinity_lock;
 
     zsf_phase_transports_t tp3;
     step_phase_3(p, &o, p->leveling_time, &state, &tp3);
-    double sal_lock_3 = state.sal_lock;
+    double sal_lock_3 = state.salinity_lock;
 
     zsf_phase_transports_t tp4;
     step_phase_4(p, &o, o.t_open_sea, &state, &tp4);
 
-    sal_lock_4 = state.sal_lock;
+    sal_lock_4 = state.salinity_lock;
 
     // Convergence check
     // ~~~~~~~~~~~~~~~~~
@@ -664,7 +666,7 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
       double disch_lake_in = vol_lake_in / o.t_cycle;
 
       double salt_load_lake = mt_lake / o.t_cycle;
-      double sal_lake_in = -1 * (mt_lake - vol_lake_out * p->sal_lake) / vol_lake_in;
+      double sal_lake_in = -1 * (mt_lake - vol_lake_out * p->salinity_lake) / vol_lake_in;
 
       // Sea side
       double mt_sea = tp1.mass_transport_sea + tp2.mass_transport_sea + tp3.mass_transport_sea +
@@ -679,7 +681,7 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
       double disch_sea_in = vol_sea_in / o.t_cycle;
 
       double salt_load_sea = mt_sea / o.t_cycle;
-      double sal_sea_in = (mt_sea + vol_sea_out * p->sal_sea) / vol_sea_in;
+      double sal_sea_in = (mt_sea + vol_sea_out * p->salinity_sea) / vol_sea_in;
 
       // Put the main results in the output stucture
       results->mass_transport_lake = mt_lake;
@@ -698,12 +700,12 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
       // understanding of what is going on, what happens in each phase, etc.
       if (aux_results != NULL) {
         // Equivalent full lock exchanges
-        aux_results->z_fraction =
-            0.5 * (mt_lake + mt_sea) /
-            (0.5 * (o.volume_lock_at_lake + o.volume_lock_at_sea) * (p->sal_sea - p->sal_lake));
+        aux_results->z_fraction = 0.5 * (mt_lake + mt_sea) /
+                                  (0.5 * (o.volume_lock_at_lake + o.volume_lock_at_sea) *
+                                   (p->salinity_sea - p->salinity_lake));
 
         // Dimensionless door open time
-        double sal_diff = p->sal_sea - p->sal_lake;
+        double sal_diff = p->salinity_sea - p->salinity_lake;
         double head_avg = 0.5 * (p->head_sea + p->head_lake);
         double velocity_exchange =
             0.5 * sqrt(o.g * 0.8 * sal_diff / o.density_average * (head_avg - p->lock_bottom));
