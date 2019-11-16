@@ -70,6 +70,7 @@ set_target_properties(zsf-static PROPERTIES
     COMPILE_DEFINITIONS "ZSF_STATIC"
     OUTPUT_NAME "zsf-static"
     PUBLIC_HEADER "include/zsf.h"
+    POSITION_INDEPENDENT_CODE ON
 )
 
 set(INSTALL_TARGETS zsf zsf-static)
