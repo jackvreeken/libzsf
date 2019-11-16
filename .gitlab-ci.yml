@@ -1,0 +1,51 @@
+stages:
+  - style
+  - build
+
+# style
+style:c:
+  image: debian:stable
+  stage: style
+  before_script:
+    - apt-get update
+    - apt-get install -y clang-format git
+  script:
+    - clang-format -i src/* include/*
+    - git diff --exit-code
+
+style:python:
+  image: python:3.6
+  stage: style
+  before_script:
+    - pip install tox
+  script:
+    - cd wrappers/python
+    - tox -vv
+  variables:
+    TOXENV: flake8,black
+
+# build
+build:linux:
+  image: quay.io/pypa/manylinux2010_x86_64
+  stage: build
+  # We need CMake 3.14+. To get it we just use the Python manylinux wheel of
+  # it, because (1) we know it is compatible and (2) is easier/faster than
+  # compiling it ourselves.
+  before_script:
+   - /opt/python/cp36-cp36m/bin/pip install cmake
+  script:
+    - mkdir build
+    - cd build
+    - /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
+    - make -j4 install
+    - cd ../wrappers/python
+    - /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
+    - auditwheel repair dist/*
+  variables:
+    CC: gcc
+    CXX: g++
+  artifacts:
+    expire_in: 2 hrs
+    paths:
+      - dist/
+      - wrappers/python/wheelhouse/
