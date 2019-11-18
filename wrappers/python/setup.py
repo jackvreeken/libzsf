@@ -52,6 +52,6 @@ setup(
     setup_requires=["cffi >= 1.0.0"],
     cffi_modules=["src/_pyzsf_build.py:ffibuilder"],
     install_requires=["cffi >= 1.0.0"],
-    tests_require=["pytest", "pytest-runner"],
+    tests_require=["pytest", "pytest-runner", "numpy"],
     python_requires=">=3.6",
 )

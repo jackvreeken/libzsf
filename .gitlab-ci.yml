@@ -1,6 +1,7 @@
 stages:
   - style
   - build
+  - test
 
 # style
 style:c:
@@ -49,3 +50,30 @@ build:linux:
     paths:
       - dist/
       - wrappers/python/wheelhouse/
+
+# test
+.job_template: &unittests
+  stage: test
+  before_script:
+    - pip install tox
+  script:
+    - cd wrappers/python
+    - tox -vv --installpkg wheelhouse/*.whl
+
+test:py36:linux:
+  <<: *unittests
+  image: python:3.6
+  variables:
+    TOXENV: py36
+
+test:py37:linux:
+  <<: *unittests
+  image: python:3.7
+  variables:
+    TOXENV: py37
+
+test:py38:linux:
+  <<: *unittests
+  image: python:3.8
+  variables:
+    TOXENV: py38
