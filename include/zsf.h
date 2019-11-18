@@ -70,15 +70,15 @@ typedef struct zsf_param_t {
 typedef struct zsf_results_t {
   double mass_transport_lake;
   double salt_load_lake;
-  double discharge_lake_out;
-  double discharge_lake_in;
-  double salinity_lake_in;
+  double discharge_from_lake;
+  double discharge_to_lake;
+  double salinity_to_lake;
 
   double mass_transport_sea;
   double salt_load_sea;
-  double discharge_sea_out;
-  double discharge_sea_in;
-  double salinity_sea_in;
+  double discharge_from_sea;
+  double discharge_to_sea;
+  double salinity_to_sea;
 } zsf_results_t;
 
 typedef struct zsf_aux_results_t {
@@ -94,10 +94,10 @@ typedef struct zsf_aux_results_t {
   double mass_transport_sea_2;
   double mass_transport_sea_3;
   double mass_transport_sea_4;
-  double volume_lake_in;
-  double volume_lake_out;
-  double volume_sea_in;
-  double volume_sea_out;
+  double volume_to_lake;
+  double volume_from_lake;
+  double volume_to_sea;
+  double volume_from_sea;
   double volume_lock_at_lake;
   double volume_lock_at_sea;
   double t_cycle;
@@ -119,18 +119,18 @@ typedef struct zsf_phase_state_t {
    to sea". */
 typedef struct zsf_phase_transports_t {
   double mass_transport_lake;
-  double volume_lake_out;
-  double volume_lake_in;
-  double discharge_lake_out;
-  double discharge_lake_in;
-  double salinity_lake_in;
+  double volume_from_lake;
+  double volume_to_lake;
+  double discharge_from_lake;
+  double discharge_to_lake;
+  double salinity_to_lake;
 
   double mass_transport_sea;
-  double volume_sea_out;
-  double volume_sea_in;
-  double discharge_sea_out;
-  double discharge_sea_in;
-  double salinity_sea_in;
+  double volume_from_sea;
+  double volume_to_sea;
+  double discharge_from_sea;
+  double discharge_to_sea;
+  double salinity_to_sea;
 } zsf_phase_transports_t;
 
 /* zsf_initialize_state:
