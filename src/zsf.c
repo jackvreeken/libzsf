@@ -211,8 +211,18 @@ static forceinline void step_phase_1(const zsf_param_t *p, const derived_paramet
 
   // Update state variables of the lock
   double saltmass_lock_1 = saltmass_lock_4 + mt_lake_1;
+  double sal_lock_1 = saltmass_lock_1 / (o->volume_lock_at_lake - volume_ship_in_lock_4);
+
+  assert((sal_lock_1 >= p->salinity_lake - 1E-8) & (sal_lock_1 <= p->salinity_sea + 1E-8));
+
+  // Rounding errors can lead to ever so slight exceedences of the boundary
+  // conditions, so we clip the salinity and recalculate the salt mass.
+  sal_lock_1 = fmax(sal_lock_1, p->salinity_lake);
+  sal_lock_1 = fmin(sal_lock_1, p->salinity_sea);
+  saltmass_lock_1 = sal_lock_1 * (o->volume_lock_at_lake - volume_ship_in_lock_4);
+
+  state->salinity_lock = sal_lock_1;
   state->saltmass_lock = saltmass_lock_1;
-  state->salinity_lock = saltmass_lock_1 / (o->volume_lock_at_lake - volume_ship_in_lock_4);
   state->head_lock = p->head_lake;
   // state->volume_ship_in_lock = state->volume_ship_in_lock;  /* Unchanged */
 }
@@ -312,7 +322,13 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   assert(fabs(saltmass_lock_2 - saltmass_lock_2c) < 1E-8);
   assert(fabs(sal_lock_2 - sal_lock_2c) < 1E-8);
 
-  assert((sal_lock_2 >= p->salinity_lake) & (sal_lock_2 <= p->salinity_sea));
+  assert((sal_lock_2 >= p->salinity_lake - 1E-8) & (sal_lock_2 <= p->salinity_sea + 1E-8));
+
+  // Rounding errors can lead to ever so slight exceedences of the boundary
+  // conditions, so we clip the salinity and recalculate the salt mass.
+  sal_lock_2 = fmax(sal_lock_2, p->salinity_lake);
+  sal_lock_2 = fmin(sal_lock_2, p->salinity_sea);
+  saltmass_lock_2 = sal_lock_2 * (o->volume_lock_at_lake - p->ship_volume_lake_to_sea);
 
   // Update the results
   results->mass_transport_lake = mt_lake_2;
@@ -381,8 +397,18 @@ static forceinline void step_phase_3(const zsf_param_t *p, const derived_paramet
 
   // Update state variables of the lock
   double saltmass_lock_3 = saltmass_lock_2 - mt_sea_3;
+  double sal_lock_3 = saltmass_lock_3 / (o->volume_lock_at_sea - volume_ship_in_lock_2);
+
+  assert((sal_lock_3 >= p->salinity_lake - 1E-8) & (sal_lock_3 <= p->salinity_sea + 1E-8));
+
+  // Rounding errors can lead to ever so slight exceedences of the boundary
+  // conditions, so we clip the salinity and recalculate the salt mass.
+  sal_lock_3 = fmax(sal_lock_3, p->salinity_lake);
+  sal_lock_3 = fmin(sal_lock_3, p->salinity_sea);
+  saltmass_lock_3 = sal_lock_3 * (o->volume_lock_at_sea - volume_ship_in_lock_2);
+
+  state->salinity_lock = sal_lock_3;
   state->saltmass_lock = saltmass_lock_3;
-  state->salinity_lock = saltmass_lock_3 / (o->volume_lock_at_sea - volume_ship_in_lock_2);
   state->head_lock = p->head_sea;
   // state->volume_ship_in_lock = state->volume_ship_in_lock;  /* Unchanged */
 }
@@ -500,7 +526,13 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   assert(fabs(saltmass_lock_4 - saltmass_lock_4c) < 1E-8);
   assert(fabs(sal_lock_4 - sal_lock_4c) < 1E-8);
 
-  assert((sal_lock_4 >= p->salinity_lake) & (sal_lock_4 <= p->salinity_sea));
+  assert((sal_lock_4 >= p->salinity_lake - 1E-8) & (sal_lock_4 <= p->salinity_sea + 1E-8));
+
+  // Rounding errors can lead to ever so slight exceedences of the boundary
+  // conditions, so we clip the salinity and recalculate the salt mass.
+  sal_lock_4 = fmax(sal_lock_4, p->salinity_lake);
+  sal_lock_4 = fmin(sal_lock_4, p->salinity_sea);
+  saltmass_lock_4 = sal_lock_4 * (o->volume_lock_at_sea - p->ship_volume_sea_to_lake);
 
   // Update the results
   results->mass_transport_lake = mt_lake_4;
