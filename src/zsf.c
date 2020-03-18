@@ -337,8 +337,11 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   results->volume_to_lake = volume_exchange_2 + p->ship_volume_lake_to_sea;
   results->discharge_from_lake = results->volume_from_lake / t_open_lake;
   results->discharge_to_lake = results->volume_to_lake / t_open_lake;
-  results->salinity_to_lake =
-      -1 * (mt_lake_2 - results->volume_from_lake * p->salinity_lake) / results->volume_to_lake;
+  results->salinity_to_lake = (results->volume_to_lake > 0.0)
+                                  ? -1 *
+                                        (mt_lake_2 - results->volume_from_lake * p->salinity_lake) /
+                                        results->volume_to_lake
+                                  : sal_lock_1;
 
   results->mass_transport_sea = mt_sea_2;
   results->volume_from_sea = 0.0;
@@ -549,7 +552,9 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   results->discharge_from_sea = results->volume_from_sea / t_open_sea;
   results->discharge_to_sea = results->volume_to_sea / t_open_sea;
   results->salinity_to_sea =
-      (mt_sea_4 - results->volume_from_sea * p->salinity_sea) / results->volume_to_sea;
+      (results->volume_to_sea > 0.0)
+          ? (mt_sea_4 - results->volume_from_sea * p->salinity_sea) / results->volume_to_sea
+          : sal_lock_3;
 
   // Update state variables of the lock
   state->saltmass_lock = saltmass_lock_4;
