@@ -1,3 +1,9 @@
+.shared_windows_runners:
+  tags:
+  - shared-windows
+  - windows
+  - windows-1809
+
 stages:
   - style
   - build
@@ -50,6 +56,38 @@ build:linux:
     paths:
       - dist/
       - wrappers/python/wheelhouse/
+
+build:windows:
+  stage: build
+  before_script:
+    - choco install cmake -y
+    # Chocolatey does not offer maintained 32-bits versions of Python, so we
+    # install both 32- and 64-bit versions manually.
+    - 'wget.exe https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe'
+    - 'Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
+    - 'wget.exe https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe'
+    - 'Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
+  script:
+    # Build both 32-bit and 64-bit versions
+    - '& "C:\\Program Files\\CMake\\bin\\cmake.exe" -G "Visual Studio 16 2019" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32'
+    - '& "C:\\Program Files\\CMake\\bin\\cmake.exe" --build build32 --config Release --target Install'
+    - '& "C:\\Program Files\\CMake\\bin\\cmake.exe" -G "Visual Studio 16 2019" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64'
+    - '& "C:\\Program Files\\CMake\\bin\\cmake.exe" --build build64 --config Release --target Install'
+    - cd wrappers/python
+    # We need the fix for issue #345, that will allow us to build abi3 wheels
+    # on Windows without bdist_wheel throwing an error.
+    - '& "C:\Python36-32\python.exe" -m pip install git+https://github.com/pypa/wheel.git'
+    - '& "C:\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
+    - '& "C:\Python36-64\python.exe" -m pip install git+https://github.com/pypa/wheel.git'
+    - '& "C:\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
+  extends:
+    - .shared_windows_runners
+  artifacts:
+    expire_in: 2 hrs
+    paths:
+      - dist32/
+      - dist64/
+      - wrappers/python/dist/
 
 # test
 .job_template: &unittests
