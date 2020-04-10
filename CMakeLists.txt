@@ -78,7 +78,7 @@ set(INSTALL_TARGETS zsf zsf-static)
 
 # We also generate a 32-bits stdcall version for VBA
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    # 64 bits - do nothing
+    # 64 bits - do nothing. 64 bits office can just use the regular dll
 elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     add_library(zsf-stdcall SHARED src/zsf.c)
 
