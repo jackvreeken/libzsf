@@ -47,31 +47,6 @@ ffibuilder.cdef(
         double salinity_to_sea;
     } zsf_results_t;
 
-    typedef struct zsf_aux_results_t {
-        double z_fraction;
-        double dimensionless_door_open_time;
-        double salinity_lock_1;
-        double salinity_lock_2;
-        double salinity_lock_3;
-        double salinity_lock_4;
-        double mass_transport_lake_1;
-        double mass_transport_lake_2;
-        double mass_transport_lake_4;
-        double mass_transport_sea_2;
-        double mass_transport_sea_3;
-        double mass_transport_sea_4;
-        double volume_to_lake;
-        double volume_from_lake;
-        double volume_to_sea;
-        double volume_from_sea;
-        double volume_lock_at_lake;
-        double volume_lock_at_sea;
-        double t_cycle;
-        double t_open;
-        double t_open_lake;
-        double t_open_sea;
-    } zsf_aux_results_t;
-
     typedef struct zsf_phase_state_t {
         double salinity_lock;
         double saltmass_lock;
@@ -94,6 +69,29 @@ ffibuilder.cdef(
         double discharge_to_sea;
         double salinity_to_sea;
     } zsf_phase_transports_t;
+
+    typedef struct zsf_aux_results_t {
+        double z_fraction;
+        double dimensionless_door_open_time;
+        double volume_to_lake;
+        double volume_from_lake;
+        double volume_to_sea;
+        double volume_from_sea;
+        double volume_lock_at_lake;
+        double volume_lock_at_sea;
+        double t_cycle;
+        double t_open;
+        double t_open_lake;
+        double t_open_sea;
+        double salinity_lock_1;
+        double salinity_lock_2;
+        double salinity_lock_3;
+        double salinity_lock_4;
+        zsf_phase_transports_t transports_phase_1;
+        zsf_phase_transports_t transports_phase_2;
+        zsf_phase_transports_t transports_phase_3;
+        zsf_phase_transports_t transports_phase_4;
+    } zsf_aux_results_t;
 
     int zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
                               double salinity_lock, double head_lock);

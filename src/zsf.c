@@ -751,21 +751,6 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
 
         aux_results->dimensionless_door_open_time = t_lock_exchange / o.t_open;
 
-        // Salinities after each phase
-        aux_results->salinity_lock_1 = sal_lock_1;
-        aux_results->salinity_lock_2 = sal_lock_2;
-        aux_results->salinity_lock_3 = sal_lock_3;
-        aux_results->salinity_lock_4 = sal_lock_4;
-
-        // Mass transports in each phase
-        aux_results->mass_transport_lake_1 = tp1.mass_transport_lake;
-        aux_results->mass_transport_lake_2 = tp2.mass_transport_lake;
-        aux_results->mass_transport_lake_4 = tp4.mass_transport_lake;
-
-        aux_results->mass_transport_sea_2 = tp2.mass_transport_sea;
-        aux_results->mass_transport_sea_3 = tp3.mass_transport_sea;
-        aux_results->mass_transport_sea_4 = tp4.mass_transport_sea;
-
         // Volumes from/to lake and sea
         aux_results->volume_to_lake = vol_to_lake;
         aux_results->volume_from_lake = vol_from_lake;
@@ -780,6 +765,18 @@ int ZSF_CALLCONV zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,
         aux_results->t_open = o.t_open;
         aux_results->t_open_lake = o.t_open_lake;
         aux_results->t_open_sea = o.t_open_sea;
+
+        // Salinities after each phase
+        aux_results->salinity_lock_1 = sal_lock_1;
+        aux_results->salinity_lock_2 = sal_lock_2;
+        aux_results->salinity_lock_3 = sal_lock_3;
+        aux_results->salinity_lock_4 = sal_lock_4;
+
+        // Transports in each phase
+        memcpy(&aux_results->transports_phase_1, &tp1, sizeof(zsf_phase_transports_t));
+        memcpy(&aux_results->transports_phase_2, &tp2, sizeof(zsf_phase_transports_t));
+        memcpy(&aux_results->transports_phase_3, &tp3, sizeof(zsf_phase_transports_t));
+        memcpy(&aux_results->transports_phase_4, &tp4, sizeof(zsf_phase_transports_t));
       }
 
       break;
