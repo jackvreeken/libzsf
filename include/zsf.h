@@ -63,6 +63,8 @@ typedef struct zsf_param_t {
   double flushing_discharge_low_tide;
   double density_current_factor_sea;
   double density_current_factor_lake;
+  double sill_height_sea;
+  double sill_height_lake;
   double rtol;
   double atol;
 } zsf_param_t;

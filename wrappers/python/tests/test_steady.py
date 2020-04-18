@@ -332,3 +332,21 @@ class TestSaltLoadSteady(unittest.TestCase):
         self.assert_allclose_loose(results_flushing_low_tide["salt_load_lake"], 4.587)
 
         self.assert_allclose_loose(results_flushing_high_tide["salt_load_lake"], -63.516)
+
+    def test_sill(self):
+        sl_sill_sea = zsf_calc_steady(**dict(self.parameters, sill_height_sea=1.0,))[
+            "salt_load_lake"
+        ]
+
+        sl_sill_lake = zsf_calc_steady(**dict(self.parameters, sill_height_lake=1.0,))[
+            "salt_load_lake"
+        ]
+
+        # Comparison checks
+        self.assertGreater(-self.reference_load, -sl_sill_sea)
+        self.assertGreater(-sl_sill_sea, -sl_sill_lake)
+
+        # Check values against known good values
+        self.assert_allclose_loose(sl_sill_sea, -32.043)
+
+        self.assert_allclose_loose(sl_sill_lake, -26.126)

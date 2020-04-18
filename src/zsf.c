@@ -151,6 +151,8 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   p->flushing_discharge_low_tide = 0.0;
   p->density_current_factor_sea = 1.0;
   p->density_current_factor_lake = 1.0;
+  p->sill_height_sea = 0.0;
+  p->sill_height_lake = 0.0;
 
   // Initial condition
   p->salinity_lock = ZSF_NAN;
@@ -261,18 +263,26 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
 
   // Subphase b. Flushing compensated lock exchange
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  double velocity_flushing =
-      o->flushing_discharge / (p->lock_width * (p->head_lake - p->lock_bottom));
+  // A sill is only 80% effective for reducing the lock exchange head, and
+  // also 80% effective for reducing the total amount of water that can be
+  // exchanged. In this subphase that means a salty layer of 80% the sill
+  // height will is unaffected by lock exchange or flushing.
+  double head_above_sill = p->head_lake - p->lock_bottom - p->sill_height_lake;
+  double head_above_sill_dc_effective = p->head_lake - p->lock_bottom - 0.8 * p->sill_height_lake;
+  double volume_lock_at_lake_effective =
+      head_above_sill_dc_effective / (p->head_lake - p->lock_bottom) * o->volume_lock_at_lake;
+
+  double velocity_flushing = o->flushing_discharge / (p->lock_width * head_above_sill);
 
   double sal_diff = sal_lock_2a - p->salinity_lake;
   double velocity_exchange_raw =
-      0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * (p->head_lake - p->lock_bottom));
+      0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * head_above_sill_dc_effective);
   double velocity_exchange_eta = p->density_current_factor_lake * velocity_exchange_raw;
   double frac_lock_exchange =
       fmax((velocity_exchange_eta - velocity_flushing) / velocity_exchange_eta, 0.0);
   double t_lock_exchange = 2 * p->lock_length / velocity_exchange_eta;
   double volume_exchange_2 =
-      frac_lock_exchange * o->volume_lock_at_lake * TANH(t_open_lake / t_lock_exchange);
+      frac_lock_exchange * volume_lock_at_lake_effective * TANH(t_open_lake / t_lock_exchange);
 
   double mt_lake_2_lock_exchange = (p->salinity_lake - sal_lock_2a) * volume_exchange_2;
 
@@ -282,7 +292,7 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   // Max volume that will lead to the lock being refreshed (before we
   // reach steady state where we are flushing to the sea with salinity of
   // lake)
-  double max_volume_flush_refresh = o->volume_lock_at_lake - volume_exchange_2;
+  double max_volume_flush_refresh = volume_lock_at_lake_effective - volume_exchange_2;
 
   double volume_flush_refresh = fmin(volume_flush, max_volume_flush_refresh);
   double volume_flush_passthrough = fmax(volume_flush - max_volume_flush_refresh, 0.0);
@@ -450,12 +460,17 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
 
   // Subphase b. Flushing compensated lock exchange
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  double velocity_flushing =
-      o->flushing_discharge / (p->lock_width * (p->head_sea - p->lock_bottom));
+  // A sill is only 80% effective for reducing the lock exchange head, but on
+  // this side not effective in reducing the maximum amount of water that can
+  // be exchanged.
+  double head_above_sill = p->head_sea - p->lock_bottom - p->sill_height_sea;
+  double head_above_sill_dc_effective = p->head_sea - p->lock_bottom - 0.8 * p->sill_height_sea;
+
+  double velocity_flushing = o->flushing_discharge / (p->lock_width * head_above_sill);
 
   double sal_diff = p->salinity_sea - sal_lock_4a;
   double velocity_exchange_raw =
-      0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * (p->head_sea - p->lock_bottom));
+      0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * head_above_sill_dc_effective);
   double velocity_exchange_eta = p->density_current_factor_sea * velocity_exchange_raw;
 
   // The equilibrium depth of the boundary layer between the salt (sal_sea)
