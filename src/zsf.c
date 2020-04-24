@@ -284,8 +284,6 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   double volume_exchange_2 =
       frac_lock_exchange * volume_lock_at_lake_effective * TANH(t_open_lake / t_lock_exchange);
 
-  double mt_lake_2_lock_exchange = (p->salinity_lake - sal_lock_2a) * volume_exchange_2;
-
   // Flushing itself (taking lock exchange into account)
   double volume_flush = o->flushing_discharge * t_open_lake;
 
@@ -297,14 +295,19 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   double volume_flush_refresh = fmin(volume_flush, max_volume_flush_refresh);
   double volume_flush_passthrough = fmax(volume_flush - max_volume_flush_refresh, 0.0);
 
-  double mt_lake_2_flushing =
-      volume_flush_refresh * p->salinity_lake + volume_flush_passthrough * p->salinity_lake;
   double mt_sea_2_flushing =
       volume_flush_refresh * sal_lock_2a + volume_flush_passthrough * p->salinity_lake;
 
+  double volume_to_sea_2b = volume_flush;
+  double volume_from_lake_2b = volume_exchange_2 + volume_flush;
+  double volume_to_lake_2b = volume_exchange_2;
+
+  double mt_to_sea_2b = mt_sea_2_flushing;
+  double mt_to_lake_2b = volume_exchange_2 * sal_lock_2a;
+  double mt_from_lake_2b = (volume_exchange_2 + volume_flush) * p->salinity_lake;
+
   // Update state variables of the lock
-  double saltmass_lock_2b =
-      saltmass_lock_2a + mt_lake_2_flushing + mt_lake_2_lock_exchange - mt_sea_2_flushing;
+  double saltmass_lock_2b = saltmass_lock_2a + mt_from_lake_2b - mt_to_lake_2b - mt_to_sea_2b;
   double sal_lock_2b = saltmass_lock_2b / o->volume_lock_at_lake;
 
   // Subphase c. Ship entering the lock chamber from the lake
@@ -321,9 +324,8 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   // Totals for Phase 2
   // ~~~~~~~~~~~~~~~~~~
   // Total mass transports over both gates
-  double mt_lake_2 =
-      mt_lake_2_ship_exit + mt_lake_2_ship_enter + mt_lake_2_flushing + mt_lake_2_lock_exchange;
-  double mt_sea_2 = mt_sea_2_flushing;
+  double mt_lake_2 = mt_lake_2_ship_exit + mt_lake_2_ship_enter + mt_from_lake_2b - mt_to_lake_2b;
+  double mt_sea_2 = mt_to_sea_2b;
 
   // Update state variables of the lock
   double saltmass_lock_2 = saltmass_lock_1 + mt_lake_2 - mt_sea_2;
@@ -342,9 +344,8 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
 
   // Update the results
   results->mass_transport_lake = mt_lake_2;
-  results->volume_from_lake =
-      volume_ship_in_lock_1 + volume_exchange_2 + o->flushing_discharge * t_open_lake;
-  results->volume_to_lake = volume_exchange_2 + p->ship_volume_lake_to_sea;
+  results->volume_from_lake = volume_ship_in_lock_1 + volume_from_lake_2b;
+  results->volume_to_lake = volume_to_lake_2b + p->ship_volume_lake_to_sea;
   results->discharge_from_lake = results->volume_from_lake / t_open_lake;
   results->discharge_to_lake = results->volume_to_lake / t_open_lake;
   results->salinity_to_lake = (results->volume_to_lake > 0.0)
@@ -496,8 +497,6 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
         frac_lock_exchange * o->volume_lock_at_sea * TANH(t_open_sea / t_lock_exchange);
   }
 
-  double mt_sea_4_lock_exchange = (sal_lock_4a - p->salinity_sea) * volume_exchange_4;
-
   // Flushing itself (taking lock exchange into account)
   double volume_flush = o->flushing_discharge * t_open_sea;
 
@@ -514,9 +513,16 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   double mt_sea_4_flushing =
       volume_flush_refresh * sal_lock_4a + volume_flush_passthrough * p->salinity_lake;
 
+  double volume_to_sea_4b = volume_exchange_4 + volume_flush;
+  double volume_from_sea_4b = volume_exchange_4;
+  double volume_from_lake_4b = volume_flush;
+
+  double mt_to_sea_4b = mt_sea_4_flushing + volume_exchange_4 * sal_lock_4a;
+  double mt_from_sea_4b = volume_exchange_4 * p->salinity_sea;
+  double mt_from_lake_4b = mt_lake_4_flushing;
+
   // Update state variables of the lock
-  double saltmass_lock_4b =
-      saltmass_lock_4a + mt_lake_4_flushing - mt_sea_4_lock_exchange - mt_sea_4_flushing;
+  double saltmass_lock_4b = saltmass_lock_4a + mt_from_sea_4b - mt_to_sea_4b + mt_from_lake_4b;
   double sal_lock_4b = saltmass_lock_4b / o->volume_lock_at_sea;
 
   // Subphase c. Ship entering the lock chamber from the sea
@@ -533,9 +539,8 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   // Totals for Phase 4
   // ~~~~~~~~~~~~~~~~~~
   // Total mass transports over both gates
-  double mt_sea_4 =
-      mt_sea_4_ship_exit + mt_sea_4_ship_enter + mt_sea_4_flushing + mt_sea_4_lock_exchange;
-  double mt_lake_4 = mt_lake_4_flushing;
+  double mt_sea_4 = mt_sea_4_ship_exit + mt_sea_4_ship_enter + mt_to_sea_4b - mt_from_sea_4b;
+  double mt_lake_4 = mt_from_lake_4b;
 
   // Update state variables of the lock
   double saltmass_lock_4 = saltmass_lock_3 + mt_lake_4 - mt_sea_4;
@@ -554,16 +559,15 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
 
   // Update the results
   results->mass_transport_lake = mt_lake_4;
-  results->volume_from_lake = o->flushing_discharge * t_open_sea;
+  results->volume_from_lake = volume_from_lake_4b;
   results->volume_to_lake = 0.0;
   results->discharge_from_lake = o->flushing_discharge;
   results->discharge_to_lake = 0.0;
   results->salinity_to_lake = sal_lock_3;
 
   results->mass_transport_sea = mt_sea_4;
-  results->volume_from_sea = volume_exchange_4 + volume_ship_in_lock_3;
-  results->volume_to_sea =
-      volume_exchange_4 + p->ship_volume_sea_to_lake + o->flushing_discharge * t_open_sea;
+  results->volume_from_sea = volume_from_sea_4b + volume_ship_in_lock_3;
+  results->volume_to_sea = volume_to_sea_4b + p->ship_volume_sea_to_lake;
   results->discharge_from_sea = results->volume_from_sea / t_open_sea;
   results->discharge_to_sea = results->volume_to_sea / t_open_sea;
   results->salinity_to_sea =
