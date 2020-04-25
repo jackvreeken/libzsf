@@ -29,6 +29,8 @@ ffibuilder.cdef(
         double flushing_discharge_low_tide;
         double density_current_factor_sea;
         double density_current_factor_lake;
+        double distance_door_bubble_screen_sea;
+        double distance_door_bubble_screen_lake;
         double sill_height_sea;
         double sill_height_lake;
         double rtol;

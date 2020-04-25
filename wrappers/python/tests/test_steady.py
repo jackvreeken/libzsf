@@ -350,3 +350,32 @@ class TestSaltLoadSteady(unittest.TestCase):
         self.assert_allclose_loose(sl_sill_sea, -32.043)
 
         self.assert_allclose_loose(sl_sill_lake, -26.126)
+
+    def test_distance_door_bubble_screen(self):
+        base_params = dict(
+            self.parameters, density_current_factor_sea=0.25, density_current_factor_lake=0.25
+        )
+
+        sl_bubble_base = zsf_calc_steady(**dict(base_params,))["salt_load_lake"]
+
+        sl_bubble_distance_sea = zsf_calc_steady(
+            **dict(base_params, distance_door_bubble_screen_sea=4.0,)
+        )["salt_load_lake"]
+
+        sl_bubble_distance_lake = zsf_calc_steady(
+            **dict(base_params, distance_door_bubble_screen_lake=4.0,)
+        )["salt_load_lake"]
+
+        # Comparison checks
+        self.assertGreater(-self.reference_load, -sl_bubble_base)
+        self.assertGreater(-sl_bubble_distance_sea, -sl_bubble_base)
+        self.assertGreater(-sl_bubble_distance_lake, -sl_bubble_base)
+
+        # Values are not _exactly_ equal due to differences in computation order,
+        # but because the effect is the same they should be very close
+        self.assertNotEqual(sl_bubble_distance_lake, sl_bubble_distance_sea)
+        self.assert_allclose_loose(sl_bubble_distance_lake, sl_bubble_distance_sea)
+
+        # Check values against known good values
+        self.assert_allclose_loose(sl_bubble_distance_sea, -6.467)
+        self.assert_allclose_loose(sl_bubble_distance_lake, -6.467)

@@ -151,6 +151,9 @@ void ZSF_CALLCONV zsf_param_default(zsf_param_t *p) {
   p->flushing_discharge_low_tide = 0.0;
   p->density_current_factor_sea = 1.0;
   p->density_current_factor_lake = 1.0;
+  p->distance_door_bubble_screen_sea = 0.0;
+  p->distance_door_bubble_screen_lake = 0.0;
+
   p->sill_height_sea = 0.0;
   p->sill_height_lake = 0.0;
 
@@ -277,12 +280,36 @@ static forceinline void step_phase_2(const zsf_param_t *p, const derived_paramet
   double sal_diff = sal_lock_2a - p->salinity_lake;
   double velocity_exchange_raw =
       0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * head_above_sill_dc_effective);
+
+  // Calculate the time that the density current is running unprotected, in
+  // the case that the bubble screen is not exactly at the door opening. Note
+  // that for equal (absolute) distance, the time differs between a bubble
+  // screen inside and outside the lock chamber.
+  double volume_exchange_2 = 0.0;
+  double t_raw_exchange = 0.0;
+
+  // Until the density current reaches the bubble screen
+  if (p->distance_door_bubble_screen_lake != 0.0) {
+    double velocity_t_raw_exchange =
+        velocity_exchange_raw - copysign(velocity_flushing, p->distance_door_bubble_screen_lake);
+    velocity_t_raw_exchange = fmax(velocity_t_raw_exchange, 1E-10);
+    t_raw_exchange = fabs(p->distance_door_bubble_screen_lake) / velocity_t_raw_exchange;
+    t_raw_exchange = fmin(t_raw_exchange, t_open_lake);
+
+    double frac_lock_exchange_raw =
+        fmax((velocity_exchange_raw - velocity_flushing) / velocity_exchange_raw, 0.0);
+    double t_lock_exchange_raw = 2 * p->lock_length / velocity_exchange_raw;
+    volume_exchange_2 += frac_lock_exchange_raw * volume_lock_at_lake_effective *
+                         TANH(t_raw_exchange / t_lock_exchange_raw);
+  }
+
+  // After the current reaches the bubble screen
   double velocity_exchange_eta = p->density_current_factor_lake * velocity_exchange_raw;
   double frac_lock_exchange =
       fmax((velocity_exchange_eta - velocity_flushing) / velocity_exchange_eta, 0.0);
   double t_lock_exchange = 2 * p->lock_length / velocity_exchange_eta;
-  double volume_exchange_2 =
-      frac_lock_exchange * volume_lock_at_lake_effective * TANH(t_open_lake / t_lock_exchange);
+  volume_exchange_2 += frac_lock_exchange * (volume_lock_at_lake_effective - volume_exchange_2) *
+                       TANH(fmax(t_open_lake - t_raw_exchange, 0.0) / t_lock_exchange);
 
   // Flushing itself (taking lock exchange into account)
   double volume_flush = o->flushing_discharge * t_open_lake;
@@ -472,7 +499,6 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   double sal_diff = p->salinity_sea - sal_lock_4a;
   double velocity_exchange_raw =
       0.5 * sqrt(o->g * 0.8 * sal_diff / o->density_average * head_above_sill_dc_effective);
-  double velocity_exchange_eta = p->density_current_factor_sea * velocity_exchange_raw;
 
   // The equilibrium depth of the boundary layer between the salt (sal_sea)
   // and fresh (sal_lake) water when flushing for a very long time.
@@ -482,19 +508,38 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
 
   head_equilibrium = fmin(head_equilibrium, p->head_sea - p->lock_bottom);
 
-  double frac_lock_exchange =
-      (p->head_sea - p->lock_bottom - head_equilibrium) / (p->head_sea - p->lock_bottom);
-
   // If we flush so much that the density current never enters the lock, we
   // might get division by zero. Avoid by branching such that we can still
   // use fast math (which typically does not work with non-finite values).
   double volume_exchange_4 = 0.0;
+  double t_raw_exchange = 0.0;
+
+  double frac_lock_exchange =
+      (p->head_sea - p->lock_bottom - head_equilibrium) / (p->head_sea - p->lock_bottom);
+
+  // Until the density current reaches the bubble screen
+  if (p->distance_door_bubble_screen_sea != 0.0) {
+    double velocity_t_raw_exchange =
+        velocity_exchange_raw + copysign(velocity_flushing, p->distance_door_bubble_screen_sea);
+    velocity_t_raw_exchange = fmax(velocity_t_raw_exchange, 1E-10);
+    t_raw_exchange = fabs(p->distance_door_bubble_screen_sea) / velocity_t_raw_exchange;
+    t_raw_exchange = fmin(t_raw_exchange, t_open_sea);
+
+    double t_lock_exchange_raw =
+        2 * p->lock_length * frac_lock_exchange / (velocity_exchange_raw - velocity_flushing);
+
+    volume_exchange_4 +=
+        frac_lock_exchange * o->volume_lock_at_sea * TANH(t_raw_exchange / t_lock_exchange_raw);
+  }
+
+  // After the current reaches the bubble screen
+  double velocity_exchange_eta = p->density_current_factor_sea * velocity_exchange_raw;
 
   if (velocity_exchange_eta > velocity_flushing) {
     double t_lock_exchange =
         2 * p->lock_length * frac_lock_exchange / (velocity_exchange_eta - velocity_flushing);
-    volume_exchange_4 =
-        frac_lock_exchange * o->volume_lock_at_sea * TANH(t_open_sea / t_lock_exchange);
+    volume_exchange_4 += frac_lock_exchange * (o->volume_lock_at_sea - volume_exchange_4) *
+                         TANH(fmax(t_open_sea - t_raw_exchange, 0.0) / t_lock_exchange);
   }
 
   // Flushing itself (taking lock exchange into account)
