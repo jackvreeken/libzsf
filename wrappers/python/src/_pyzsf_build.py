@@ -116,6 +116,11 @@ ffibuilder.cdef(
                           zsf_phase_state_t *state,
                           zsf_phase_transports_t *results);
 
+    int zsf_step_flush_doors_closed(const zsf_param_t *p,
+                                    double t_flushing,
+                                    zsf_phase_state_t *state,
+                                    zsf_phase_transports_t *results);
+
     void zsf_param_default(zsf_param_t *p);
 
     int zsf_calc_steady(const zsf_param_t *p, zsf_results_t *results,

@@ -116,6 +116,17 @@ class ZSFUnsteady:
 
         return _struct_to_dict(self._results_t)
 
+    def step_flush_doors_closed(self, t_flushing: float, **parameters: float) -> Dict[str, float]:
+        self._set_parameters(**parameters)
+
+        err = lib.zsf_step_flush_doors_closed(
+            self._param_t, t_flushing, self._state_t, self._results_t
+        )
+        if err:
+            raise RuntimeError(_zsf_error_message(err))
+
+        return _struct_to_dict(self._results_t)
+
     @property
     def state(self):
         return _struct_to_dict(self._state_t)

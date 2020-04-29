@@ -627,6 +627,79 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   state->volume_ship_in_lock = p->ship_volume_sea_to_lake;
 }
 
+static forceinline void step_flush_doors_closed(const zsf_param_t *p, const derived_parameters_t *o,
+                                                double t_flushing, zsf_phase_state_t *state,
+                                                zsf_phase_transports_t *results) {
+  // Flushing with gates closed
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //            Low Tide (for example)
+  //
+  //      Lake                           Sea
+  //            |                   |
+  //    --------|-------------------|
+  //            |                   |-----------
+  //            → flushing          → flushing
+  //    ________|___________________|___________
+  //
+  // Note that the above schematics do not include a ship inside the lock, as
+  // flushing with the doors closed is typically done between ships going out
+  // of the lock, and ships going into the lock. This routine does however work
+  // correctly when there is a ship inside nonetheless.
+  // Also note that this routine does not care whether the lock is at sea or
+  // lake level, or anywhere inbetween. It will however not raise/lower the
+  // level in the lock, for which the levelling routines (phase 1 and 3)
+  // should be used.
+  //
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  // Contrary to the superposition of velocities in step_phase_2/4 (which
+  // would correspond to a linear decay), we do an exponential decay. The
+  // initial "speed" of this exponential decay is the same as that of the
+  // linear decay.
+  double sal_diff = state->salinity_lock - p->salinity_lake;
+  double volume_water_in_lock =
+      p->lock_length * p->lock_width * (state->head_lock - p->lock_bottom) -
+      state->volume_ship_in_lock;
+
+  double lam_exp = o->flushing_discharge * sal_diff / state->saltmass_lock;
+  double saltmass_lock = volume_water_in_lock * sal_diff * exp(-1.0 * lam_exp * t_flushing) +
+                         volume_water_in_lock * p->salinity_lake;
+  double saltmass_out = state->saltmass_lock - saltmass_lock;
+
+  // Update state variables of the lock
+  double sal_lock = saltmass_lock / volume_water_in_lock;
+
+  assert((sal_lock >= p->salinity_lake - 1E-8) & (sal_lock <= p->salinity_sea + 1E-8));
+
+  // Rounding errors can lead to ever so slight exceedences of the boundary
+  // conditions, so we clip the salinity and recalculate the salt mass.
+  sal_lock = fmax(sal_lock, p->salinity_lake);
+  sal_lock = fmin(sal_lock, p->salinity_sea);
+  saltmass_lock = sal_lock * volume_water_in_lock;
+
+  // Update the results
+  results->mass_transport_lake = o->flushing_discharge * t_flushing * p->salinity_lake;
+  results->volume_from_lake = o->flushing_discharge * t_flushing;
+  results->volume_to_lake = 0.0;
+  results->discharge_from_lake = o->flushing_discharge;
+  results->discharge_to_lake = 0.0;
+  results->salinity_to_lake = sal_lock;
+
+  results->mass_transport_sea = saltmass_out;
+  results->volume_from_sea = 0.0;
+  results->volume_to_sea = o->flushing_discharge * t_flushing;
+  results->discharge_from_sea = 0.0;
+  results->discharge_to_sea = o->flushing_discharge;
+  results->salinity_to_sea =
+      (results->volume_to_sea > 0.0) ? saltmass_out / results->volume_to_sea : sal_lock;
+
+  // Update state variables of the lock
+  state->saltmass_lock = saltmass_lock;
+  state->salinity_lock = sal_lock;
+  // state->head_lock = state->head_lock;  /* Unchanged */
+  // state->volume_ship_in_lock = state->ship_volume_lake_to_sea; /* Unchanged */
+}
+
 int ZSF_CALLCONV zsf_initialize_state(const zsf_param_t *p, zsf_phase_state_t *state,
                                       double sal_lock, double head_lock) {
   state->salinity_lock = sal_lock;
@@ -668,6 +741,23 @@ int ZSF_CALLCONV zsf_step_phase_2(const zsf_param_t *p, double t_open_lake,
   }
 
   step_phase_2(p, &o, t_open_lake, state, results);
+
+  return ZSF_SUCCESS;
+}
+
+int ZSF_CALLCONV zsf_step_flush_doors_closed(const zsf_param_t *p, double t_flushing,
+                                             zsf_phase_state_t *state,
+                                             zsf_phase_transports_t *results) {
+  // Get the derived parameters
+  derived_parameters_t o;
+  calculate_derived_parameters(p, &o);
+
+  int err = check_parameters_state(p, &o, state);
+  if (err) {
+    return err;
+  }
+
+  step_flush_doors_closed(p, &o, t_flushing, state, results);
 
   return ZSF_SUCCESS;
 }

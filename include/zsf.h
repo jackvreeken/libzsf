@@ -164,6 +164,12 @@ ZSF_EXPORT int ZSF_CALLCONV zsf_step_phase_4(const zsf_param_t *p, double t_open
                                              zsf_phase_state_t *state,
                                              zsf_phase_transports_t *results);
 
+/* zsf_step_flush_doors_closed:
+ *      Doors closed, but still flushing. */
+ZSF_EXPORT int ZSF_CALLCONV zsf_step_flush_doors_closed(const zsf_param_t *p, double t_flushing,
+                                                        zsf_phase_state_t *state,
+                                                        zsf_phase_transports_t *results);
+
 /* zsf_param_default:
  *      fill zsf_param_t with default values */
 ZSF_EXPORT void ZSF_CALLCONV zsf_param_default(zsf_param_t *p);
