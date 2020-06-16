@@ -98,6 +98,7 @@ build:windows:
   script:
     - cd wrappers/python
     - tox -vv --installpkg wheelhouse/*.whl
+  needs: ["build:linux"]
 
 test:py36:linux:
   <<: *unittests
