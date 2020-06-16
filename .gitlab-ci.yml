@@ -8,6 +8,7 @@ stages:
   - style
   - build
   - test
+  - package
 
 # style
 style:c:
@@ -115,3 +116,27 @@ test:py38:linux:
   image: python:3.8
   variables:
     TOXENV: py38
+
+# package
+package:
+  image: debian:stable
+  stage: package
+  before_script:
+    - apt-get update
+    - apt-get install -y zip
+  script:
+    # Prepare
+    - mkdir package package/pyzsf package/excel package/libraries
+    # Libraries
+    - cd dist64; zip -r ../package/libraries/libzsf-windows-amd64.zip *; cd ..
+    - cd dist32; zip -r ../package/libraries/libzsf-windows-386.zip *; cd ..
+    - cd dist; tar -czf ../package/libraries/libzsf-linux-amd64.tar.gz *; cd ..
+    # Python
+    - cp -R wrappers/python/dist/* package/pyzsf
+    - cp -R wrappers/python/wheelhouse/* package/pyzsf
+    # Excel
+    - zip -j package/excel/zsf-excel.zip dist64/bin/zsf.dll dist32/bin/zsf-stdcall.dll wrappers/excel/zsf.xlsm
+  artifacts:
+    expire_in: 2 hrs
+    paths:
+      - package/
