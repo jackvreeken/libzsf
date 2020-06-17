@@ -145,6 +145,7 @@ package:
 
 # deploy
 .job_template: &deployrelease
+  image: python:3.6
   stage: deploy
   only:
     # Only deploy refs that start with "v"
@@ -156,7 +157,6 @@ package:
 
 deploy:s3-gitlab:
   <<: *deployrelease
-  image: python:3.6
   before_script:
     - pip install awscli
   variables:
@@ -202,3 +202,9 @@ deploy:s3-gitlab:
       )
     - echo $release
     - 'curl -f --header "Content-Type: application/json" --header "PRIVATE-TOKEN: $DEPLOY_TOKEN" --data "$release" --request POST "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases"'
+
+deploy:pypi:
+  <<: *deployrelease
+  script:
+    - pip install twine
+    - twine upload -u __token__ -p $PYPI_TOKEN package/pyzsf/*
