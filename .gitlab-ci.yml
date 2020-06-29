@@ -10,6 +10,7 @@ stages:
   - test
   - package
   - deploy
+  - documentation
 
 # style
 style:c:
@@ -206,3 +207,21 @@ deploy:pypi:
   script:
     - pip install twine
     - twine upload -u __token__ -p $PYPI_TOKEN package/pyzsf/*
+
+# documentation
+pages:
+  image: python:3.6
+  stage: documentation
+  before_script:
+    - echo "documentation"
+  script:
+    - cd docs
+    - pip install -r requirements.txt
+    - make html
+    - mv _build/html ../public
+    - cd ..
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

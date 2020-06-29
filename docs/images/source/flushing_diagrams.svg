@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="664.95mm" height="655.17mm" version="1.1" viewBox="0 0 664.95 655.17" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <pattern id="pattern6693" patternTransform="matrix(.62135 -.35874 .35874 .62135 10.583 0)" xlink:href="#pattern9422"/>
+  <pattern id="pattern6691" patternTransform="matrix(1.2651 0 0 1.2651 190.58 3.6667e-7)" xlink:href="#pattern9076"/>
+  <pattern id="pattern6689" patternTransform="matrix(.65744 -.37957 .37957 .65744 10.583 0)" xlink:href="#pattern9434"/>
+  <pattern id="pattern6687" patternTransform="matrix(.52127 -.30096 .30096 .52127 240.58 230)" xlink:href="#pattern14756"/>
+  <pattern id="pattern6685" patternTransform="matrix(.47369 -.27349 3.3377 5.781 10.583 0)" xlink:href="#pattern15058"/>
+  <pattern id="pattern6683" patternTransform="matrix(1.2651 0 0 1.2651 240.58 230)" xlink:href="#pattern16056"/>
+  <marker id="marker2509" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern3610" patternTransform="scale(.873)" xlink:href="#Polkadots-med"/>
+  <pattern id="pattern3562" patternTransform="matrix(.26863 -.15509 .15509 .26863 0 0)" xlink:href="#Strips1_3"/>
+  <marker id="marker18022" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern17962" patternTransform="matrix(1.2651 0 0 1.2651 431.17 230)" xlink:href="#pattern16056"/>
+  <marker id="marker17476" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker16684" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker16188" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern16174" patternTransform="matrix(1.2651 0 0 1.2651 240.58 280)" xlink:href="#pattern13464"/>
+  <pattern id="Wavy" width="30.066020" height="5.1805778" patternUnits="userSpaceOnUse">
+   <path d="m7.597 0.061c-2.518-0.248-4.941 0.241-7.607 1.727v1.273c2.783-1.63 5.183-2.009 7.482-1.781 2.298 0.228 4.497 1.081 6.781 1.938 4.567 1.713 9.551 3.458 15.813-0.157l-4e-3 -1.273c-6.44 3.709-10.816 1.982-15.371 0.273-2.278-0.854-4.576-1.75-7.094-2z"/>
+  </pattern>
+  <pattern id="pattern16056" patternTransform="matrix(1.2651 0 0 1.2651 230 230)" xlink:href="#pattern12198"/>
+  <marker id="marker15372" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern15102" patternTransform="matrix(.47369 -.27349 3.3377 5.781 10.583 50)" xlink:href="#pattern15058"/>
+  <pattern id="pattern15100" patternTransform="matrix(.52127 -.30096 .30096 .52127 240.58 280)" xlink:href="#pattern14756"/>
+  <pattern id="pattern15058" patternTransform="matrix(.47369 -.27349 3.3377 5.781 0 0)" xlink:href="#Strips1_3"/>
+  <marker id="marker14762" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern14756" patternTransform="matrix(.52127 -.30096 .30096 .52127 230 230)" xlink:href="#pattern10596"/>
+  <pattern id="pattern14678" patternTransform="matrix(0 -1.1988 1.1452 0 -17 629.21)" xlink:href="#pattern14318"/>
+  <pattern id="pattern14676" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 162.53 614)" xlink:href="#pattern14394"/>
+  <pattern id="pattern14674" patternTransform="matrix(.52127 -.30096 .30096 .52127 70 550)" xlink:href="#pattern14392"/>
+  <pattern id="pattern14672" patternTransform="matrix(1.1452 0 0 1.1452 50 500)" xlink:href="#pattern14390"/>
+  <pattern id="pattern14670" patternTransform="matrix(.52127 -.30096 .30096 .52127 63.229 552.12)" xlink:href="#pattern14388"/>
+  <marker id="marker14398" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern14394" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 162.53 564)" xlink:href="#pattern10900"/>
+  <pattern id="pattern14392" patternTransform="matrix(.52127 -.30096 .30096 .52127 70 500)" xlink:href="#pattern10898"/>
+  <pattern id="pattern14390" patternTransform="matrix(1.1452 0 0 1.1452 50 450)" xlink:href="#pattern10896"/>
+  <pattern id="pattern14388" patternTransform="matrix(.52127 -.30096 .30096 .52127 63.229 502.12)" xlink:href="#pattern11296"/>
+  <pattern id="pattern14318" patternTransform="matrix(1.1988 0 0 1.1452 -2.2053 450)" xlink:href="#pattern14230"/>
+  <pattern id="pattern14230" patternTransform="matrix(1.1452 0 0 1.1452 -147.11 392.72)" xlink:href="#pattern14220"/>
+  <pattern id="pattern14220" patternTransform="matrix(1.1452 0 0 1.1452 -97.373 392.72)" xlink:href="#pattern10896"/>
+  <linearGradient id="linearGradient13926-5">
+   <stop stop-color="#d5e5ff" offset="0"/>
+   <stop stop-color="#acf" offset="1"/>
+  </linearGradient>
+  <pattern id="pattern13464" patternTransform="matrix(1.2651 0 0 1.2651 50 280)" xlink:href="#pattern8500"/>
+  <marker id="marker12866" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker12680" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker12210" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern12198" patternTransform="matrix(1.2651 0 0 1.2651 50 230)" xlink:href="#pattern7628"/>
+  <marker id="marker11996" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker11584" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker11436" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern11296" patternTransform="matrix(.52127 -.30096 .30096 .52127 63.229 282.12)" xlink:href="#pattern10772"/>
+  <pattern id="pattern10900" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 162.53 344)" xlink:href="#pattern8114"/>
+  <pattern id="pattern10898" patternTransform="matrix(.52127 -.30096 .30096 .52127 70 280)" xlink:href="#pattern7165"/>
+  <pattern id="pattern10896" patternTransform="matrix(1.1452 0 0 1.1452 50 230)" xlink:href="#pattern7260"/>
+  <pattern id="pattern10772" patternTransform="matrix(.52127 -.30096 .30096 .52127 50 280)" xlink:href="#pattern10596"/>
+  <pattern id="pattern10734" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 100 64)" xlink:href="#pattern7105"/>
+  <pattern id="pattern10732" patternTransform="matrix(.52127 -.30096 .30096 .52127 0 -3.3333e-8)" xlink:href="#pattern7057"/>
+  <pattern id="pattern10598" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 150.03 294)" xlink:href="#pattern7105"/>
+  <pattern id="pattern10596" patternTransform="matrix(.52127 -.30096 .30096 .52127 50 230)" xlink:href="#pattern7057"/>
+  <pattern id="pattern10530" patternTransform="matrix(1.2651 0 0 1.2651 381.17 3.6667e-7)" xlink:href="#pattern9076"/>
+  <pattern id="pattern10480" patternTransform="matrix(1.2651 0 0 1.2651 381.17 -50)" xlink:href="#pattern9876"/>
+  <pattern id="pattern10478" patternTransform="matrix(1.2651 0 0 1.2651 381.17 50)" xlink:href="#pattern9876"/>
+  <marker id="marker10312" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern9876" patternTransform="matrix(1.2651 0 0 1.2651 360 3.6667e-7)" xlink:href="#pattern9076"/>
+  <marker id="marker9731" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker9633" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern9615" patternTransform="matrix(1.1452 0 0 1.1452 190.5 0)" xlink:href="#pattern7260"/>
+  <marker id="marker9484" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern9472" patternTransform="matrix(.65744 -.37957 .37957 .65744 10.583 50)" xlink:href="#pattern9434"/>
+  <pattern id="pattern9470" patternTransform="matrix(.62135 -.35874 .35874 .62135 28.209 65)" xlink:href="#pattern9422"/>
+  <pattern id="pattern9434" patternTransform="matrix(.65744 -.37957 .37957 .65744 0 0)" xlink:href="#Strips1_3"/>
+  <pattern id="pattern9422" patternTransform="matrix(.62135 -.35874 .35874 .62135 0 0)" xlink:href="#Strips1_3"/>
+  <marker id="marker9082" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern9078" patternTransform="matrix(1.2651 0 0 1.2651 190.58 50)" xlink:href="#pattern8500"/>
+  <pattern id="pattern9076" patternTransform="matrix(1.2651 0 0 1.2651 180 3.6667e-7)" xlink:href="#pattern7628"/>
+  <marker id="marker8504" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern8500" patternTransform="matrix(1.2651 0 0 1.2651 0 50)" xlink:href="#pattern7628"/>
+  <pattern id="pattern8114" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 112.5 114)" xlink:href="#pattern7161"/>
+  <marker id="marker8026" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker7926" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern7628" patternTransform="scale(1.2651)" xlink:href="#Polkadots-med"/>
+  <marker id="marker7430" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern7260" patternTransform="scale(1.1452)" xlink:href="#Polkadots-med"/>
+  <pattern id="Polkadots-med" width="10" height="10" patternTransform="translate(0) scale(10)" patternUnits="userSpaceOnUse">
+   <circle cx="2.567" cy=".81" r=".15"/>
+   <circle cx="3.048" cy="2.33" r=".15"/>
+   <circle cx="4.418" cy="2.415" r=".15"/>
+   <circle cx="1.844" cy="3.029" r=".15"/>
+   <circle cx="6.08" cy="1.363" r=".15"/>
+   <circle cx="5.819" cy="4.413" r=".15"/>
+   <circle cx="4.305" cy="4.048" r=".15"/>
+   <circle cx="5.541" cy="3.045" r=".15"/>
+   <circle cx="4.785" cy="5.527" r=".15"/>
+   <circle cx="2.667" cy="5.184" r=".15"/>
+   <circle cx="7.965" cy="1.448" r=".15"/>
+   <circle cx="7.047" cy="5.049" r=".15"/>
+   <circle cx="4.34" cy=".895" r=".15"/>
+   <circle cx="7.125" cy=".34" r=".15"/>
+   <circle cx="9.553" cy="1.049" r=".15"/>
+   <circle cx="7.006" cy="2.689" r=".15"/>
+   <circle cx="8.909" cy="2.689" r=".15"/>
+   <circle cx="9.315" cy="4.407" r=".15"/>
+   <circle cx="7.82" cy="3.87" r=".15"/>
+   <circle cx="8.27" cy="5.948" r=".15"/>
+   <circle cx="7.973" cy="7.428" r=".15"/>
+   <circle cx="9.342" cy="8.072" r=".15"/>
+   <circle cx="8.206" cy="9.315" r=".15"/>
+   <circle cx="9.682" cy="9.475" r=".15"/>
+   <circle cx="9.688" cy="6.186" r=".15"/>
+   <circle cx="3.379" cy="6.296" r=".15"/>
+   <circle cx="2.871" cy="8.204" r=".15"/>
+   <circle cx="4.59" cy="8.719" r=".15"/>
+   <circle cx="3.181" cy="9.671" r=".15"/>
+   <circle cx="5.734" cy="7.315" r=".15"/>
+   <circle cx="6.707" cy="6.513" r=".15"/>
+   <circle cx="5.73" cy="9.67" r=".15"/>
+   <circle cx="6.535" cy="8.373" r=".15"/>
+   <circle cx="4.37" cy="7.154" r=".15"/>
+   <circle cx=".622" cy="7.25" r=".15"/>
+   <circle cx=".831" cy="5.679" r=".15"/>
+   <circle cx="1.257" cy="8.519" r=".15"/>
+   <circle cx="1.989" cy="6.877" r=".15"/>
+   <circle cx=".374" cy="3.181" r=".15"/>
+   <circle cx="1.166" cy="1.664" r=".15"/>
+   <circle cx="1.151" cy=".093" r=".15"/>
+   <circle cx="1.151" cy="10.093" r=".15"/>
+   <circle cx="1.302" cy="4.451" r=".15"/>
+   <circle cx="3.047" cy="3.763" r=".15"/>
+  </pattern>
+  <marker id="marker7169" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <pattern id="pattern7165" patternTransform="matrix(.52127 -.30096 .30096 .52127 20 50)" xlink:href="#pattern7161"/>
+  <pattern id="pattern7161" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 112.5 114)" xlink:href="#pattern7105"/>
+  <pattern id="pattern7105" patternTransform="matrix(-.52127 .30096 -.30096 -.52127 100 64)" xlink:href="#pattern7057"/>
+  <pattern id="pattern7057" patternTransform="matrix(.52127 -.30096 .30096 .52127 0 0)" xlink:href="#Strips1_3"/>
+  <pattern id="Strips1_3" width="4" height="1" patternTransform="translate(0) scale(10)" patternUnits="userSpaceOnUse">
+   <rect y="-.5" width="1" height="2"/>
+  </pattern>
+  <marker id="marker5057" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="marker4919" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <marker id="Arrow1Lend" overflow="visible" orient="auto">
+   <path transform="matrix(-.8 0 0 -.8 -10 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill-rule="evenodd" stroke="#000" stroke-width="1pt"/>
+  </marker>
+  <linearGradient id="linearGradient13928" x1="50" x2="100" y1="412" y2="412" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient13936" x1="50" x2="100" y1="362" y2="362" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient13944" x1="50" x2="100" y1="312" y2="312" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient15110" x1="230" x2="280" y1="312" y2="312" gradientTransform="translate(10.583)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient16054" x1="50" x2="100" y1="362" y2="362" gradientTransform="translate(190.58)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient16172" x1="50" x2="100" y1="412" y2="412" gradientTransform="translate(190.58)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient17910" x1="460" x2="510" y1="412" y2="412" gradientTransform="translate(21.167)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient17960" x1="50" x2="100" y1="362" y2="362" gradientTransform="translate(381.17)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+  <linearGradient id="linearGradient18012" x1="230" x2="280" y1="312" y2="312" gradientTransform="translate(201.17)" gradientUnits="userSpaceOnUse" xlink:href="#linearGradient13926-5"/>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(133.79 58.17)">
+  <g stroke-width=".26934">
+   <rect x="431.17" y="67" width="50" height="30" fill="#d5e5ff"/>
+   <rect y="17" width="50" height="30" fill="#d5e5ff"/>
+   <rect x="50" y="17" width="50" height="30" fill="#acf"/>
+  </g>
+  <rect x="100" y="27" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m100.13 47v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m39 32h11v15h-15s-0.66532-15 4-15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m0 46.868h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g>
+   <path d="m61 32h-11v-15h15s0.66532 15-4 15z" fill="#d5e5ff" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m61 32h-11v-15h15s0.66532 15-4 15z" fill="url(#pattern10732)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m50.13 47v-40" fill="none" opacity=".8025" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  </g>
+  <rect x="82.761" y="-38.615" width="50" height="20" fill="#5f8dd3" stroke-width=".21991"/>
+  <path d="m61.004 24.356h9.5646" fill="none" marker-end="url(#marker4919)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  <path d="m38.998 39.356h-9.5646" fill="none" marker-end="url(#marker5057)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <text x="71.313293" y="26.255966" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="71.313293" y="26.255966" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <text x="23.159113" y="41.072632" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" opacity=".8025" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="23.159113" y="41.072632" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <path d="m39.028 32h10.972v15h-15s-0.63732-15 4.028-15z" fill="url(#pattern10734)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  </g>
+  <rect y="67" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="50" y="67" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="100" y="77" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m100.13 97v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m46.5 82h3.5v15h-7.5s-0.66532-15 4-15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m0 96.867h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+   <path d="m68.5 82h-18.5v-15h22.5s0.66532 15-4 15z" fill="#d5e5ff"/>
+   <path d="m65 82h-15v-15h15z" fill="url(#pattern7260)" opacity=".5"/>
+   <path d="m68.5 82h-3.5v-15h7.5s0.66532 15-4 15z" fill="url(#pattern7165)" opacity=".33"/>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m50.13 97v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <g>
+    <path d="m95 88.351h9.5643" marker-end="url(#Arrow1Lend)" stroke-width=".22532"/>
+    <path d="m69 74.355h9.5646" marker-end="url(#marker7926)" stroke-width=".22532"/>
+    <path d="m46.002 89.355h-9.5646" marker-end="url(#marker8026)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <g>
+   <text x="79.579956" y="76.255638" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="79.579956" y="76.255638" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <path d="m46.5 82h3.5v15h-7.5s-0.66532-15 4-15z" fill="url(#pattern8114)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <text x="106.23827" y="90.543137" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="106.23827" y="90.543137" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">L</tspan></tspan></text>
+   <text x="11.317464" y="91.072296" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="11.317464" y="91.072296" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  </g>
+  <rect y="117" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="50" y="117" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="50" y="132" width="5" height="15" fill="#d5e5ff" stroke-width=".060226"/>
+  <rect x="100" y="127" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m100.13 147v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m54.028 132h8.4719v15h-12.467s-0.67067-15 3.9946-15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m0 146.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <path d="m76 132h-26v-15h30s0.66532 15-4 15z" fill="#d5e5ff" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m76 132h-26v-15h30s0.66532 15-4 15z" fill="url(#pattern7628)" opacity=".5" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <g fill="none" stroke="#000">
+   <path d="m50.13 147v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <g>
+    <path d="m95 138.35h9.5643" marker-end="url(#Arrow1Lend)" stroke-width=".22532"/>
+    <path d="m76.679 124.36h9.5646" marker-end="url(#marker7169)" stroke-width=".22532"/>
+    <path d="m54.144 139.36h-9.5646" marker-end="url(#marker11996)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <g fill="#000000" font-family="sans-serif" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <g font-size="7.0556px">
+    <text x="87.517448" y="126.25564" style="line-height:1.25" xml:space="preserve"><tspan x="87.517448" y="126.25564" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+    <text x="106.23827" y="140.54314" style="line-height:1.25" xml:space="preserve"><tspan x="106.23827" y="140.54314" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">L</tspan></tspan></text>
+    <text x="6.5549636" y="141.0723" style="line-height:1.25" xml:space="preserve"><tspan x="6.5549636" y="141.0723" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan>= 0</tspan></text>
+   </g>
+   <text x="-133.04514" y="85.456161" font-size="10.583px" style="line-height:1.25" xml:space="preserve"><tspan x="-133.04514" y="85.456161" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 0.5 * ci</tspan></text>
+   <text x="-131.15527" y="133.45914" font-size="10.583px" style="line-height:1.25" xml:space="preserve"><tspan x="-131.15527" y="133.45914" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = ci</tspan></text>
+  </g>
+  <rect y="167" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="50" y="167" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="50" y="182" width="12.5" height="15" fill="#d5e5ff" stroke-width=".095225"/>
+  <rect x="100" y="177" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m100.13 197v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+   <path d="m83.5 182h-33.5v-15h37.5s0.66532 15-4 15z" fill="#d5e5ff"/>
+   <path d="m83.5 182-21.748 3.3e-4c-1.6531 3.8176-0.31356 10.926 0.248 15h-12v-30h37.5s0.66532 15-4 15z" fill="url(#pattern8500)" opacity=".5"/>
+   <path d="m61.528 182h8.4719v15h-12.467s-0.67067-15 3.9946-15z" fill="#acf"/>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m50.13 197v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m0 196.87h150" stroke-width=".26458px"/>
+   <g>
+    <path d="m95 188.35h9.5643" marker-end="url(#Arrow1Lend)" stroke-width=".22532"/>
+    <path d="m83.558 174.36h9.5646" marker-end="url(#marker7169)" stroke-width=".22532"/>
+    <path d="m54.196 189.36h9.5646" marker-end="url(#marker8504)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <g fill="#000000" font-family="sans-serif" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <g font-size="7.0556px">
+    <text x="94.396614" y="176.25565" style="line-height:1.25" xml:space="preserve"><tspan x="94.396614" y="176.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+    <text x="106.23827" y="190.54314" style="line-height:1.25" xml:space="preserve"><tspan x="106.23827" y="190.54314" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">L</tspan></tspan></text>
+    <text x="29.309128" y="191.0723" style="line-height:1.25" xml:space="preserve"><tspan x="29.309128" y="191.0723" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan>-c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   </g>
+   <text x="-131.15527" y="183.45914" font-size="10.583px" style="line-height:1.25" xml:space="preserve"><tspan x="-131.15527" y="183.45914" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 1.5 * ci</tspan></text>
+   <text x="-131.15527" y="38.209148" font-size="10.583px" style="line-height:1.25" xml:space="preserve"><tspan x="-131.15527" y="38.209148" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 0</tspan></text>
+  </g>
+  <rect x="190.58" y="17" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="240.58" y="17" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="290.58" y="27" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <rect x="240.58" y="17" width="50" height="30" fill="url(#pattern6693)" opacity=".33" stroke-width=".26934"/>
+  <path d="m290.71 47v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m190.58 32h81c5 0 4 15 4 15h-85z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <g fill="none" stroke="#000">
+   <path d="m190.58 46.868h150" stroke-width=".26458px"/>
+   <g>
+    <path d="m240.71 47v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+    <path d="m237.83 24.356h9.5646" marker-end="url(#marker4919)" stroke-width=".22532"/>
+    <path d="m278.26 39.356h-9.5646" marker-end="url(#marker9082)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <text x="248.13834" y="26.255966" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="248.13834" y="26.255966" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  <text x="262.42581" y="41.072632" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="262.42581" y="41.072632" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  <rect x="190.58" y="117" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="240.58" y="117" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="240.58" y="132" width="5" height="15" fill="#d5e5ff" stroke-width=".060226"/>
+  <rect x="290.58" y="127" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m290.71 147v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m244.61 132h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m190.58 146.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <path d="m290.58 132h-50v-15h50z" fill="#d5e5ff" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m290.58 132h-50v-15h50z" fill="url(#pattern6691)" opacity=".5" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <g fill="none" stroke="#000">
+   <path d="m240.71 147v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <g>
+    <path d="m284.13 126.49 3.7282 0.0659c3.2938 2.108-3.2743 10.968 0.54653 11.627l6.7389 0.16469" marker-end="url(#marker2509)" stroke-width=".22532"/>
+    <path d="m237.1 124.36h9.5646" marker-end="url(#marker7169)" stroke-width=".22532"/>
+    <path d="m244.73 139.36h-9.5646" marker-end="url(#marker7430)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <g fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="247.93828" y="126.25564" style="line-height:1.25" xml:space="preserve"><tspan x="247.93828" y="126.25564" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <text x="296.82159" y="140.54314" style="line-height:1.25" xml:space="preserve"><tspan x="296.82159" y="140.54314" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+   <text x="197.13831" y="141.0723" style="line-height:1.25" xml:space="preserve"><tspan x="197.13831" y="141.0723" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan>= 0</tspan></text>
+  </g>
+  <rect x="190.58" y="167" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="240.58" y="167" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <path d="m240.58 182h37.5v15h-37.5z" fill="#d5e5ff" stroke-width=".095225"/>
+  <rect x="290.58" y="177" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+   <path d="m291.08 182h-50.5v-15h50.5z" fill="#d5e5ff"/>
+   <path d="m291.08 182-14 3.3e-4 -4 15h-32.5v-30h50.5z" fill="url(#pattern9078)" opacity=".5"/>
+   <path d="m277.08 182h9.9583v15h-13.958s-0.66531-15 4-15z" fill="#acf"/>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m240.71 197v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m190.58 196.87h150" stroke-width=".26458px"/>
+   <g>
+    <path d="m285.58 188.35h9.5643" marker-end="url(#Arrow1Lend)" stroke-width=".22532"/>
+    <path d="m237.1 174.36h9.5646" marker-end="url(#marker9731)" stroke-width=".22532"/>
+    <path d="m269.65 189.36h9.5646" marker-end="url(#marker8504)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <g fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="247.93829" y="176.25565" style="line-height:1.25" xml:space="preserve"><tspan x="247.93829" y="176.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <text x="296.82159" y="190.54314" style="line-height:1.25" xml:space="preserve"><tspan x="296.82159" y="190.54314" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan>&lt;S&lt;S<tspan baseline-shift="sub" font-size="65%">L</tspan></tspan></text>
+   <text x="244.76335" y="191.0723" style="line-height:1.25" xml:space="preserve"><tspan x="244.76335" y="191.0723" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan>-c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  </g>
+  <path d="m190.58 32h50v15h-50z" fill="url(#pattern6689)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <rect x="190.58" y="67" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="240.58" y="67" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="290.58" y="77" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m273.08 67h17.625v30h-15.125l-1.5902-11.445-0.90975-3.197z" fill="url(#pattern9470)" opacity=".33" stroke-width=".26934"/>
+  <path d="m290.71 97v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m212.08 82h59.5c5 0 4 15 4 15h-67.5s-1.1747-15 4-15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <g fill="none" stroke="#000">
+   <path d="m190.58 96.868h150" stroke-width=".26458px"/>
+   <g>
+    <path d="m240.71 97v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+    <path d="m237.83 74.356h9.5646" marker-end="url(#marker4919)" stroke-width=".22532"/>
+    <path d="m278.26 89.356h-9.5646" marker-end="url(#marker9082)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <path d="m212.08 82h28.5v15h-32.5s-1.1747-15 4-15z" fill="url(#pattern9472)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m285.58 88.351h9.5643" fill="none" marker-end="url(#marker9484)" stroke="#000" stroke-width=".22532"/>
+  <g fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="296.82159" y="90.543137" style="line-height:1.25" xml:space="preserve"><tspan x="296.82159" y="90.543137" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+   <text x="243.09258" y="91.072296" style="line-height:1.25" xml:space="preserve"><tspan x="243.09258" y="91.072296" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <text x="248.91338" y="76.255638" style="line-height:1.25" xml:space="preserve"><tspan x="248.91338" y="76.255638" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  </g>
+  <path d="m273.08 82h-32.583v-15h32.583z" fill="url(#pattern9615)" opacity=".5" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m290.71 197v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <rect x="381.17" y="67" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="481.17" y="77" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m381.17 96.867h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g>
+   <path d="m481.17 97h-50v-30h50z" fill="url(#pattern10480)" opacity=".5" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m476.17 88.351h9.5643" fill="none" marker-end="url(#marker9633)" stroke="#000" stroke-width=".22532"/>
+   <path d="m427.68 81.764h9.5646" fill="none" marker-end="url(#marker10312)" stroke="#000" stroke-width=".22532"/>
+  </g>
+  <text x="487.40491" y="90.543137" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="487.40491" y="90.543137" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <rect x="381.17" y="17" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="431.17" y="17" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="481.17" y="27" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <g fill="none" stroke="#000">
+   <path d="m481.29 47v-40" stroke-width=".259"/>
+   <path d="m381.17 46.868h150" stroke-width=".26458px"/>
+   <path d="m431.3 47v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m431.3 97v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  </g>
+  <text x="439.49664" y="83.405655" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="439.49664" y="83.405655" font-size="7.0556px" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <rect x="431.17" y="167" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="381.17" y="167" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="481.17" y="177" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m381.17 196.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g>
+   <path d="m481.17 197h-50v-30h50z" fill="url(#pattern10478)" opacity=".5" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m476.17 188.35h9.5643" fill="none" marker-end="url(#marker9633)" stroke="#000" stroke-width=".22532"/>
+   <path d="m427.68 181.76h9.5646" fill="none" marker-end="url(#marker10312)" stroke="#000" stroke-width=".22532"/>
+  </g>
+  <text x="487.40491" y="190.54314" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="487.40491" y="190.54314" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m431.3 197v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <text x="439.49664" y="183.40565" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="439.49664" y="183.40565" font-size="7.0556px" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <rect x="381.17" y="117" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+  <rect x="431.17" y="117" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="431.17" y="132" width="5" height="15" fill="#d5e5ff" stroke-width=".060226"/>
+  <rect x="481.17" y="127" width="50" height="20" fill="#f4e3d7" stroke-width=".21991"/>
+  <path d="m481.29 147v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m435.19 132h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m381.17 146.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <path d="m481.17 132h-50v-15h50z" fill="#d5e5ff" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m481.17 132h-50v-15h50z" fill="url(#pattern10530)" opacity=".5" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <g fill="none" stroke="#000">
+   <path d="m431.3 147v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <g>
+    <path d="m476.17 138.35h9.5643" marker-end="url(#marker9633)" stroke-width=".22532"/>
+    <path d="m427.68 124.36h9.5646" marker-end="url(#marker7169)" stroke-width=".22532"/>
+    <path d="m435.31 139.36h-9.5646" marker-end="url(#marker7430)" stroke-width=".22532"/>
+   </g>
+  </g>
+  <g fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="438.52155" y="126.25564" style="line-height:1.25" xml:space="preserve"><tspan x="438.52155" y="126.25564" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <text x="487.40491" y="140.54314" style="line-height:1.25" xml:space="preserve"><tspan x="487.40491" y="140.54314" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+   <text x="387.72159" y="141.0723" style="line-height:1.25" xml:space="preserve"><tspan x="387.72159" y="141.0723" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan>= 0</tspan></text>
+  </g>
+  <rect y="242" width="50" height="35" fill="#f4e3d7" stroke-width=".29092"/>
+  <rect x="50" y="247" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="100" y="247" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+  <path d="m50.13 277v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <g>
+   <text x="121.05492" y="256.25598" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="121.05492" y="256.25598" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <text x="-132.21361" y="268.20917" fill="#000000" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-132.21361" y="268.20917" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 0</tspan></text>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m89.033 262h11v15h-15s-0.66532-15 4-15z" fill="#5f8dd3"/>
+    <path d="m111 262h-11v-15h15s0.66532 15-4 15z" fill="#acf"/>
+    <path d="m111 262h-11v-15h15s0.66532 15-4 15z" fill="url(#pattern10596)" opacity=".33"/>
+   </g>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m100.13 277v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m110.87 254.36h9.5646" marker-end="url(#marker4919)" opacity=".8025" stroke-width=".22532"/>
+   <path d="m88.868 269.36h-9.5646" marker-end="url(#marker5057)" opacity=".8025" stroke-width=".22532"/>
+  </g>
+  <text x="73.029617" y="271.07263" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" opacity=".8025" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="73.029617" y="271.07263" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  <path d="m89.057 262h10.972v15h-15s-0.63732-15 4.028-15z" fill="url(#pattern10598)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  <path d="m0 276.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <rect y="292" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="50" y="297" width="50" height="30" fill="url(#Wavy)" opacity=".33" stroke-width=".26934"/>
+  <rect x="50" y="297" width="50" height="30" fill="url(#linearGradient13944)" stroke-width=".26934"/>
+  <path d="m50.13 327v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <g>
+   <text x="134.28404" y="308.37268" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="134.28404" y="308.37268" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <path d="m124.23 314.12h-11v-15h15s0.66532 15-4 15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m124.23 314.12h-11v-15h15s0.66532 15-4 15z" fill="url(#pattern11296)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  </g>
+  <path d="m124.1 306.47h9.5646" fill="none" marker-end="url(#marker4919)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  <path d="m0 326.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <rect y="342" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="50" y="347" width="50" height="30" fill="url(#linearGradient13936)" stroke-width=".26934"/>
+  <path d="m50.13 377v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m0 376.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <rect y="392" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="50" y="397" width="50" height="30" fill="url(#linearGradient13928)" stroke-width=".26934"/>
+  <path d="m50.13 427v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <g>
+   <rect x="100" y="297" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m96.533 312h3.5v15h-7.5s-0.66532-15 4-15z" fill="#5f8dd3"/>
+    <path d="m118.5 312h-18.5v-15h22.5s0.66532 15-4 15z" fill="#acf"/>
+    <path d="m115 312h-15v-15h15z" fill="url(#pattern10896)" opacity=".5"/>
+    <path d="m118.5 312h-3.5v-15h7.5s0.66532 15-4 15z" fill="url(#pattern10898)" opacity=".33"/>
+   </g>
+  </g>
+  <path d="m119.27 304.01h9.5646" fill="none" marker-end="url(#marker11584)" stroke="#000" stroke-width=".22532"/>
+  <path d="m95.214 320.6h-9.5646" fill="none" marker-end="url(#marker11436)" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <text x="129.85074" y="305.914" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="129.85074" y="305.914" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <path d="m96.533 312h3.5v15h-7.5s-0.66532-15 4-15z" fill="url(#pattern10900)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <text x="61.059135" y="322.31808" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="61.059135" y="322.31808" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  </g>
+  <path d="m100.13 327v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <g>
+   <rect x="100" y="347" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <rect x="100" y="359.62" width="5" height="17.381" fill="#acf" stroke-width=".06483"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m104.03 362h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#5f8dd3"/>
+    <path d="m126 362h-26v-15h30s0.66532 15-4 15z" fill="#acf"/>
+    <path d="m126 362h-26v-15h30s0.66532 15-4 15z" fill="url(#pattern12198)" opacity=".5"/>
+   </g>
+  </g>
+  <path d="m126.68 354.36h9.5646" fill="none" marker-end="url(#marker7169)" stroke="#000" stroke-width=".22532"/>
+  <path d="m104.14 369.36h-9.5646" fill="none" marker-end="url(#marker11996)" stroke="#000" stroke-width=".22532"/>
+  <text x="137.51746" y="356.25565" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="137.51746" y="356.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <text x="56.554962" y="371.0723" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="56.554962" y="371.0723" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan>= 0</tspan></text>
+  <path d="m46.052 306.9h9.5643" fill="none" marker-end="url(#marker12210)" stroke="#000" stroke-width=".22532"/>
+  <text x="57.290352" y="309.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="57.290352" y="309.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m46.052 356.9h9.5643" fill="none" marker-end="url(#marker12680)" stroke="#000" stroke-width=".22532"/>
+  <text x="57.290356" y="359.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="57.290356" y="359.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m46.052 406.9h9.5643" fill="none" marker-end="url(#marker12866)" stroke="#000" stroke-width=".22532"/>
+  <text x="57.290356" y="409.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="57.290356" y="409.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m100.13 377v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <g>
+   <rect x="100" y="397" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <rect x="100" y="405.52" width="12.5" height="21.482" fill="#acf" stroke-width=".11396"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m133.5 412h-33.5v-15h37.5s0.66532 15-4 15z" fill="#acf"/>
+    <path d="m133.5 412-21.748 3.3e-4c-1.6531 3.8176-0.31356 10.926 0.248 15h-12v-30h37.5s0.66532 15-4 15z" fill="url(#pattern13464)" opacity=".5"/>
+    <path d="m111.53 412h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#5f8dd3"/>
+   </g>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m100.13 427v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m133.56 404.36h9.5646" marker-end="url(#marker7169)" stroke-width=".22532"/>
+   <path d="m104.2 419.36h9.5646" marker-end="url(#marker8504)" stroke-width=".22532"/>
+  </g>
+  <text x="144.39661" y="406.25565" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="144.39661" y="406.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <text x="79.309128" y="421.0723" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="79.309128" y="421.0723" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan>-c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  <path d="m0 426.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g fill="#000000" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="-134.10349" y="315.45618" style="line-height:1.25" xml:space="preserve"><tspan x="-134.10349" y="315.45618" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 0.5 * ci</tspan></text>
+   <text x="-132.21361" y="363.45914" style="line-height:1.25" xml:space="preserve"><tspan x="-132.21361" y="363.45914" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = ci</tspan></text>
+   <text x="-132.21361" y="413.45914" style="line-height:1.25" xml:space="preserve"><tspan x="-132.21361" y="413.45914" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 1.5 * ci</tspan></text>
+  </g>
+  <rect y="512" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <g>
+   <rect x="50" y="517" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+   <text x="134.28404" y="528.37268" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="134.28404" y="528.37268" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <path d="m124.23 534.12h-11v-15h15s0.66532 15-4 15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m124.23 534.12h-11v-15h15s0.66532 15-4 15z" fill="url(#pattern14388)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  </g>
+  <path d="m124.1 526.47h9.5646" fill="none" marker-end="url(#marker4919)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <rect x="100" y="517" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m96.533 532h3.5v15h-7.5s-0.66532-15 4-15z" fill="#5f8dd3"/>
+    <path d="m118.5 532h-18.5v-15h22.5s0.66532 15-4 15z" fill="#acf"/>
+    <path d="m115 532h-15v-15h15z" fill="url(#pattern14390)" opacity=".5"/>
+    <path d="m118.5 532h-3.5v-15h7.5s0.66532 15-4 15z" fill="url(#pattern14392)" opacity=".33"/>
+   </g>
+  </g>
+  <path d="m119.27 524.01h9.5646" fill="none" marker-end="url(#marker11584)" stroke="#000" stroke-width=".22532"/>
+  <path d="m95.214 540.6h-9.5646" fill="none" marker-end="url(#marker11436)" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <text x="129.85074" y="525.914" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="129.85074" y="525.914" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <path d="m96.533 532h3.5v15h-7.5s-0.66532-15 4-15z" fill="url(#pattern14394)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <text x="61.059135" y="542.31812" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="61.059135" y="542.31812" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  </g>
+  <path d="m100.13 547v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <text x="-101.29515" y="535.45618" fill="#000000" font-family="sans-serif" font-size="10.583px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="-101.29515" y="535.45618" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan> = 0.5 * ci</tspan></text>
+  <rect x="50" y="517" width="10" height="30" fill="#d5e5ff" stroke-width=".12045"/>
+  <path d="m60 547h-10l0.13486-30 9.8651 1e-5z" fill="url(#pattern14318)" opacity=".5" stroke-dasharray="0.207455, 0.414909" stroke-width=".20746"/>
+  <text x="57.290356" y="529.08899" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="57.290356" y="529.08899" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <g fill="none" stroke="#000">
+   <path d="m46.052 526.9h9.5643" marker-end="url(#marker14398)" stroke-width=".22532"/>
+   <path d="m50.13 547v-40" stroke-width=".259"/>
+   <path d="m0 546.87h150" stroke-width=".26458px"/>
+  </g>
+  <rect y="562" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <g>
+   <rect x="50" y="567" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+   <text x="134.28404" y="578.37268" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="134.28404" y="578.37268" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <path d="m124.23 584.12h-11v-15h15s0.66532 15-4 15z" fill="#acf" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m124.23 584.12h-11v-15h15s0.66532 15-4 15z" fill="url(#pattern14670)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+  </g>
+  <path d="m124.1 576.47h9.5646" fill="none" marker-end="url(#marker4919)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <rect x="100" y="567" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m96.533 582h3.5v15h-7.5s-0.66532-15 4-15z" fill="#5f8dd3"/>
+    <path d="m118.5 582h-18.5v-15h22.5s0.66532 15-4 15z" fill="#acf"/>
+    <path d="m115 582h-15v-15h15z" fill="url(#pattern14672)" opacity=".5"/>
+    <path d="m118.5 582h-3.5v-15h7.5s0.66532 15-4 15z" fill="url(#pattern14674)" opacity=".33"/>
+   </g>
+  </g>
+  <path d="m119.27 574.01h9.5646" fill="none" marker-end="url(#marker11584)" stroke="#000" stroke-width=".22532"/>
+  <path d="m95.214 590.6h-9.5646" fill="none" marker-end="url(#marker11436)" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <text x="129.85074" y="575.914" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="129.85074" y="575.914" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <path d="m96.533 582h3.5v15h-7.5s-0.66532-15 4-15z" fill="url(#pattern14676)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <text x="61.059135" y="592.31812" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="61.059135" y="592.31812" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  </g>
+  <path d="m100.13 597v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <rect transform="rotate(-90)" x="-577" y="50" width="10" height="30" fill="#d5e5ff" stroke-width=".12045"/>
+  <path d="m80 567v10l-30-0.13486 1e-5 -9.8651z" fill="url(#pattern14678)" opacity=".5" stroke-dasharray="0.207455, 0.414909" stroke-width=".20746"/>
+  <text x="57.290356" y="579.08899" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="57.290356" y="579.08899" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <g fill="none" stroke="#000">
+   <path d="m46.052 576.9h9.5643" marker-end="url(#marker14398)" stroke-width=".22532"/>
+   <path d="m50.13 597v-40" stroke-width=".259"/>
+   <path d="m0 596.87h150" stroke-width=".26458px"/>
+  </g>
+  <rect x="190.58" y="242" width="50" height="35" fill="#f4e3d7" stroke-width=".29092"/>
+  <rect x="240.58" y="247" width="50" height="30" fill="#acf" stroke-width=".26934"/>
+  <rect x="290.58" y="247" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+  <path d="m240.71 277v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <g>
+   <text x="273.5383" y="256.25598" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="273.5383" y="256.25598" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m240.58 262v-15h22c5.1215 0 4.9412 15 4.9412 15h23.092v15h-50.033z" fill="#5f8dd3"/>
+    <path d="m340.58 262h-50v-15h50z" fill="#acf"/>
+    <path d="m340.58 262h-50v-15h50z" fill="url(#pattern6687)" opacity=".33"/>
+   </g>
+  </g>
+  <g>
+   <path d="m290.71 277v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m240.58 262v-15h22c5.1215 0 4.9412 15 4.9412 15h23.092v15h-50.033z" fill="url(#pattern6685)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m263.36 254.36h9.5646" fill="none" marker-end="url(#marker14762)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+   <path d="m295.33 269.36h-9.5646" fill="none" marker-end="url(#marker5057)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  </g>
+  <text x="279.48792" y="271.07263" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" opacity=".8025" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="279.48792" y="271.07263" font-size="7.0556px" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  <path d="m190.58 276.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <rect x="190.58" y="292" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="240.58" y="297" width="50" height="30" fill="url(#linearGradient15110)" stroke-width=".26934"/>
+  <rect x="290.58" y="297" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+  <path d="m240.71 327v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+   <path d="m240.58 312v-6.0042h22c5.1215 0 4.9412 6.0042 4.9412 6.0042h23.092v15h-50.033z" fill="#5f8dd3"/>
+   <path d="m340.58 312h-50v-15h50z" fill="#acf"/>
+   <path d="m340.58 312h-50v-15h50z" fill="url(#pattern15100)" opacity=".33"/>
+  </g>
+  <g>
+   <path d="m290.71 327v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m240.58 312v-6.0042h22c5.1215 0 4.9412 6.0042 4.9412 6.0042h23.092v15h-50.033z" fill="url(#pattern15102)" opacity=".33" stroke-dasharray="0.202764, 0.405528" stroke-width=".20276"/>
+   <path d="m295.33 319.36h-9.5646" fill="none" marker-end="url(#marker5057)" opacity=".8025" stroke="#000" stroke-width=".22532"/>
+  </g>
+  <path d="m190.58 326.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <text x="260.36188" y="320.46539" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="260.36188" y="320.46539">c<tspan baseline-shift="sub" font-size="4.5861px" stroke-width=".26458">i</tspan>-v<tspan baseline-shift="sub" font-size="4.5861px" stroke-width=".26458">flush</tspan></tspan></text>
+  <path d="m237.52 301.59h9.5643" fill="none" marker-end="url(#marker15372)" stroke="#000" stroke-width=".22532"/>
+  <text x="248.76276" y="303.77835" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="248.76276" y="303.77835" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <rect x="190.58" y="342" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="240.58" y="347" width="50" height="30" fill="url(#linearGradient16054)" stroke-width=".26934"/>
+  <path d="m240.71 377v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m190.58 376.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g>
+   <rect x="290.58" y="347" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <rect x="290.58" y="359.62" width="5" height="17.381" fill="#acf" stroke-width=".06483"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m294.61 362h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#5f8dd3"/>
+    <path d="m340.58 362h-50v-15h50z" fill="#acf"/>
+    <path d="m340.58 362h-50v-15h50z" fill="url(#pattern6683)" opacity=".5"/>
+   </g>
+  </g>
+  <path d="m286.57 354.36h9.5646" fill="none" marker-end="url(#marker7169)" stroke="#000" stroke-width=".22532"/>
+  <path d="m294.73 369.36h-9.5646" fill="none" marker-end="url(#marker11996)" stroke="#000" stroke-width=".22532"/>
+  <text x="297.40918" y="356.25565" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="297.40918" y="356.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <text x="247.13831" y="371.0723" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="247.13831" y="371.0723" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan>= 0</tspan></text>
+  <path d="m236.64 356.9h9.5643" fill="none" marker-end="url(#marker12680)" stroke="#000" stroke-width=".22532"/>
+  <text x="247.8737" y="359.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="247.8737" y="359.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m290.71 377v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <rect x="190.58" y="392" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="240.58" y="397" width="50" height="30" fill="url(#linearGradient16172)" stroke-width=".26934"/>
+  <path d="m240.71 427v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m236.64 406.9h9.5643" fill="none" marker-end="url(#marker12866)" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <text x="247.8737" y="409.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="247.8737" y="409.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+   <rect x="290.58" y="397" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <rect x="290.58" y="405.52" width="44.772" height="21.482" fill="#acf" stroke-width=".21567"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m340.58 412h-50v-15h50z" fill="#acf"/>
+    <path d="m340.58 412-11.26 3.3e-4 -1.8687 15h-36.871v-30h50z" fill="url(#pattern16174)" opacity=".5"/>
+    <path d="m331.22 412h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#5f8dd3"/>
+   </g>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m290.71 427v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m324.14 404.36h9.5646" marker-end="url(#marker16684)" stroke-width=".22532"/>
+   <path d="m323.35 419.36h9.5646" marker-end="url(#marker8504)" stroke-width=".22532"/>
+  </g>
+  <text x="334.97992" y="406.25565" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="334.97992" y="406.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <text x="298.46744" y="421.0723" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="298.46744" y="421.0723" stroke-width=".26458">v<tspan baseline-shift="sub" font-size="65%">flush</tspan>-c<tspan baseline-shift="sub" font-size="65%">i</tspan></tspan></text>
+  <path d="m190.58 426.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <path d="m287.63 304.34h9.5646" fill="none" marker-end="url(#marker16188)" stroke="#000" stroke-width=".22532"/>
+  <g>
+   <text x="298.46741" y="306.24332" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="298.46741" y="306.24332" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+   <rect x="381.17" y="242" width="50" height="35" fill="#f4e3d7" stroke-width=".29092"/>
+   <rect x="431.17" y="247" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+  </g>
+  <rect x="481.17" y="247" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+  <g fill="none" stroke="#000">
+   <path d="m431.3 277v-40" stroke-width=".259"/>
+   <path d="m481.3 277v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m381.17 276.87h150" stroke-width=".26458px"/>
+  </g>
+  <g>
+   <rect x="381.17" y="392" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+   <rect x="431.17" y="397" width="50" height="30" fill="#d5e5ff" stroke-width=".26934"/>
+   <rect x="481.17" y="397" width="50" height="30" fill="url(#linearGradient17910)" stroke-width=".26934"/>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m431.3 427v-40" stroke-width=".259"/>
+   <path d="m481.3 427v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m381.17 426.87h150" stroke-width=".26458px"/>
+   <path d="m427.14 406.9h9.5643" marker-end="url(#marker17476)" stroke-width=".22532"/>
+  </g>
+  <text x="438.37335" y="409.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="438.37335" y="409.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <rect x="381.17" y="342" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="431.17" y="347" width="50" height="30" fill="url(#linearGradient17960)" stroke-width=".26934"/>
+  <path d="m431.3 377v-40" fill="none" stroke="#000" stroke-width=".259"/>
+  <path d="m381.17 376.87h150" fill="none" stroke="#000" stroke-width=".26458px"/>
+  <g>
+   <rect x="481.17" y="347" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+   <rect x="481.17" y="359.62" width="5" height="17.381" fill="#acf" stroke-width=".06483"/>
+   <g stroke-dasharray="0.202764, 0.405528" stroke-width=".20276">
+    <path d="m485.19 362h8.4719v15h-12.467s-0.67066-15 3.9946-15z" fill="#5f8dd3"/>
+    <path d="m531.17 362h-50v-15h50z" fill="#acf"/>
+    <path d="m531.17 362h-50v-15h50z" fill="url(#pattern17962)" opacity=".5"/>
+   </g>
+  </g>
+  <path d="m477.15 354.36h9.5646" fill="none" marker-end="url(#marker7169)" stroke="#000" stroke-width=".22532"/>
+  <path d="m485.31 369.36h-9.5646" fill="none" marker-end="url(#marker11996)" stroke="#000" stroke-width=".22532"/>
+  <text x="487.99249" y="356.25565" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="487.99249" y="356.25565" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>+v<tspan baseline-shift="sub" font-size="65%">flush</tspan></tspan></text>
+  <text x="437.72159" y="371.0723" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="437.72159" y="371.0723" stroke-width=".26458">c<tspan baseline-shift="sub" font-size="65%">i</tspan>-v<tspan baseline-shift="sub" font-size="65%">flush</tspan>= 0</tspan></text>
+  <path d="m427.22 356.9h9.5643" fill="none" marker-end="url(#marker12680)" stroke="#000" stroke-width=".22532"/>
+  <text x="438.45697" y="359.08896" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="438.45697" y="359.08896" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m481.3 377v-40" fill="none" stroke="#000" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+  <rect x="381.17" y="292" width="50" height="35" fill="#d5e5ff" stroke-width=".29092"/>
+  <rect x="431.17" y="297" width="50" height="30" fill="url(#linearGradient18012)" stroke-width=".26934"/>
+  <rect x="481.17" y="297" width="50" height="30" fill="#5f8dd3" stroke-width=".26934"/>
+  <g>
+   <path d="m431.3 327v-40" fill="none" stroke="#000" stroke-width=".259"/>
+   <path d="m531.17 306h-50v-8.9958h50z" fill="#acf" stroke-dasharray="0.157024, 0.314048" stroke-width=".15702"/>
+   <path d="m431.17 312v-6.0042h50v21.004h-50z" fill="#5f8dd3" stroke-dasharray="0.143376, 0.286751" stroke-width=".14338"/>
+  </g>
+  <g fill="none" stroke="#000">
+   <path d="m481.3 327v-40" stroke-dasharray="0.259, 0.518" stroke-width=".259"/>
+   <path d="m381.17 326.87h150" stroke-width=".26458px"/>
+   <path d="m428.11 301.59h9.5643" marker-end="url(#marker15372)" stroke-width=".22532"/>
+  </g>
+  <text x="439.34604" y="303.77835" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="439.34604" y="303.77835" font-size="7.0556px" stroke-width=".26458">S<tspan baseline-shift="sub" font-size="65%">F</tspan></tspan></text>
+  <path d="m477.68 301.17h9.5646" fill="none" marker-end="url(#marker18022)" stroke="#000" stroke-width=".22532"/>
+  <g fill="#000000" font-family="sans-serif" font-size="7.7611px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="-21.242382" y="34.738277" style="line-height:1.25" xml:space="preserve"><tspan x="-21.242382" y="34.738277" font-size="7.7611px" stroke-width=".26458">1)</tspan></text>
+   <text x="-21.242382" y="84.738281" style="line-height:1.25" xml:space="preserve"><tspan x="-21.242382" y="84.738281" font-size="7.7611px" stroke-width=".26458">2)</tspan></text>
+   <text x="-21.242382" y="134.73828" style="line-height:1.25" xml:space="preserve"><tspan x="-21.242382" y="134.73828" font-size="7.7611px" stroke-width=".26458">3)</tspan></text>
+   <text x="-21.242382" y="184.73828" style="line-height:1.25" xml:space="preserve"><tspan x="-21.242382" y="184.73828" font-size="7.7611px" stroke-width=".26458">4)</tspan></text>
+  </g>
+  <rect x="255.82" y="-58" width="10" height="5" fill="#f4e3d7" stroke-width=".049174"/>
+  <g>
+   <text x="268.366" y="-53.881943" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="268.366" y="-53.881943" font-size="5.6444px" stroke-width=".26458">salinity irrelevant</tspan></text>
+   <rect x="255.82" y="-51.121" width="10" height="5" fill="#d5e5ff" stroke-width=".049174"/>
+   <text x="268.366" y="-47.002773" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="268.366" y="-47.002773" font-size="5.6444px" stroke-width=".26458">salinity fresh side</tspan></text>
+   <rect x="255.82" y="-44.242" width="10" height="5" fill="#acf" stroke-width=".049174"/>
+   <text x="268.366" y="-40.123604" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="268.366" y="-40.123604" font-size="5.6444px" stroke-width=".26458">salinity lock (initially)</tspan></text>
+   <rect x="255.82" y="-37.362" width="10" height="5" fill="#5f8dd3" stroke-width=".049174"/>
+   <text x="268.366" y="-33.244434" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="268.366" y="-33.244434" font-size="5.6444px" stroke-width=".26458">salinity salt side</tspan></text>
+   <rect x="255.82" y="-30.483" width="10" height="5" fill="url(#pattern3562)" stroke-width=".049174"/>
+   <text x="268.366" y="-26.365267" fill="#000000" font-family="sans-serif" font-size="7.0556px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="268.366" y="-26.365267" font-size="5.6444px" stroke-width=".26458">contribution lock exchange</tspan></text>
+   <rect x="255.82" y="-23.604" width="10" height="5" fill="url(#pattern3610)" stroke-width=".049174"/>
+  </g>
+  <g fill="#000000" font-family="sans-serif" letter-spacing="0px" stroke-width=".26458" word-spacing="0px">
+   <text x="268.366" y="-19.486099" font-size="7.0556px" style="line-height:1.25" xml:space="preserve"><tspan x="268.366" y="-19.486099" font-size="5.6444px" stroke-width=".26458">contribution flushing</tspan></text>
+   <g font-size="7.7611px">
+    <text x="173.58812" y="34.970947" style="line-height:1.25" xml:space="preserve"><tspan x="173.58812" y="34.970947" font-size="7.7611px" stroke-width=".26458">1)</tspan></text>
+    <text x="173.58812" y="84.970947" style="line-height:1.25" xml:space="preserve"><tspan x="173.58812" y="84.970947" font-size="7.7611px" stroke-width=".26458">2)</tspan></text>
+    <text x="173.58812" y="134.97095" style="line-height:1.25" xml:space="preserve"><tspan x="173.58812" y="134.97095" font-size="7.7611px" stroke-width=".26458">3)</tspan></text>
+    <text x="173.58812" y="184.97096" style="line-height:1.25" xml:space="preserve"><tspan x="173.58812" y="184.97096" font-size="7.7611px" stroke-width=".26458">4)</tspan></text>
+    <text x="364.08798" y="34.970947" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="34.970947" font-size="7.7611px" stroke-width=".26458">1)</tspan></text>
+    <text x="364.08798" y="84.970947" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="84.970947" font-size="7.7611px" stroke-width=".26458">2)</tspan></text>
+    <text x="364.08798" y="134.97095" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="134.97095" font-size="7.7611px" stroke-width=".26458">3)</tspan></text>
+    <text x="364.08798" y="184.97096" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="184.97096" font-size="7.7611px" stroke-width=".26458">4)</tspan></text>
+    <text x="364.08798" y="262.5127" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="262.5127" font-size="7.7611px" stroke-width=".26458">1)</tspan></text>
+    <text x="364.08798" y="312.5126" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="312.5126" font-size="7.7611px" stroke-width=".26458">2)</tspan></text>
+    <text x="364.08798" y="362.51251" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="362.51251" font-size="7.7611px" stroke-width=".26458">3)</tspan></text>
+    <text x="364.08798" y="412.51239" style="line-height:1.25" xml:space="preserve"><tspan x="364.08798" y="412.51239" font-size="7.7611px" stroke-width=".26458">4)</tspan></text>
+    <text x="173.5881" y="262.5127" style="line-height:1.25" xml:space="preserve"><tspan x="173.5881" y="262.5127" font-size="7.7611px" stroke-width=".26458">1)</tspan></text>
+    <text x="173.5881" y="312.5126" style="line-height:1.25" xml:space="preserve"><tspan x="173.5881" y="312.5126" font-size="7.7611px" stroke-width=".26458">2)</tspan></text>
+    <text x="173.5881" y="362.51251" style="line-height:1.25" xml:space="preserve"><tspan x="173.5881" y="362.51251" font-size="7.7611px" stroke-width=".26458">3)</tspan></text>
+    <text x="173.5881" y="412.51239" style="line-height:1.25" xml:space="preserve"><tspan x="173.5881" y="412.51239" font-size="7.7611px" stroke-width=".26458">4)</tspan></text>
+    <text x="-16.911905" y="262.5127" style="line-height:1.25" xml:space="preserve"><tspan x="-16.911905" y="262.5127" font-size="7.7611px" stroke-width=".26458">1)</tspan></text>
+    <text x="-16.911905" y="312.5126" style="line-height:1.25" xml:space="preserve"><tspan x="-16.911905" y="312.5126" font-size="7.7611px" stroke-width=".26458">2)</tspan></text>
+    <text x="-16.911905" y="362.51251" style="line-height:1.25" xml:space="preserve"><tspan x="-16.911905" y="362.51251" font-size="7.7611px" stroke-width=".26458">3)</tspan></text>
+    <text x="-16.911905" y="412.51239" style="line-height:1.25" xml:space="preserve"><tspan x="-16.911905" y="412.51239" font-size="7.7611px" stroke-width=".26458">4)</tspan></text>
+    <text x="-16.911905" y="531.84564" style="line-height:1.25" xml:space="preserve"><tspan x="-16.911905" y="531.84564" font-size="7.7611px" stroke-width=".26458">A)</tspan></text>
+    <text x="-16.911905" y="581.84583" style="line-height:1.25" xml:space="preserve"><tspan x="-16.911905" y="581.84583" font-size="7.7611px" stroke-width=".26458">B)</tspan></text>
+   </g>
+  </g>
+ </g>
+</svg>
