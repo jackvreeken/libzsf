@@ -76,11 +76,9 @@ build:windows:
     - '& "C:\\Program Files\\CMake\\bin\\cmake.exe" -G "Visual Studio 16 2019" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64'
     - '& "C:\\Program Files\\CMake\\bin\\cmake.exe" --build build64 --config Release --target Install'
     - cd wrappers/python
-    # We need the fix for issue #345, that will allow us to build abi3 wheels
-    # on Windows without bdist_wheel throwing an error.
-    - '& "C:\Python36-32\python.exe" -m pip install git+https://github.com/pypa/wheel.git'
+    - '& "C:\Python36-32\python.exe" -m pip install wheel>=0.35.0'
     - '& "C:\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
-    - '& "C:\Python36-64\python.exe" -m pip install git+https://github.com/pypa/wheel.git'
+    - '& "C:\Python36-64\python.exe" -m pip install wheel>=0.35.0'
     - '& "C:\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
   extends:
     - .shared_windows_runners
