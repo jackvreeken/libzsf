@@ -11,7 +11,7 @@ from setuptools import find_packages, setup
 DOCLINES = __doc__.split("\n")
 
 CLASSIFIERS = """\
-Development Status :: 4 - Beta
+Development Status :: 3 - Alpha
 Intended Audience :: Science/Research
 Intended Audience :: Information Technology
 License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
