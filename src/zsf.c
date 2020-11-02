@@ -617,7 +617,7 @@ static forceinline void step_phase_4(const zsf_param_t *p, const derived_paramet
   results->discharge_to_sea = results->volume_to_sea / t_open_sea;
   results->salinity_to_sea =
       (results->volume_to_sea > 0.0)
-          ? (mt_sea_4 - results->volume_from_sea * p->salinity_sea) / results->volume_to_sea
+          ? (mt_sea_4 + results->volume_from_sea * p->salinity_sea) / results->volume_to_sea
           : sal_lock_3;
 
   // Update state variables of the lock
