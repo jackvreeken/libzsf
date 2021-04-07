@@ -26,7 +26,9 @@ For further instructions, it is best to go through the examples.
 Troubleshooting
 ---------------
 
-If nothing happens, there is a chance the macro did not run, because the button is unresponsive.
+If an error is thrown that ``zsf-stdcall`` or ``zsf`` cannot be found when you press the `Run ZSF` button, you need to install `Visual C++ Redistributable for Visual Studio 2015 <https://www.microsoft.com/en-us/download/details.aspx?id=48145>`_ .
+
+If instead nothing happens, there is a chance the macro did not run, because the button is unresponsive.
 To test whether this is the case, and check that macros are indeed able to run, go to `File -> Options -> Customize Ribbon` and enable the Developer mode.
 
 .. thumbnail:: images/getting_started_excel_enable_developer.png
