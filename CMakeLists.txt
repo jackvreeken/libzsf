@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 
 project(libzsf)
 enable_language(C)
@@ -57,6 +57,8 @@ endif()
 ##############################################################################
 ################################## Targets ###################################
 ##############################################################################
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 add_library(zsf SHARED src/zsf.c)
 
 set_target_properties (zsf PROPERTIES
