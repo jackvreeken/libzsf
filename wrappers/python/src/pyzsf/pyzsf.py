@@ -9,6 +9,9 @@ def _struct_to_dict(struct):
     for k in dir(struct):
         d[k] = getattr(struct, k)
 
+        if not isinstance(d[k], (float, int, str)) and ffi.typeof(d[k]).cname.startswith("struct "):
+            d[k] = _struct_to_dict(d[k])
+
     return d
 
 
