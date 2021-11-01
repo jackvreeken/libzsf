@@ -66,9 +66,10 @@ build:windows:
     - choco install cmake -y
     # Chocolatey does not offer maintained 32-bits versions of Python, so we
     # install both 32- and 64-bit versions manually.
-    - 'wget.exe https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe'
+    - '[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"'
+    - 'Invoke-WebRequest -OutFile python-3.6.8.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe'
     - 'Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
-    - 'wget.exe https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe'
+    - 'Invoke-WebRequest -OutFile python-3.6.8-amd64.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe'
     - 'Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
   script:
     # Build both 32-bit and 64-bit versions
