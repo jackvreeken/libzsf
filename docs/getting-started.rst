@@ -67,6 +67,12 @@ C library
 Static and dynamic libraries for both Windows and Linux are available on the `releases <https://gitlab.com/deltares/libzsf/-/releases>`_ page on GitLab.
 The Linux libraries are built using the `manylinux2010 <https://www.python.org/dev/peps/pep-0571/>`_ docker image, and should be therefore be compatible with most versions of Linux.
 
+Fortran interface
+=================
+
+A wrapper is provided to easily call the static and dynamic libraries from Fortran.
+See the `releases <https://gitlab.com/deltares/libzsf/-/releases>` page on GitLab, or download the ``zsf.f90`` interface file directly from the `git tree <https://gitlab.com/deltares/libzsf/-/tree/master/wrappers/fortran>`_.
+
 .. _getstart_fromsource:
 
 From Source
