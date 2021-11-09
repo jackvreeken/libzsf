@@ -71,7 +71,7 @@ Fortran interface
 =================
 
 A wrapper is provided to easily call the static and dynamic libraries from Fortran.
-See the `releases <https://gitlab.com/deltares/libzsf/-/releases>` page on GitLab, or download the ``zsf.f90`` interface file directly from the `git tree <https://gitlab.com/deltares/libzsf/-/tree/master/wrappers/fortran>`_.
+See the `releases <https://gitlab.com/deltares/libzsf/-/releases>`_ page on GitLab, or download the ``zsf.f90`` interface file directly from the `git tree <https://gitlab.com/deltares/libzsf/-/tree/master/wrappers/fortran>`_.
 
 .. _getstart_fromsource:
 
