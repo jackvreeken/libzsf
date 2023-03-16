@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: 3.6
       - name: Install dependencies
-      - run: |
+        run: |
           pip install tox
           cd wrappers/python
       - name: Check Python code formatting
