@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install and update dependencies
-      - run: |
+        run: |
           apt-get update
           apt-get install -y clang-format git
       - name: Check C code formatting
