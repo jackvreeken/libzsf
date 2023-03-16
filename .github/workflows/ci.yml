@@ -13,11 +13,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install and update dependencies
       - run: |
-          apt-get update \
+          apt-get update
           apt-get install -y clang-format git
       - name: Check C code formatting
         run: |
-          clang-format -i src/* include/* \
+          clang-format -i src/* include/*
           git diff --exit-code
 
   style-python:
@@ -30,7 +30,7 @@ jobs:
           python-version: 3.6
       - name: Install dependencies
       - run: |
-          pip install tox \
+          pip install tox
           cd wrappers/python
       - name: Check Python code formatting
         run:
