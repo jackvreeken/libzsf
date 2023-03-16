@@ -30,8 +30,8 @@ jobs:
           python-version: 3.6
       - name: Install dependencies
       - run: |
-        pip install tox \
-        cd wrapper/python
+          pip install tox \
+          cd wrappers/python
       - name: Check Python code formatting
         run:
           tox -vv -e flake8,black
