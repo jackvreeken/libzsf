@@ -33,7 +33,7 @@ jobs:
           pip install tox
           cd wrappers/python
       - name: Check Python code formatting
-        run:
+        run: |
           tox -vv -e flake8,black
 
   # test:
