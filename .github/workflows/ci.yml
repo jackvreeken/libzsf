@@ -42,7 +42,7 @@ jobs:
     #   - style-python
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pypa/manylinux2010_x86_64
+      image: quay.io/pypa/manylinux2014_x86_64
       env:
         CC: gcc
         CXX: g++
