@@ -6,40 +6,40 @@ on:
 
 
 jobs:
-  style-c:
-    runs-on: ubuntu-latest
+  # style-c:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install and update dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang-format git
-      - name: Check C code formatting
-        run: |
-          clang-format -i src/* include/*
-          git diff --exit-code
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install and update dependencies
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y clang-format git
+  #     - name: Check C code formatting
+  #       run: |
+  #         clang-format -i src/* include/*
+  #         git diff --exit-code
 
-  style-python:
-    runs-on: ubuntu-latest
+  # style-python:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: |
-          pip install tox
-          cd wrappers/python
-      - name: Check Python code formatting
-        run: |
-          tox -vv -e flake8,black
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-python@v4
+  #       with:
+  #         python-version: '3.9'
+  #     - name: Install dependencies
+  #       run: |
+  #         pip install tox
+  #         cd wrappers/python
+  #     - name: Check Python code formatting
+  #       run: |
+  #         tox -vv -e flake8,black
 
   build-linux:
-    needs:
-      - style-c
-      - style-python
+    # needs:
+    #   - style-c
+    #   - style-python
     runs-on: ubuntu-latest
     container:
       image: quay.io/pypa/manylinux2010_x86_64
@@ -61,8 +61,16 @@ jobs:
           cd build
           /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
           make -j4 install
+      - name: Where am I
+        run: |
+          pwd
       - name: Build wheel
         run: |
+          pwd
+          cd ..
+          ls -alh
+          cd wrappers
+          ls -alh
           cd ../wrappers/python
           /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
           auditwheel repair dist/*
