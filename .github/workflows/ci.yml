@@ -46,6 +46,8 @@ jobs:
       env:
         CC: gcc
         CXX: g++
+      volumes:
+        - /home/runner/work:__w
     # We need CMake 3.14+. To get it we just use the Python manylinux wheel of
     # it, because (1) we know it is compatible and (2) is easier/faster than
     # compiling it ourselves.
@@ -84,7 +86,7 @@ jobs:
           path: |
             dist/
             wrappers/python/wheelhouse/
-          retention-days: 5
+          # retention-days: 5
 
   # test:
   #   needs: style
