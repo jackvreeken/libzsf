@@ -42,6 +42,8 @@ jobs:
     #   - style-python
     runs-on: ubuntu-latest
     container:
+      # Things like actions/checkout and actions/upload-artifact start to fall
+      # apart if we use an older image.
       image: quay.io/pypa/manylinux2014_x86_64
       env:
         CC: gcc
@@ -50,41 +52,32 @@ jobs:
     # it, because (1) we know it is compatible and (2) is easier/faster than
     # compiling it ourselves.
     steps:
-      # Note that we're stuck using checkout@v1, because the manylinux2010
-      # container uses CentOS 6 (=old!)
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Install CMake
         run: /opt/python/cp36-cp36m/bin/pip install cmake
       - name: Build C library
         run: |
           mkdir build
           cd build
-          echo "yo"
-          pwd
-          echo "huh"
           /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
           make -j4 install
-      - name: Where am I
-        run: |
-          pwd
       - name: Build wheel
         run: |
-          echo "yo2"
-          pwd
-          echo "huh2"
           cd wrappers/python
           /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
           auditwheel repair dist/*
 
-      # Note that we're stuck using upload-artifact@v1, because the manylinux2010
-      # container uses CentOS 6 (=old!)
+      # Upload the artifacts
+      - uses: actions/upload-artifact@v3
+        with:
+          name: C-build-linux
+          path: dist/
+          retention-days: 5
       - uses: actions/upload-artifact@v3
         with:
           name: python-build-linux
-          path: |
-            dist/
-            wrappers/python/wheelhouse/
-          # retention-days: 5
+          path: wrappers/python/wheelhouse/
+          retention-days: 5
 
   # test:
   #   needs: style
