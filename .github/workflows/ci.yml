@@ -36,48 +36,85 @@ jobs:
   #       run: |
   #         tox -vv -e flake8,black
 
-  build-linux:
+  # build-linux:
+  #   # needs:
+  #   #   - style-c
+  #   #   - style-python
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     # Things like actions/checkout and actions/upload-artifact start to fall
+  #     # apart if we use an older image.
+  #     image: quay.io/pypa/manylinux2014_x86_64
+  #     env:
+  #       CC: gcc
+  #       CXX: g++
+  #   # We need CMake 3.14+. To get it we just use the Python manylinux wheel of
+  #   # it, because (1) we know it is compatible and (2) is easier/faster than
+  #   # compiling it ourselves.
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install CMake
+  #       run: /opt/python/cp36-cp36m/bin/pip install cmake
+  #     - name: Build C Library
+  #       run: |
+  #         mkdir build
+  #         cd build
+  #         /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
+  #         make -j4 install
+  #     - name: Build Python Wheel
+  #       run: |
+  #         cd wrappers/python
+  #         /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
+  #         auditwheel repair dist/*
+
+  #     # Upload the artifacts
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: c-build-linux
+  #         path: dist/
+  #         retention-days: 5
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: python-build-linux
+  #         path: wrappers/python/wheelhouse/
+  #         retention-days: 5
+
+  build-windows:
     # needs:
     #   - style-c
     #   - style-python
-    runs-on: ubuntu-latest
-    container:
-      # Things like actions/checkout and actions/upload-artifact start to fall
-      # apart if we use an older image.
-      image: quay.io/pypa/manylinux2014_x86_64
-      env:
-        CC: gcc
-        CXX: g++
-    # We need CMake 3.14+. To get it we just use the Python manylinux wheel of
-    # it, because (1) we know it is compatible and (2) is easier/faster than
-    # compiling it ourselves.
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install CMake
-        run: /opt/python/cp36-cp36m/bin/pip install cmake
-      - name: Build C library
-        run: |
-          mkdir build
-          cd build
-          /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
-          make -j4 install
-      - name: Build wheel
-        run: |
-          cd wrappers/python
-          /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
-          auditwheel repair dist/*
 
-      # Upload the artifacts
-      - uses: actions/upload-artifact@v3
-        with:
-          name: C-build-linux
-          path: dist/
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-build-linux
-          path: wrappers/python/wheelhouse/
-          retention-days: 5
+      - name: Download 32- and 64-bits version of Python
+        run: |
+        # Chocolatey does not offer maintained 32-bits versions of Python, so we
+        # install both 32- and 64-bit versions manually.
+        '[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"'
+        'Invoke-WebRequest -OutFile python-3.6.8.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe'
+        'Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
+        'Invoke-WebRequest -OutFile python-3.6.8-amd64.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe'
+        'Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
+
+      - name: Install CMake using Python
+        run: |
+        # With Chocolatey we can get "Too many requests" errors, so we use the
+        # CMake provided via PyPI. Just to be doubly sure, we let each Python
+        # version have its own install of CMake.
+        '& "C:\Python36-32\python.exe" -m pip install cmake wheel>=0.35.0 certifi'
+        '& "C:\Python36-64\python.exe" -m pip install cmake wheel>=0.35.0 certifi'
+
+      - name: Build both 32-bit and 64-bit versions
+        run: |
+        '& "C:\\Python36-32\\Scripts\\cmake.exe" -G "Visual Studio 16 2019" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32'
+        '& "C:\\Python36-32\\Scripts\\cmake.exe" --build build32 --config Release --target Install'
+        '& "C:\\Python36-64\\Scripts\\cmake.exe" -G "Visual Studio 16 2019" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64'
+        '& "C:\\Python36-64\\Scripts\\cmake.exe" --build build64 --config Release --target Install'
+        cd wrappers/python
+        '& "C:\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
+        '& "C:\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
+
 
   # test:
   #   needs: style
