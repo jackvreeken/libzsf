@@ -72,11 +72,7 @@ jobs:
           echo "yo2"
           pwd
           echo "huh2"
-          cd ..
-          ls -alh
-          cd wrappers
-          ls -alh
-          cd ../wrappers/python
+          cd wrappers/python
           /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
           auditwheel repair dist/*
 
