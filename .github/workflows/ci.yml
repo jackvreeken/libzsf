@@ -50,6 +50,7 @@ jobs:
     # it, because (1) we know it is compatible and (2) is easier/faster than
     # compiling it ourselves.
     steps:
+      - uses: actions/checkout@v3
       - name: Install CMake
         run: /opt/python/cp36-cp36m/bin/pip install cmake
       - name: Build C library
