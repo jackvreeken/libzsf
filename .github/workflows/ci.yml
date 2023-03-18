@@ -88,9 +88,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Download 32- and 64-bits version of Python
-        run: |
         # Chocolatey does not offer maintained 32-bits versions of Python, so we
         # install both 32- and 64-bit versions manually.
+        run: |
         [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
         Invoke-WebRequest -OutFile python-3.6.8.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe
         Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
@@ -98,10 +98,10 @@ jobs:
         Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
 
       - name: Install CMake using Python
-        run: |
         # With Chocolatey we can get "Too many requests" errors, so we use the
         # CMake provided via PyPI. Just to be doubly sure, we let each Python
         # version have its own install of CMake.
+        run: |
         & "C:\Python36-32\python.exe" -m pip install cmake wheel>=0.35.0 certifi
         & "C:\Python36-64\python.exe" -m pip install cmake wheel>=0.35.0 certifi
 
