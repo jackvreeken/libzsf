@@ -78,7 +78,7 @@ jobs:
 
       # Note that we're stuck using upload-artifact@v1, because the manylinux2010
       # container uses CentOS 6 (=old!)
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: python-build-linux
           path: |
