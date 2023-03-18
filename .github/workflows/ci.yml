@@ -50,7 +50,9 @@ jobs:
     # it, because (1) we know it is compatible and (2) is easier/faster than
     # compiling it ourselves.
     steps:
-      - uses: actions/checkout@v3
+      # Note that we're stuck using checkout@v1, because the manylinux2010
+      # container uses CentOS 6 (=old!)
+      - uses: actions/checkout@v1
       - name: Install CMake
         run: /opt/python/cp36-cp36m/bin/pip install cmake
       - name: Build C library
@@ -65,7 +67,9 @@ jobs:
           /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
           auditwheel repair dist/*
 
-      - uses: actions/upload-artifact@v3
+      # Note that we're stuck using upload-artifact@v1, because the manylinux2010
+      # container uses CentOS 6 (=old!)
+      - uses: actions/upload-artifact@v1
         with:
           name: python-build-linux
           path: |
