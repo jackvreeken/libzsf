@@ -91,29 +91,29 @@ jobs:
         run: |
         # Chocolatey does not offer maintained 32-bits versions of Python, so we
         # install both 32- and 64-bit versions manually.
-        '[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"'
-        'Invoke-WebRequest -OutFile python-3.6.8.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe'
-        'Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
-        'Invoke-WebRequest -OutFile python-3.6.8-amd64.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe'
-        'Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"'
+        [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+        Invoke-WebRequest -OutFile python-3.6.8.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe
+        Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
+        Invoke-WebRequest -OutFile python-3.6.8-amd64.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe
+        Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
 
       - name: Install CMake using Python
         run: |
         # With Chocolatey we can get "Too many requests" errors, so we use the
         # CMake provided via PyPI. Just to be doubly sure, we let each Python
         # version have its own install of CMake.
-        '& "C:\Python36-32\python.exe" -m pip install cmake wheel>=0.35.0 certifi'
-        '& "C:\Python36-64\python.exe" -m pip install cmake wheel>=0.35.0 certifi'
+        & "C:\Python36-32\python.exe" -m pip install cmake wheel>=0.35.0 certifi
+        & "C:\Python36-64\python.exe" -m pip install cmake wheel>=0.35.0 certifi
 
       - name: Build both 32-bit and 64-bit versions
         run: |
-        '& "C:\\Python36-32\\Scripts\\cmake.exe" -G "Visual Studio 16 2019" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32'
-        '& "C:\\Python36-32\\Scripts\\cmake.exe" --build build32 --config Release --target Install'
-        '& "C:\\Python36-64\\Scripts\\cmake.exe" -G "Visual Studio 16 2019" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64'
-        '& "C:\\Python36-64\\Scripts\\cmake.exe" --build build64 --config Release --target Install'
+        & "C:\\Python36-32\\Scripts\\cmake.exe" -G "Visual Studio 16 2019" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
+        & "C:\\Python36-32\\Scripts\\cmake.exe" --build build32 --config Release --target Install
+        & "C:\\Python36-64\\Scripts\\cmake.exe" -G "Visual Studio 16 2019" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
+        & "C:\\Python36-64\\Scripts\\cmake.exe" --build build64 --config Release --target Install
         cd wrappers/python
-        '& "C:\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
-        '& "C:\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36'
+        & "C:\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
+        & "C:\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
 
 
   # test:
