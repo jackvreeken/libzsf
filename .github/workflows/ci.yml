@@ -36,6 +36,42 @@ jobs:
         run: |
           tox -vv -e flake8,black
 
+  build-linux:
+    needs:
+      - style-c
+      - style-python
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/pypa/manylinux2010_x86_64
+      env:
+        CC: gcc
+        CXX: g++
+    # We need CMake 3.14+. To get it we just use the Python manylinux wheel of
+    # it, because (1) we know it is compatible and (2) is easier/faster than
+    # compiling it ourselves.
+    steps:
+      - name: Install CMake
+        run: /opt/python/cp36-cp36m/bin/pip install cmake
+      - name: Build C library
+        run: |
+          mkdir build
+          cd build
+          /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
+          make -j4 install
+      - name: Build wheel
+        run: |
+          cd ../wrappers/python
+          /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
+          auditwheel repair dist/*
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: python-build-linux
+          path: |
+            dist/
+            wrappers/python/wheelhouse/
+          retention-days: 5
+
   # test:
   #   needs: style
   #   runs-on: ${{ matrix.os }}
