@@ -144,37 +144,64 @@ jobs:
   #         path: wrappers/python/dist/*amd64.whl
   #         retention-days: 5
 
-  test:
+  # test-python:
+  #   needs: build-linux
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       python-version: ['3.7', '3.10', '3.11']
+
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: true
+
+  #   - uses: actions/setup-python@v4
+  #     with:
+  #       python-version: ${{ matrix.python-version }}
+
+  #   - uses: actions/download-artifact@v3
+  #     with:
+  #       name: python-build-linux
+  #       path: wrappers/python/wheelhouse/
+
+  #   - name: Install Tox
+  #     run: pip install tox
+
+  #   - name: Run tests
+  #     run: |
+  #       cd wrappers/python
+  #       tox -vv --installpkg wheelhouse/*.whl
+  #     env:
+  #       TOXENV: py
+
+  test-fortran:
     needs: build-linux
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.7', '3.10', '3.11']
 
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: true
 
-    - uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-
     - uses: actions/download-artifact@v3
       with:
-        name: python-build-linux
-        path: wrappers/python/wheelhouse/
+        name: c-build-linux
+        path: dist/
 
-    - name: Install Tox
-      run: pip install tox
+    - name: Check
+      run: ls -alh dist/
+
+    - name: Install gfortran
+      run: |
+        sudo apt-get update
+        sudo apt-get install gfortran
 
     - name: Run tests
       run: |
-        cd wrappers/python
-        tox -vv --installpkg wheelhouse/*.whl
-      env:
-        TOXENV: py
-
+        cd wrappers/fortran
+        gfortran -fdefault-real-8 -o test zsf.f90 test.f90 ../../dist/lib/libzsf-static.a
+        ./test
 
   # coverage:
   #   needs: test
