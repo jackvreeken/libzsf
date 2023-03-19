@@ -80,10 +80,13 @@ jobs:
   #         retention-days: 5
 
   build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell
     # needs:
     #   - style-c
     #   - style-python
-    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -102,7 +105,6 @@ jobs:
           architecture: x64
 
       - name: Build C library (32-bit and 64-bit)
-        shell: powershell
         run: |
           cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
           cmake --build build32 --config Release --target Install
@@ -110,13 +112,11 @@ jobs:
           cmake --build build64 --config Release --target Install
 
       - name: Install Python dependencies
-        shell: powershell
         run: |
-          & "${{ steps.python_x86.outputs.python-path }}" pip install wheel>=0.35.0
-          & "${{ steps.python_x64.outputs.python-path }}" pip install wheel>=0.35.0
+          & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
+          & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
 
       - name: Build Python Wheels
-        shell: powershell
         run: |
           cd wrappers/python
           & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
