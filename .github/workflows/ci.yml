@@ -93,10 +93,10 @@ jobs:
         # install both 32- and 64-bit versions manually.
         run: |
           [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
-          Invoke-WebRequest -OutFile python-3.6.8.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8.exe
-          Start-Process -Wait ".\python-3.6.8.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
-          Invoke-WebRequest -OutFile python-3.6.8-amd64.exe -Uri https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64.exe
-          Start-Process -Wait ".\python-3.6.8-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
+          Invoke-WebRequest -OutFile python-3.7.16.exe -Uri https://www.python.org/ftp/python/3.7.16/python-3.7.16.exe
+          Start-Process -Wait ".\python-3.7.16.exe" -ArgumentList "/quiet TargetDir=C:\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
+          Invoke-WebRequest -OutFile python-3.7.16-amd64.exe -Uri https://www.python.org/ftp/python/3.7.16/python-3.7.16-amd64.exe
+          Start-Process -Wait ".\python-3.7.16-amd64.exe" -ArgumentList "/quiet TargetDir=C:\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
 
       - name: Install CMake using Python
         shell: powershell
