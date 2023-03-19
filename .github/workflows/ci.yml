@@ -145,22 +145,31 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.7', '3.10', '3.11']
+
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: true
+
     - uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Before
-      run: ls -alh
+
     - uses: actions/download-artifact@v3
       with:
         name: python-build-linux
         path: wrappers/python/wheelhouse/
-        retention-days: 5
-    - name: After
-      run: ls -alh
+
+    - name: Install Tox
+      run: pip install tox
+
+    - name: Run tests
+      run: |
+        cd wrappers/python
+        tox -vv --installpkg wheelhouse/*.whl
+      env:
+        TOXENV: py
+
 
   # coverage:
   #   needs: test
