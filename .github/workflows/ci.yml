@@ -53,13 +53,12 @@ jobs:
       - name: Build C Library
         # GLIBC 2.31 broke compatibility in that __exp_finite is no longer
         # defined, i.e. building with fast-math means it won't run on modern
-        # platforms. We therefore statically link the tiny amount of
-        # functions we use.
+        # platforms. We therefore disable this for Linux wheels.
         # See e.g. https://stackoverflow.com/questions/63261220/link-errors-with-ffast-math-ffinite-math-only-and-glibc-2-31
         run: |
           mkdir build
           cd build
-          cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
+          cmake -DUSE_FAST_MATH=OFF -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
           make -j4 install
         env:
           LDFLAGS: -static -static-libgcc -static-libstdc++
