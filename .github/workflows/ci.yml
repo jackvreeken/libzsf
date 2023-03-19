@@ -122,6 +122,22 @@ jobs:
           & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
           & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
 
+      # Upload the artifacts
+      - uses: actions/upload-artifact@v3
+        with:
+          name: c-build-windows-x86
+          path: dist32/
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: c-build-windows-x64
+          path: dist64/
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: python-build-windows
+          path: wrappers/python/dist/
+          retention-days: 5
 
   # test:
   #   needs: style
