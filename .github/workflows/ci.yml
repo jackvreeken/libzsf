@@ -135,8 +135,13 @@ jobs:
           retention-days: 5
       - uses: actions/upload-artifact@v3
         with:
-          name: python-build-windows
-          path: wrappers/python/dist/
+          name: python-build-windows-x86
+          path: wrappers/python/dist/*win32.whl
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: python-build-windows-x64
+          path: wrappers/python/dist/*amd64.whl
           retention-days: 5
 
   # test:
