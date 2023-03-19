@@ -87,12 +87,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install 32- and 64-bits version of Python
+      - name: Install 32-bit Python
         uses: actions/setup-python@v4
         id: cp39_x86
         with:
           python-version: "3.7"
           architecture: x86
+
+      - name: Install 64-bit Python
         uses: actions/setup-python@v4
         id: cp39_x64
         with:
