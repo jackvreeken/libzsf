@@ -36,133 +36,131 @@ jobs:
   #       run: |
   #         tox -vv -e flake8,black
 
-  # build-linux:
-  #   # needs:
-  #   #   - style-c
-  #   #   - style-python
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     # Things like actions/checkout and actions/upload-artifact start to fall
-  #     # apart if we use an older image.
-  #     image: quay.io/pypa/manylinux2014_x86_64
-  #     env:
-  #       CC: gcc
-  #       CXX: g++
-  #   # We need CMake 3.14+. To get it we just use the Python manylinux wheel of
-  #   # it, because (1) we know it is compatible and (2) is easier/faster than
-  #   # compiling it ourselves.
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Install CMake
-  #       run: /opt/python/cp36-cp36m/bin/pip install cmake
-  #     - name: Build C Library
-  #       run: |
-  #         mkdir build
-  #         cd build
-  #         /opt/python/cp36-cp36m/bin/cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
-  #         make -j4 install
-  #     - name: Build Python Wheel
-  #       run: |
-  #         cd wrappers/python
-  #         /opt/python/cp36-cp36m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
-  #         auditwheel repair dist/*
-
-  #     # Upload the artifacts
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: c-build-linux
-  #         path: dist/
-  #         retention-days: 5
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: python-build-linux
-  #         path: wrappers/python/wheelhouse/
-  #         retention-days: 5
-
-  build-windows:
-    runs-on: windows-latest
-    defaults:
-      run:
-        shell: powershell
+  build-linux:
     # needs:
     #   - style-c
     #   - style-python
+    runs-on: ubuntu-latest
+    container:
+      # Things like actions/checkout and actions/upload-artifact start to fall
+      # apart if we use an older image.
+      image: quay.io/pypa/manylinux2014_x86_64
+      env:
+        CC: gcc
+        CXX: g++
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install 32-bit Python
-        uses: actions/setup-python@v4
-        id: python_x86
-        with:
-          python-version: "3.7"
-          architecture: x86
-
-      - name: Install 64-bit Python
-        uses: actions/setup-python@v4
-        id: python_x64
-        with:
-          python-version: "3.7"
-          architecture: x64
-
-      - name: Build C library (32-bit and 64-bit)
+      - name: Build C Library
         run: |
-          cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
-          cmake --build build32 --config Release --target Install
-          cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
-          cmake --build build64 --config Release --target Install
-
-      - name: Install Python dependencies
-        run: |
-          & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
-          & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
-
-      - name: Build Python Wheels
+          mkdir build
+          cd build
+          cmake -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
+          make -j4 install
+      - name: Build Python Wheel
         run: |
           cd wrappers/python
-          & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
-          & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+          /opt/python/cp37-cp37m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+          auditwheel repair dist/*
 
       # Upload the artifacts
       - uses: actions/upload-artifact@v3
         with:
-          name: c-build-windows-x86
-          path: dist32/
+          name: c-build-linux
+          path: dist/
           retention-days: 5
       - uses: actions/upload-artifact@v3
         with:
-          name: c-build-windows-x64
-          path: dist64/
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-build-windows-x86
-          path: wrappers/python/dist/*win32.whl
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-build-windows-x64
-          path: wrappers/python/dist/*amd64.whl
+          name: python-build-linux
+          path: wrappers/python/wheelhouse/
           retention-days: 5
 
-  # test:
-  #   needs: style
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest, macos-latest, windows-latest]
-  #       python-version: [3.7, 3.8, 3.9]
-
+  # build-windows:
+  #   runs-on: windows-latest
+  #   defaults:
+  #     run:
+  #       shell: powershell
+  #   # needs:
+  #   #   - style-c
+  #   #   - style-python
   #   steps:
-  #   - uses: actions/checkout@v3
-  #     with:
-  #       submodules: true
-  #   - uses: actions/setup-python@v4
-  #     with:
-  #       python-version: ${{ matrix.python-version }}
-  #   - run: |
-  #       python -m pip install --upgrade pip
-  #       pip install tox
-  #   - run: tox -e py
+  #     - uses: actions/checkout@v3
+
+  #     - name: Install 32-bit Python
+  #       uses: actions/setup-python@v4
+  #       id: python_x86
+  #       with:
+  #         python-version: "3.7"
+  #         architecture: x86
+
+  #     - name: Install 64-bit Python
+  #       uses: actions/setup-python@v4
+  #       id: python_x64
+  #       with:
+  #         python-version: "3.7"
+  #         architecture: x64
+
+  #     - name: Build C library (32-bit and 64-bit)
+  #       run: |
+  #         cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
+  #         cmake --build build32 --config Release --target Install
+  #         cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
+  #         cmake --build build64 --config Release --target Install
+
+  #     - name: Install Python dependencies
+  #       run: |
+  #         & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
+  #         & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
+
+  #     - name: Build Python Wheels
+  #       run: |
+  #         cd wrappers/python
+  #         & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+  #         & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+
+  #     # Upload the artifacts
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: c-build-windows-x86
+  #         path: dist32/
+  #         retention-days: 5
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: c-build-windows-x64
+  #         path: dist64/
+  #         retention-days: 5
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: python-build-windows-x86
+  #         path: wrappers/python/dist/*win32.whl
+  #         retention-days: 5
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: python-build-windows-x64
+  #         path: wrappers/python/dist/*amd64.whl
+  #         retention-days: 5
+
+  test:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.10', '3.11']
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Before
+      run: ls -alh
+    - uses: actions/download-artifact@v3
+      with:
+        name: python-build-linux
+        path: wrappers/python/wheelhouse/
+        retention-days: 5
+    - name: After
+      run: ls -alh
 
   # coverage:
   #   needs: test
