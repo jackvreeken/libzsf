@@ -87,36 +87,46 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download 32- and 64-bits version of Python
-        shell: powershell
-        # Chocolatey does not offer maintained 32-bits versions of Python, so we
-        # install both 32- and 64-bit versions manually.
-        run: |
-          [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
-          Invoke-WebRequest -OutFile python-3.7.9.exe -Uri https://www.python.org/ftp/python/3.7.9/python-3.7.9.exe
-          Start-Process -Wait ".\python-3.7.9.exe" -ArgumentList "/quiet TargetDir=D:\a\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
-          Invoke-WebRequest -OutFile python-3.7.9-amd64.exe -Uri https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe
-          Start-Process -Wait ".\python-3.7.9-amd64.exe" -ArgumentList "/quiet TargetDir=D:\a\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
+      - name: Install 32- and 64-bits version of Python
+        uses: actions/setup-python@v4
+        id: cp39_x86
+        with:
+          python-version: "3.7"
+          architecture: x86
+        uses: actions/setup-python@v4
+        id: cp39_x64
+        with:
+          python-version: "3.7"
+          architecture: x64
 
-      - name: Install CMake using Python
-        shell: powershell
-        # With Chocolatey we can get "Too many requests" errors, so we use the
-        # CMake provided via PyPI. Just to be doubly sure, we let each Python
-        # version have its own install of CMake.
-        run: |
-          & "D:\a\Python36-32\python.exe" -m pip install cmake wheel>=0.35.0 certifi
-          & "D:\a\Python36-64\python.exe" -m pip install cmake wheel>=0.35.0 certifi
+      #   # Chocolatey does not offer maintained 32-bits versions of Python, so we
+      #   # install both 32- and 64-bit versions manually.
+      #   run: |
+      #     [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+      #     Invoke-WebRequest -OutFile python-3.7.9.exe -Uri https://www.python.org/ftp/python/3.7.9/python-3.7.9.exe
+      #     Start-Process -Wait ".\python-3.7.9.exe" -ArgumentList "/quiet TargetDir=D:\a\Python36-32 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
+      #     Invoke-WebRequest -OutFile python-3.7.9-amd64.exe -Uri https://www.python.org/ftp/python/3.7.9/python-3.7.9-amd64.exe
+      #     Start-Process -Wait ".\python-3.7.9-amd64.exe" -ArgumentList "/quiet TargetDir=D:\a\Python36-64 InstallAllUsers=1 Include_launcher=0 Include_doc=0 Include_tcltk=0 Include_test=0"
 
-      - name: Build both 32-bit and 64-bit versions
-        shell: powershell
-        run: |
-          & "D:\\a\\Python36-32\\Scripts\\cmake.exe" -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
-          & "D:\\a\\Python36-32\\Scripts\\cmake.exe" --build build32 --config Release --target Install
-          & "D:\\a\\Python36-64\\Scripts\\cmake.exe" -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
-          & "D:\\a\\Python36-64\\Scripts\\cmake.exe" --build build64 --config Release --target Install
-          cd wrappers/python
-          & "D:\\a\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
-          & "D:\\a\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
+      # - name: Install CMake using Python
+      #   shell: powershell
+      #   # With Chocolatey we can get "Too many requests" errors, so we use the
+      #   # CMake provided via PyPI. Just to be doubly sure, we let each Python
+      #   # version have its own install of CMake.
+      #   run: |
+      #     & "D:\a\Python36-32\python.exe" -m pip install cmake wheel>=0.35.0 certifi
+      #     & "D:\a\Python36-64\python.exe" -m pip install cmake wheel>=0.35.0 certifi
+
+      # - name: Build both 32-bit and 64-bit versions
+      #   shell: powershell
+      #   run: |
+      #     & "D:\\a\\Python36-32\\Scripts\\cmake.exe" -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
+      #     & "D:\\a\\Python36-32\\Scripts\\cmake.exe" --build build32 --config Release --target Install
+      #     & "D:\\a\\Python36-64\\Scripts\\cmake.exe" -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
+      #     & "D:\\a\\Python36-64\\Scripts\\cmake.exe" --build build64 --config Release --target Install
+      #     cd wrappers/python
+      #     & "D:\\a\Python36-32\python.exe" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
+      #     & "D:\\a\Python36-64\python.exe" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp36
 
 
   # test:
