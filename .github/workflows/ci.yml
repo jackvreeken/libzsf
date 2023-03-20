@@ -182,21 +182,21 @@ jobs:
         gfortran -fdefault-real-8 -o test zsf.f90 test.f90 ../../dist/lib/libzsf-static.a
         ./test
 
-    package:
-      needs:
-        - test-fortran
-        - test-python
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-      - run: ls -alh
-      # Download all artifacts
-      - uses: actions/download-artifact@v3
-        with:
-          path: artifacts/
-      - run: ls -alh
+  package:
+    needs:
+      - test-fortran
+      - test-python
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - run: ls -alh
+    # Download all artifacts
+    - uses: actions/download-artifact@v3
+      with:
+        path: artifacts/
+    - run: ls -alh
 
   # coverage:
   #   needs: test
