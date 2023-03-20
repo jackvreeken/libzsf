@@ -152,7 +152,7 @@ jobs:
       run: |
         mkdir excel-build
         cp artifacts/c-build-windows-x64/bin/zsf.dll excel-build
-        cp artifacts/c-build-windows-x86/bin/zsf.dll excel-build
+        cp artifacts/c-build-windows-x86/bin/zsf-stdcall.dll excel-build
         cp wrappers/excel/zsf.xlsm excel-build
     - uses: actions/upload-artifact@v3
       with:
