@@ -9,30 +9,30 @@ jobs:
   # style-c:
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Install and update dependencies
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y clang-format git
-  #     - name: Check C code formatting
-  #       run: |
-  #         clang-format -i src/* include/*
-  #         git diff --exit-code
+  #   - uses: actions/checkout@v3
+  #   - name: Install and update dependencies
+  #     run: |
+  #       sudo apt-get update
+  #       sudo apt-get install -y clang-format git
+  #   - name: Check C code formatting
+  #     run: |
+  #       clang-format -i src/* include/*
+  #       git diff --exit-code
 
   # style-python:
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-python@v4
-  #       with:
-  #         python-version: '3.9'
-  #     - name: Install dependencies
-  #       run: |
-  #         pip install tox
-  #         cd wrappers/python
-  #     - name: Check Python code formatting
-  #       run: |
-  #         tox -vv -e flake8,black
+  #   - uses: actions/checkout@v3
+  #   - uses: actions/setup-python@v4
+  #     with:
+  #       python-version: '3.9'
+  #   - name: Install dependencies
+  #     run: |
+  #       pip install tox
+  #       cd wrappers/python
+  #   - name: Check Python code formatting
+  #     run: |
+  #       tox -vv -e flake8,black
 
   build-linux:
     # needs:
@@ -47,39 +47,39 @@ jobs:
         CC: gcc
         CXX: g++
     steps:
-      - uses: actions/checkout@v3
-      - name: Build C Library
-        # GLIBC 2.31 broke compatibility in that a.o. __exp_finite is no
-        # longer defined, i.e. building with -ffast-math on the manylinux2014
-        # image means it won't run on modern platforms. We therefore disable
-        # this for Linux wheels.
-        # See e.g. https://stackoverflow.com/questions/63261220/link-errors-with-ffast-math-ffinite-math-only-and-glibc-2-31
-        run: |
-          mkdir build
-          cd build
-          cmake -DUSE_FAST_MATH=OFF -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
-          make -j4 install
-      - name: Build Python Wheel
-        run: |
-          cd wrappers/python
-          /opt/python/cp37-cp37m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
-          auditwheel repair dist/*
-      # Upload the artifacts
-      - uses: actions/upload-artifact@v3
-        with:
-          name: c-build-linux
-          path: dist/
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-build-linux
-          path: wrappers/python/wheelhouse/
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: fortran-interface
-          path: wrappers/fortran/zsf.f90
-          retention-days: 5
+    - uses: actions/checkout@v3
+    - name: Build C Library
+      # GLIBC 2.31 broke compatibility in that a.o. __exp_finite is no
+      # longer defined, i.e. building with -ffast-math on the manylinux2014
+      # image means it won't run on modern platforms. We therefore disable
+      # this for Linux wheels.
+      # See e.g. https://stackoverflow.com/questions/63261220/link-errors-with-ffast-math-ffinite-math-only-and-glibc-2-31
+      run: |
+        mkdir build
+        cd build
+        cmake -DUSE_FAST_MATH=OFF -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX=../dist -DCMAKE_BUILD_TYPE=Release ..
+        make -j4 install
+    - name: Build Python Wheel
+      run: |
+        cd wrappers/python
+        /opt/python/cp37-cp37m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+        auditwheel repair dist/*
+    # Upload the artifacts
+    - uses: actions/upload-artifact@v3
+      with:
+        name: c-build-linux
+        path: dist/
+        retention-days: 5
+    - uses: actions/upload-artifact@v3
+      with:
+        name: python-build-linux
+        path: wrappers/python/wheelhouse/
+        retention-days: 5
+    - uses: actions/upload-artifact@v3
+      with:
+        name: fortran-interface
+        path: wrappers/fortran/zsf.f90
+        retention-days: 5
 
   build-windows:
     runs-on: windows-latest
@@ -90,81 +90,75 @@ jobs:
     #   - style-c
     #   - style-python
     steps:
-      - uses: actions/checkout@v3
-      - name: Install 32-bit Python
-        uses: actions/setup-python@v4
-        id: python_x86
-        with:
-          python-version: "3.7"
-          architecture: x86
-      - name: Install 64-bit Python
-        uses: actions/setup-python@v4
-        id: python_x64
-        with:
-          python-version: "3.7"
-          architecture: x64
-      - name: Build C library (32-bit and 64-bit)
-        run: |
-          cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
-          cmake --build build32 --config Release --target Install
-          cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
-          cmake --build build64 --config Release --target Install
-      - name: Install Python dependencies
-        run: |
-          & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
-          & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
-      - name: Build Python Wheels
-        run: |
-          cd wrappers/python
-          & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
-          & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
-      # Upload the artifacts
-      - uses: actions/upload-artifact@v3
-        with:
-          name: c-build-windows-x86
-          path: dist32/
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: c-build-windows-x64
-          path: dist64/
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-build-windows-x86
-          path: wrappers/python/dist/*win32.whl
-          retention-days: 5
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-build-windows-x64
-          path: wrappers/python/dist/*amd64.whl
-          retention-days: 5
+    - uses: actions/checkout@v3
+    - name: Install 32-bit Python
+      uses: actions/setup-python@v4
+      id: python_x86
+      with:
+        python-version: "3.7"
+        architecture: x86
+    - name: Install 64-bit Python
+      uses: actions/setup-python@v4
+      id: python_x64
+      with:
+        python-version: "3.7"
+        architecture: x64
+    - name: Build C library (32-bit and 64-bit)
+      run: |
+        cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
+        cmake --build build32 --config Release --target Install
+        cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
+        cmake --build build64 --config Release --target Install
+    - name: Install Python dependencies
+      run: |
+        & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
+        & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
+    - name: Build Python Wheels
+      run: |
+        cd wrappers/python
+        & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+        & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+    # Upload the artifacts
+    - uses: actions/upload-artifact@v3
+      with:
+        name: c-build-windows-x86
+        path: dist32/
+        retention-days: 5
+    - uses: actions/upload-artifact@v3
+      with:
+        name: c-build-windows-x64
+        path: dist64/
+        retention-days: 5
+    - uses: actions/upload-artifact@v3
+      with:
+        name: python-build-windows-x86
+        path: wrappers/python/dist/*win32.whl
+        retention-days: 5
+    - uses: actions/upload-artifact@v3
+      with:
+        name: python-build-windows-x64
+        path: wrappers/python/dist/*amd64.whl
+        retention-days: 5
 
   package-excel:
-    needs:
-      - build-windows
+    needs: build-windows
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: actions/download-artifact@v3
       with:
-        name: c-build-windows-x64
         path: artifacts/
-    - uses: actions/download-artifact@v3
-      with:
-        name: c-build-windows-x86
-        path: artifacts2/
     - name: Package Excel
       run: |
         mkdir excel-build
         cp artifacts/c-build-windows-x64/bin/zsf.dll excel-build
         cp artifacts/c-build-windows-x86/bin/zsf.dll excel-build
         cp wrappers/excel/zsf.xlsm excel-build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: excel-build
-          path: excel-build
-          retention-days: 5
+    - uses: actions/upload-artifact@v3
+      with:
+        name: excel-build
+        path: excel-build
+        retention-days: 5
 
   test-python:
     needs: build-linux
