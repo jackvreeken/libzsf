@@ -8,7 +8,6 @@ on:
 jobs:
   # style-c:
   #   runs-on: ubuntu-latest
-
   #   steps:
   #     - uses: actions/checkout@v3
   #     - name: Install and update dependencies
@@ -22,7 +21,6 @@ jobs:
 
   # style-python:
   #   runs-on: ubuntu-latest
-
   #   steps:
   #     - uses: actions/checkout@v3
   #     - uses: actions/setup-python@v4
@@ -66,7 +64,6 @@ jobs:
           cd wrappers/python
           /opt/python/cp37-cp37m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
           auditwheel repair dist/*
-
       # Upload the artifacts
       - uses: actions/upload-artifact@v3
         with:
@@ -79,129 +76,127 @@ jobs:
           path: wrappers/python/wheelhouse/
           retention-days: 5
 
-  # build-windows:
-  #   runs-on: windows-latest
-  #   defaults:
-  #     run:
-  #       shell: powershell
-  #   # needs:
-  #   #   - style-c
-  #   #   - style-python
-  #   steps:
-  #     - uses: actions/checkout@v3
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell
+    # needs:
+    #   - style-c
+    #   - style-python
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install 32-bit Python
+        uses: actions/setup-python@v4
+        id: python_x86
+        with:
+          python-version: "3.7"
+          architecture: x86
+      - name: Install 64-bit Python
+        uses: actions/setup-python@v4
+        id: python_x64
+        with:
+          python-version: "3.7"
+          architecture: x64
+      - name: Build C library (32-bit and 64-bit)
+        run: |
+          cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
+          cmake --build build32 --config Release --target Install
+          cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
+          cmake --build build64 --config Release --target Install
+      - name: Install Python dependencies
+        run: |
+          & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
+          & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
+      - name: Build Python Wheels
+        run: |
+          cd wrappers/python
+          & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+          & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
+      # Upload the artifacts
+      - uses: actions/upload-artifact@v3
+        with:
+          name: c-build-windows-x86
+          path: dist32/
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: c-build-windows-x64
+          path: dist64/
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: python-build-windows-x86
+          path: wrappers/python/dist/*win32.whl
+          retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: python-build-windows-x64
+          path: wrappers/python/dist/*amd64.whl
+          retention-days: 5
 
-  #     - name: Install 32-bit Python
-  #       uses: actions/setup-python@v4
-  #       id: python_x86
-  #       with:
-  #         python-version: "3.7"
-  #         architecture: x86
-
-  #     - name: Install 64-bit Python
-  #       uses: actions/setup-python@v4
-  #       id: python_x64
-  #       with:
-  #         python-version: "3.7"
-  #         architecture: x64
-
-  #     - name: Build C library (32-bit and 64-bit)
-  #       run: |
-  #         cmake -G "Visual Studio 17 2022" -A Win32 -S . -B "build32" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist32
-  #         cmake --build build32 --config Release --target Install
-  #         cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" -DUSE_FAST_MATH=ON -DUSE_FAST_TANH=ON -DCMAKE_INSTALL_PREFIX:FILEPATH=../dist64
-  #         cmake --build build64 --config Release --target Install
-
-  #     - name: Install Python dependencies
-  #       run: |
-  #         & "${{ steps.python_x86.outputs.python-path }}" -m pip install wheel>=0.35.0
-  #         & "${{ steps.python_x64.outputs.python-path }}" -m pip install wheel>=0.35.0
-
-  #     - name: Build Python Wheels
-  #       run: |
-  #         cd wrappers/python
-  #         & "${{ steps.python_x86.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist32/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
-  #         & "${{ steps.python_x64.outputs.python-path }}" setup.py build_ext --library-dirs=../../dist64/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
-
-  #     # Upload the artifacts
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: c-build-windows-x86
-  #         path: dist32/
-  #         retention-days: 5
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: c-build-windows-x64
-  #         path: dist64/
-  #         retention-days: 5
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: python-build-windows-x86
-  #         path: wrappers/python/dist/*win32.whl
-  #         retention-days: 5
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: python-build-windows-x64
-  #         path: wrappers/python/dist/*amd64.whl
-  #         retention-days: 5
-
-  # test-python:
-  #   needs: build-linux
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       python-version: ['3.7', '3.10', '3.11']
-
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #     with:
-  #       submodules: true
-
-  #   - uses: actions/setup-python@v4
-  #     with:
-  #       python-version: ${{ matrix.python-version }}
-
-  #   - uses: actions/download-artifact@v3
-  #     with:
-  #       name: python-build-linux
-  #       path: wrappers/python/wheelhouse/
-
-  #   - name: Install Tox
-  #     run: pip install tox
-
-  #   - name: Run tests
-  #     run: |
-  #       cd wrappers/python
-  #       tox -vv --installpkg wheelhouse/*.whl
-  #     env:
-  #       TOXENV: py
-
-  test-fortran:
+  test-python:
     needs: build-linux
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.10', '3.11']
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: true
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: actions/download-artifact@v3
+      with:
+        name: python-build-linux
+        path: wrappers/python/wheelhouse/
+    - name: Install Tox
+      run: pip install tox
+    - name: Run tests
+      run: |
+        cd wrappers/python
+        tox -vv --installpkg wheelhouse/*.whl
+      env:
+        TOXENV: py
 
+  test-fortran:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
     - uses: actions/download-artifact@v3
       with:
         name: c-build-linux
         path: dist/
-
-    - name: Check
-      run: ls -alh dist/
-
     - name: Install gfortran
       run: |
         sudo apt-get update
         sudo apt-get install gfortran
-
     - name: Run tests
       run: |
         cd wrappers/fortran
         gfortran -fdefault-real-8 -o test zsf.f90 test.f90 ../../dist/lib/libzsf-static.a
         ./test
+
+    package:
+      needs: 
+        - test-fortran
+        - test-python
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - run: ls -alh
+    # Download all artifacts
+    - uses: actions/download-artifact@v3
+      with:
+        path: artifacts/
+    - run: ls -alh
 
   # coverage:
   #   needs: test
