@@ -75,6 +75,11 @@ jobs:
           name: python-build-linux
           path: wrappers/python/wheelhouse/
           retention-days: 5
+      - uses: actions/upload-artifact@v3
+        with:
+          name: fortran-interface
+          path: wrappers/fortran/zsf.f90
+          retention-days: 5
 
   build-windows:
     runs-on: windows-latest
@@ -135,6 +140,26 @@ jobs:
           path: wrappers/python/dist/*amd64.whl
           retention-days: 5
 
+  package-excel:
+    needs:
+      - build-windows
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        path: artifacts/
+    - name: Package Excel
+      run: |
+        mkdir excel-build
+        cp artifacts/c-build-windows-x64/bin/zsf.dll excel-build
+        cp artifacts/c-build-windows-x86/bin/zsf.dll excel-build
+        cp wrappers/excel/zsf.xlsm excel-build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: excel-build
+          path: excel-build
+          retention-days: 5
+
   test-python:
     needs: build-linux
     runs-on: ubuntu-latest
@@ -143,8 +168,6 @@ jobs:
         python-version: ['3.7', '3.10', '3.11']
     steps:
     - uses: actions/checkout@v3
-      with:
-        submodules: true
     - uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
@@ -166,8 +189,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        submodules: true
     - uses: actions/download-artifact@v3
       with:
         name: c-build-linux
@@ -181,23 +202,6 @@ jobs:
         cd wrappers/fortran
         gfortran -fdefault-real-8 -o test zsf.f90 test.f90 ../../dist/lib/libzsf-static.a
         ./test
-
-  package:
-    needs:
-      - build-linux
-      - build-windows
-      - test-fortran
-      - test-python
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    # Download all artifacts
-    - uses: actions/download-artifact@v3
-      with:
-        path: artifacts/
-    - run: ls -R artifacts/
 
   # coverage:
   #   needs: test
