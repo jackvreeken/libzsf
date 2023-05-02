@@ -206,9 +206,9 @@ jobs:
   deploy-pypi:
     needs:
       - build-windows
-      - build-linux
       - test-fortran
       - test-python
+      - package-excel
     runs-on: ubuntu-latest
     #if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
     steps:
