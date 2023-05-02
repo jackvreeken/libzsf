@@ -205,6 +205,8 @@ jobs:
 
   deploy-pypi:
     needs:
+      - build-windows
+      - build-linux
       - test-fortran
       - test-python
     runs-on: ubuntu-latest
