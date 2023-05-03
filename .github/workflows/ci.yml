@@ -205,7 +205,6 @@ jobs:
 
   deploy-pypi:
     needs:
-      - build-windows
       - test-fortran
       - test-python
       - package-excel
@@ -228,7 +227,6 @@ jobs:
 
   deploy-github-release:
     needs:
-      - build-windows
       - test-fortran
       - test-python
       - package-excel
@@ -247,7 +245,7 @@ jobs:
         tar zcf libzsf-${{ github.ref_name }}-linux-amd64.tar.gz artifacts/c-build-linux/*
         zip -r libzsf-${{ github.ref_name }}-windows-amd64.zip artifacts/c-build-windows-x64/*
         zip -r libzsf-${{ github.ref_name }}-windows-386.zip artifacts/c-build-windows-x86/*
-        zip -r libzsf-fortran-interface-${{ github.ref_name }}.zip fortran-interface/*
+        zip -r libzsf-fortran-interface-${{ github.ref_name }}.zip artifacts/fortran-interface/*
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "artifacts/*.zip,artifacts/*.tar.gz,artifacts/python-build-*/*.whl,"
