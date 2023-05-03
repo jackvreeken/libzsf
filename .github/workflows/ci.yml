@@ -48,6 +48,8 @@ jobs:
         CXX: g++
     steps:
     - uses: actions/checkout@v3
+    - name: Describe version
+      run: git describe --tags --first-parent HEAD
     - name: Build C Library
       # GLIBC 2.31 broke compatibility in that a.o. __exp_finite is no
       # longer defined, i.e. building with -ffast-math on the manylinux2014
@@ -65,8 +67,6 @@ jobs:
         /opt/python/cp37-cp37m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
         auditwheel repair dist/*
     # Upload the artifacts
-    - name: TODOREMOVEME
-      run: tree
     - uses: actions/upload-artifact@v3
       with:
         name: c-build-linux
@@ -93,6 +93,8 @@ jobs:
     #   - style-python
     steps:
     - uses: actions/checkout@v3
+    - name: Describe version
+      run: git describe --tags --first-parent HEAD
     - name: Install 32-bit Python
       uses: actions/setup-python@v4
       id: python_x86
