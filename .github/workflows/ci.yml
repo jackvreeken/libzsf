@@ -261,10 +261,10 @@ jobs:
       with:
         path: artifacts/
     - run: cd artifacts/excel-build && zip ../../zsf-excel-${{ github.ref_name }}.zip *
-    - run: cd artifacts/c-build-linux/* && tar ../../artifacts/c-build-linux zcf libzsf-${{ github.ref_name }}-linux-amd64.tar.gz *
-    - run: cd artifacts/c-build-windows-x64/* && zip -r ../../libzsf-${{ github.ref_name }}-windows-amd64.zip *
-    - run: cd artifacts/c-build-windows-x86/* && zip -r ../../libzsf-${{ github.ref_name }}-windows-386.zip *
-    - run: cd artifacts/fortran-interface/* && zip -r ../../libzsf-fortran-interface-${{ github.ref_name }}.zip *
+    - run: cd artifacts/c-build-linux && tar ../../artifacts/c-build-linux zcf libzsf-${{ github.ref_name }}-linux-amd64.tar.gz *
+    - run: cd artifacts/c-build-windows-x64 && zip -r ../../libzsf-${{ github.ref_name }}-windows-amd64.zip *
+    - run: cd artifacts/c-build-windows-x86 && zip -r ../../libzsf-${{ github.ref_name }}-windows-386.zip *
+    - run: cd artifacts/fortran-interface && zip -r ../../libzsf-fortran-interface-${{ github.ref_name }}.zip *
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "*.zip,*.tar.gz,artifacts/python-build-*/*.whl"
