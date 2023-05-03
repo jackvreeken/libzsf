@@ -65,6 +65,8 @@ jobs:
         /opt/python/cp37-cp37m/bin/python setup.py build_ext --library-dirs=../../dist/lib --include-dirs=../../include bdist_wheel --py-limited-api=cp37
         auditwheel repair dist/*
     # Upload the artifacts
+    - name: TODOREMOVEME
+      run: tree
     - uses: actions/upload-artifact@v3
       with:
         name: c-build-linux
@@ -223,6 +225,7 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
+        tree
         twine upload artifacts/python-build-*/*
 
   deploy-github-release:
