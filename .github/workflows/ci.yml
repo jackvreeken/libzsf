@@ -270,6 +270,6 @@ jobs:
         zip -r libzsf-fortran-interface-${{ github.ref_name }}.zip artifacts/fortran-interface/*
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "artifacts/*.zip,artifacts/*.tar.gz,artifacts/python-build-*/*.whl,"
+        artifacts: "*.zip,*.tar.gz,artifacts/python-build-*/*.whl,"
         generateReleaseNotes: true
         draft: true
