@@ -210,7 +210,7 @@ jobs:
       - test-python
       - package-excel
     runs-on: ubuntu-latest
-    #if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/download-artifact@v3
@@ -226,9 +226,19 @@ jobs:
       run: |
         ls -alh artifacts
         tree
+        ls python-build-*/*
 
 
-  #        twine upload dist/*
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*"
+        draft: true
+
 
   # coverage:
   #   needs: test
