@@ -48,8 +48,14 @@ jobs:
         CXX: g++
     steps:
     - uses: actions/checkout@v3
+    - name: Get history and tags for SCM versioning to work
+      run: |
+        git fetch --prune --unshallow
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Describe version
-      run: git describe --tags --first-parent HEAD
+      run: |
+        git config --global --add safe.directory /__w/libzsf/libzsf
+        git describe --tags --first-parent HEAD
     - name: Build C Library
       # GLIBC 2.31 broke compatibility in that a.o. __exp_finite is no
       # longer defined, i.e. building with -ffast-math on the manylinux2014
@@ -93,6 +99,10 @@ jobs:
     #   - style-python
     steps:
     - uses: actions/checkout@v3
+    - name: Get history and tags for SCM versioning to work
+      run: |
+        git fetch --prune --unshallow
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Describe version
       run: git describe --tags --first-parent HEAD
     - name: Install 32-bit Python
